@@ -1,0 +1,244 @@
+{%- style -%}
+.flat-spacing-3 {
+  padding: 80px 0;
+}
+
+.container {
+  max-width: 1488px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.flat-title-tab-categories {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.flat-title-tab-categories .title {
+  font-size: 36px;
+  margin-bottom: 30px;
+}
+
+.menu-tab-line {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-tab-item .tab-link {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-foreground);
+  text-decoration: none;
+  padding-bottom: 5px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.nav-tab-item .tab-link.active {
+  color: var(--gradient-base-accent-1);
+  border-bottom-color: var(--gradient-base-accent-1);
+}
+
+.wg-cls.style-circle {
+  text-align: center;
+}
+
+.wg-cls .image.img-style {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.wg-cls .image.img-style img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.hover-img:hover .image.img-style img {
+  transform: scale(1.1);
+}
+
+.cls-content .link {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-foreground);
+  text-decoration: none;
+}
+
+.sw-dot-default {
+  display: none;
+  margin-top: 30px;
+}
+
+@media screen and (max-width: 1200px) {
+  .sw-dot-default {
+    display: flex;
+  }
+}
+{%- endstyle -%}
+
+<section class="flat-spacing-3">
+  <div class="container">
+    <div class="flat-animate-tab">
+      <div class="flat-title-tab-categories wow fadeInUp text-center">
+        <h4 class="title">{{ section.settings.title }}</h4>
+        <ul class="menu-tab-line justify-content-center" role="tablist">
+          {% for block in section.blocks %}
+            <li class="nav-tab-item" role="presentation">
+              <a href="#{{ block.settings.title | handleize }}" 
+                 class="tab-link{% if forloop.first %} active{% endif %}" 
+                 data-bs-toggle="tab">
+                {{ block.settings.title }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="tab-content">
+        {% for block in section.blocks %}
+          <div class="tab-pane{% if forloop.first %} active show{% endif %}" 
+               id="{{ block.settings.title | handleize }}" 
+               role="tabpanel">
+            <div dir="ltr" class="swiper tf-swiper" data-swiper='{
+              "slidesPerView": 2,
+              "spaceBetween": 12,
+              "speed": 800,
+              "observer": true,
+              "observeParents": true,
+              "slidesPerGroup": 2,
+              "pagination": { "el": ".sw-pagination-{{ block.settings.title | handleize }}", "clickable": true },
+              "breakpoints": {
+                "575": { "slidesPerView": 3, "spaceBetween": 12, "slidesPerGroup": 2 },
+                "768": { "slidesPerView": 4, "spaceBetween": 24, "slidesPerGroup": 3 },
+                "1200": { "slidesPerView": 6, "spaceBetween": 64, "slidesPerGroup": 3 }
+              }
+            }'>
+              <div class="swiper-wrapper">
+                {% for category in block.settings.categories %}
+                  <div class="swiper-slide">
+                    <div class="wg-cls style-circle hover-img">
+                      <a href="{{ category.url }}" class="image img-style d-block">
+                        <img src="{{ category.image }}"
+                             data-src="{{ category.image }}"
+                             alt="{{ category.title }}"
+                             class="lazyload">
+                      </a>
+                      <div class="cls-content text-center">
+                        <a href="{{ category.url }}" 
+                           class="link text-md fw-medium">
+                          {{ category.title }}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+              <span class="d-flex d-xl-none sw-dot-default sw-pagination-{{ block.settings.title | handleize }} justify-content-center"></span>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const swipers = document.querySelectorAll('.tf-swiper');
+    swipers.forEach(element => {
+      const options = JSON.parse(element.dataset.swiper);
+      new Swiper(element, options);
+    });
+
+    const tabs = document.querySelectorAll('.tab-link');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = tab.getAttribute('href');
+        
+        // Update active tab
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        // Show corresponding content
+        document.querySelectorAll('.tab-pane').forEach(pane => {
+          if (pane.id === target.substring(1)) {
+            pane.classList.add('active', 'show');
+          } else {
+            pane.classList.remove('active', 'show');
+          }
+        });
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Categories",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Categories"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category_group",
+      "name": "Category Group",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tab Title",
+          "default": "Womens"
+        },
+        {
+          "type": "collection_list",
+          "id": "categories",
+          "label": "Categories",
+          "limit": 6
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Categories",
+      "blocks": [
+        {
+          "type": "category_group",
+          "settings": {
+            "title": "Womens"
+          }
+        },
+        {
+          "type": "category_group",
+          "settings": {
+            "title": "Mens"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %} 

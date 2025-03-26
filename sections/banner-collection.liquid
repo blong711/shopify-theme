@@ -1,0 +1,182 @@
+{%- style -%}
+/* Root variables for consistent styling */
+:root {
+  --primary: #2d54a3;
+  --secondary: #666666;
+  --text: #666666;
+  --dark: #0d0d0d;
+  --white: #ffffff;
+  --line: rgba(0, 0, 0, 0.1);
+}
+
+/* Banner Collection styles */
+.banner-collection {
+  position: relative;
+  padding: 80px 0;
+  background: #f8f8f8;
+}
+
+.banner-collection__wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  align-items: center;
+}
+
+.banner-collection__image-wrapper {
+  position: relative;
+  padding-bottom: 100%;
+  overflow: hidden;
+}
+
+.banner-collection__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.banner-collection__image:hover {
+  transform: scale(1.05);
+}
+
+.banner-collection__content {
+  padding: 30px;
+}
+
+.banner-collection__title {
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.banner-collection__description {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  margin-bottom: 30px;
+}
+
+.banner-collection__button {
+  display: inline-block;
+  padding: 15px 40px;
+  background: var(--primary);
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  border-radius: 30px;
+  transition: background 0.3s ease;
+}
+
+.banner-collection__button:hover {
+  background: var(--dark);
+}
+
+@media screen and (max-width: 991px) {
+  .banner-collection {
+    padding: 60px 0;
+  }
+
+  .banner-collection__wrapper {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .banner-collection__content {
+    padding: 20px 0;
+    text-align: center;
+  }
+
+  .banner-collection__title {
+    font-size: 28px;
+  }
+
+  .banner-collection__description {
+    font-size: 14px;
+  }
+
+  .banner-collection__button {
+    padding: 12px 30px;
+    font-size: 14px;
+  }
+}
+{%- endstyle -%}
+
+<div class="banner-collection page-width">
+  <div class="banner-collection__wrapper">
+    <div class="banner-collection__image-wrapper">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 800 | image_tag:
+          loading: 'lazy',
+          class: 'banner-collection__image',
+          widths: '400, 600, 800',
+          sizes: '(min-width: 992px) 50vw, 100vw'
+        }}
+      {%- else -%}
+        {{ 'collection-1' | placeholder_svg_tag: 'banner-collection__image placeholder' }}
+      {%- endif -%}
+    </div>
+    <div class="banner-collection__content">
+      {%- if section.settings.title != blank -%}
+        <h2 class="banner-collection__title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <div class="banner-collection__description">{{ section.settings.description }}</div>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+        <a href="{{ section.settings.button_link }}" class="banner-collection__button">
+          {{ section.settings.button_label }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Banner Collection",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Featured Collection",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "default": "<p>Share information about your collection and what makes it special</p>",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "Shop Collection",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Banner Collection"
+    }
+  ]
+}
+{% endschema %} 

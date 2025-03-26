@@ -1,0 +1,330 @@
+{%- style -%}
+  .todays-picks {
+    padding: 80px 0;
+    background-color: var(--color-background);
+    overflow: hidden;
+  }
+
+  .todays-picks__header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .todays-picks__title {
+    font-size: 2.4rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--color-dark);
+  }
+
+  .todays-picks__slider {
+    position: relative;
+    padding: 0 48px;
+  }
+
+  .todays-picks__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    margin: 0 -12px;
+  }
+
+  .todays-picks__item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: var(--color-white);
+    transition: transform 0.3s ease;
+  }
+
+  .todays-picks__item:hover {
+    transform: translateY(-5px);
+  }
+
+  .todays-picks__image {
+    position: relative;
+    padding-bottom: 100%;
+    overflow: hidden;
+  }
+
+  .todays-picks__image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .todays-picks__item:hover .todays-picks__image img {
+    transform: scale(1.1);
+  }
+
+  .todays-picks__badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 6px 12px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 4px;
+    z-index: 1;
+  }
+
+  .todays-picks__content {
+    padding: 20px;
+  }
+
+  .todays-picks__product-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--color-dark);
+  }
+
+  .todays-picks__price {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+  }
+
+  .todays-picks__price-current {
+    color: var(--color-primary);
+    font-size: 1.1rem;
+  }
+
+  .todays-picks__price-compare {
+    color: var(--color-text);
+    text-decoration: line-through;
+    font-size: 0.9rem;
+  }
+
+  .todays-picks__actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .todays-picks__button {
+    flex: 1;
+    padding: 8px 16px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .todays-picks__button:hover {
+    background-color: var(--color-primary-dark);
+  }
+
+  .todays-picks__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-line);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 2;
+  }
+
+  .todays-picks__nav:hover {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .todays-picks__nav--prev {
+    left: 0;
+  }
+
+  .todays-picks__nav--next {
+    right: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .todays-picks {
+      padding: 40px 0;
+    }
+
+    .todays-picks__title {
+      font-size: 2rem;
+    }
+
+    .todays-picks__slider {
+      padding: 0 24px;
+    }
+
+    .todays-picks__grid {
+      gap: 16px;
+    }
+
+    .todays-picks__nav {
+      width: 32px;
+      height: 32px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="todays-picks">
+  <div class="todays-picks__header">
+    {%- if section.settings.title != blank -%}
+      <h2 class="todays-picks__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+  </div>
+
+  <div class="todays-picks__slider">
+    <button class="todays-picks__nav todays-picks__nav--prev" aria-label="{{ 'general.slider.previous' | t }}">
+      {% render 'icon-chevron-left' %}
+    </button>
+
+    <div class="todays-picks__grid">
+      {%- for block in section.blocks -%}
+        <div class="todays-picks__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <div class="todays-picks__image">
+              {{ block.settings.image | image_url: width: 600 | image_tag:
+                loading: 'lazy',
+                width: block.settings.image.width,
+                height: block.settings.image.height,
+                alt: block.settings.image.alt | escape
+              }}
+            </div>
+          {%- endif -%}
+
+          {%- if block.settings.badge != blank -%}
+            <div class="todays-picks__badge">{{ block.settings.badge }}</div>
+          {%- endif -%}
+
+          <div class="todays-picks__content">
+            {%- if block.settings.title != blank -%}
+              <h3 class="todays-picks__product-title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+
+            <div class="todays-picks__price">
+              <span class="todays-picks__price-current">{{ block.settings.price }}</span>
+              {%- if block.settings.compare_price != blank -%}
+                <span class="todays-picks__price-compare">{{ block.settings.compare_price }}</span>
+              {%- endif -%}
+            </div>
+
+            <div class="todays-picks__actions">
+              <button class="todays-picks__button">{{ 'products.product.add_to_cart' | t }}</button>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <button class="todays-picks__nav todays-picks__nav--next" aria-label="{{ 'general.slider.next' | t }}">
+      {% render 'icon-chevron-right' %}
+    </button>
+  </div>
+</div>
+
+<script>
+  class TodaysPicks extends HTMLElement {
+    constructor() {
+      super();
+      this.slider = this.querySelector('.todays-picks__grid');
+      this.prevButton = this.querySelector('.todays-picks__nav--prev');
+      this.nextButton = this.querySelector('.todays-picks__nav--next');
+      this.init();
+    }
+
+    init() {
+      if (this.prevButton && this.nextButton) {
+        this.prevButton.addEventListener('click', () => this.slide('prev'));
+        this.nextButton.addEventListener('click', () => this.slide('next'));
+      }
+    }
+
+    slide(direction) {
+      const scrollAmount = this.slider.offsetWidth;
+      const currentScroll = this.slider.scrollLeft;
+      const newScroll = direction === 'prev' 
+        ? currentScroll - scrollAmount 
+        : currentScroll + scrollAmount;
+
+      this.slider.scrollTo({
+        left: newScroll,
+        behavior: 'smooth'
+      });
+    }
+  }
+
+  customElements.define('todays-picks', TodaysPicks);
+</script>
+
+{% schema %}
+{
+  "name": "Today's Picks",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Today's Picks"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Product name"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "$99.00"
+        },
+        {
+          "type": "text",
+          "id": "compare_price",
+          "label": "Compare at price"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge",
+          "default": "New"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Today's Picks",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %} 

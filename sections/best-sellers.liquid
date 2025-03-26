@@ -1,0 +1,455 @@
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{{ 'vineta-font-icons.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+.best-sellers {
+  padding: 80px 0;
+  overflow: hidden;
+}
+
+.best-sellers .container {
+  max-width: 1488px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.best-sellers .flat-title {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.best-sellers .title {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.best-sellers .swiper {
+  margin: 0 -12px;
+  padding: 0 12px;
+}
+
+.best-sellers .swiper-slide {
+  height: auto;
+}
+
+.card-product {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.card-product-wrapper {
+  position: relative;
+}
+
+.product-img {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.img-product,
+.img-hover {
+  width: 100%;
+  height: auto;
+  transition: transform 0.6s ease;
+}
+
+.img-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.product-img:hover .img-product {
+  opacity: 0;
+}
+
+.product-img:hover .img-hover {
+  opacity: 1;
+}
+
+.list-product-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 2;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: all 0.3s ease;
+}
+
+.card-product:hover .list-product-btn {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.box-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--white);
+  border-radius: 50%;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+.box-icon:hover {
+  background: var(--dark);
+  color: var(--white);
+}
+
+.hover-tooltip {
+  position: relative;
+}
+
+.tooltip {
+  position: absolute;
+  left: -120px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--dark);
+  color: var(--white);
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  right: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left: 4px solid var(--dark);
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+}
+
+.hover-tooltip:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  left: -100px;
+}
+
+.on-sale-wrap {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 2;
+}
+
+.on-sale-item {
+  display: inline-block;
+  padding: 5px 12px;
+  background: var(--dark);
+  color: var(--white);
+  font-size: 12px;
+  border-radius: 30px;
+}
+
+.card-product-info {
+  padding: 20px 0;
+  text-align: center;
+}
+
+.name-product {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: var(--dark);
+  text-decoration: none;
+}
+
+.name-product:hover {
+  color: var(--primary);
+}
+
+.price-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.price-new {
+  color: var(--primary);
+}
+
+.price-old {
+  color: var(--text-light);
+  text-decoration: line-through;
+}
+
+.nav-swiper {
+  width: 50px;
+  height: 50px;
+  background: var(--white);
+  border-radius: 50%;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  color: var(--dark);
+  transition: all 0.3s ease;
+}
+
+.nav-swiper:hover {
+  background: var(--dark);
+  color: var(--white);
+}
+
+.sw-pagination-seller {
+  margin-top: 30px;
+}
+
+.sw-pagination-seller .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background: var(--line);
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.sw-pagination-seller .swiper-pagination-bullet-active {
+  background: var(--dark);
+}
+
+@media screen and (max-width: 991px) {
+  .best-sellers {
+    padding: 60px 0;
+  }
+}
+{%- endstyle -%}
+
+<section class="best-sellers">
+  <div class="container">
+    <div class="flat-title wow fadeInUp">
+      <h4 class="title">{{ section.settings.title }}</h4>
+    </div>
+    <div class="fl-control-sw2 pos2 wow fadeInUp">
+      <div dir="ltr" class="swiper tf-swiper wrap-sw-over">
+        <div class="swiper-wrapper">
+          {%- for block in section.blocks -%}
+            <div class="swiper-slide" {{ block.shopify_attributes }}>
+              <div class="card-product">
+                <div class="card-product-wrapper">
+                  <a href="{{ block.settings.product_url }}" class="product-img">
+                    {%- if block.settings.image != blank -%}
+                      {{ block.settings.image | image_url: width: 600 | image_tag:
+                        loading: 'lazy',
+                        class: 'img-product lazyload',
+                        widths: '300, 400, 600',
+                        sizes: '(min-width: 1200px) 25vw, (min-width: 768px) 33vw, (min-width: 576px) 50vw, 100vw'
+                      }}
+                      {%- if block.settings.hover_image != blank -%}
+                        {{ block.settings.hover_image | image_url: width: 600 | image_tag:
+                          loading: 'lazy',
+                          class: 'img-hover lazyload',
+                          widths: '300, 400, 600',
+                          sizes: '(min-width: 1200px) 25vw, (min-width: 768px) 33vw, (min-width: 576px) 50vw, 100vw'
+                        }}
+                      {%- endif -%}
+                    {%- else -%}
+                      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                    {%- endif -%}
+                  </a>
+                  <ul class="list-product-btn">
+                    <li>
+                      <a href="#shoppingCart" data-bs-toggle="offcanvas" class="box-icon hover-tooltip tooltip-left">
+                        <i class="icon-cart2"></i>
+                        <span class="tooltip">Add to Cart</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="javascript:void(0);" class="box-icon hover-tooltip tooltip-left">
+                        <i class="icon-heart2"></i>
+                        <span class="tooltip">Add to Wishlist</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#quickView" data-bs-toggle="modal" class="box-icon hover-tooltip tooltip-left">
+                        <i class="icon-view"></i>
+                        <span class="tooltip">Quick View</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#compare" data-bs-toggle="modal" class="box-icon hover-tooltip tooltip-left">
+                        <i class="icon-compare"></i>
+                        <span class="tooltip">Add to Compare</span>
+                      </a>
+                    </li>
+                  </ul>
+                  {%- if block.settings.badge != blank -%}
+                    <div class="on-sale-wrap">
+                      <span class="on-sale-item">{{ block.settings.badge }}</span>
+                    </div>
+                  {%- endif -%}
+                </div>
+                <div class="card-product-info">
+                  <a href="{{ block.settings.product_url }}" class="name-product">{{ block.settings.title }}</a>
+                  <p class="price-wrap">
+                    <span class="price-new">{{ block.settings.price }}</span>
+                    {%- if block.settings.compare_price != blank -%}
+                      <span class="price-old">{{ block.settings.compare_price }}</span>
+                    {%- endif -%}
+                  </p>
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+        <div class="d-flex d-xl-none sw-dot-default sw-pagination-seller justify-content-center"></div>
+        <div class="d-none d-xl-flex swiper-button-next nav-swiper nav-next-seller"></div>
+        <div class="d-none d-xl-flex swiper-button-prev nav-swiper nav-prev-seller"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    new Swiper('.best-sellers .tf-swiper', {
+      slidesPerView: 2,
+      spaceBetween: 12,
+      speed: 800,
+      observer: true,
+      observeParents: true,
+      slidesPerGroup: 2,
+      navigation: {
+        nextEl: '.nav-next-seller',
+        prevEl: '.nav-prev-seller'
+      },
+      pagination: {
+        el: '.sw-pagination-seller',
+        clickable: true
+      },
+      breakpoints: {
+        768: {
+          slidesPerView: 3,
+          spaceBetween: 12,
+          slidesPerGroup: 3
+        },
+        1200: {
+          slidesPerView: 4,
+          spaceBetween: 24,
+          slidesPerGroup: 4
+        }
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Best Sellers",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Best Sellers"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "hover_image",
+          "label": "Hover Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Product Title",
+          "default": "Product Title"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "$99.00"
+        },
+        {
+          "type": "text",
+          "id": "compare_price",
+          "label": "Compare Price"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge Text"
+        },
+        {
+          "type": "url",
+          "id": "product_url",
+          "label": "Product URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Best Sellers",
+      "blocks": [
+        {
+          "type": "product",
+          "settings": {
+            "title": "Turtleneck T-shirt",
+            "price": "$100.00",
+            "compare_price": "$130.00",
+            "badge": "20% Off"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "Loose Fit Tee",
+            "price": "$130.00",
+            "badge": "Trending"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "Crop T-shirt",
+            "price": "$120.00",
+            "compare_price": "$140.00",
+            "badge": "10% Off"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "Short Sleeve Sweat",
+            "price": "$80.00",
+            "compare_price": "$100.00",
+            "badge": "10% Off"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %} 
