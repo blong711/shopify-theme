@@ -158,17 +158,14 @@
   <div class="container">
     <div class="s-banner-countdown banner-cd-fashion">
       <div class="image">
-        {%- if section.settings.image contains 'shopify://' -%}
-          {%- assign img_url = section.settings.image | replace: 'shopify://', 'https://' -%}
-          <img
-            src="{{ img_url }}"
-            loading="lazy"
-            class="lazyload"
-            alt="Banner Image"
-          >
-        {%- else -%}
-          {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
-        {%- endif -%}
+      {%- if section.settings.image != blank -%}
+        <img
+          src="{{ section.settings.image | image_url }}"
+          loading="lazy"
+          class="lazyload"
+          alt="Banner Image"
+        >
+      {%- endif -%}
       </div>
       <div class="banner-content text-center">
         <div class="box-title wow fadeInUp">

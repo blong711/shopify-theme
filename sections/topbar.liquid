@@ -3,17 +3,6 @@
   "name": "Topbar",
   "settings": [
     {
-      "type": "text",
-      "id": "announcement_text",
-      "label": "Announcement text",
-      "default": "Welcome to our store"
-    },
-    {
-      "type": "url",
-      "id": "announcement_link",
-      "label": "Announcement link"
-    },
-    {
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "Color scheme",
@@ -31,17 +20,34 @@
 <div class="topbar color-{{ section.settings.color_scheme }}">
   <div class="page-width">
     <div class="topbar__content">
-      {%- if section.settings.announcement_text != blank -%}
-        <div class="topbar__announcement">
-          {%- if section.settings.announcement_link != blank -%}
-            <a href="{{ section.settings.announcement_link }}" class="topbar__announcement-link">
+      <div class="topbar__social">
+        <ul class="social-icons">
+          {%- if settings.social_facebook_link != blank -%}
+            <li><a href="{{ settings.social_facebook_link }}" class="social-item social-facebook"><i class="icon icon-fb"></i></a></li>
           {%- endif -%}
-            {{ section.settings.announcement_text }}
-          {%- if section.settings.announcement_link != blank -%}
-            </a>
+          {%- if settings.social_instagram_link != blank -%}
+            <li><a href="{{ settings.social_instagram_link }}" class="social-item social-instagram"><i class="icon icon-instagram"></i></a></li>
           {%- endif -%}
-        </div>
-      {%- endif -%}
+          {%- if settings.social_twitter_link != blank -%}
+            <li><a href="{{ settings.social_twitter_link }}" class="social-item social-x"><i class="icon icon-x"></i></a></li>
+          {%- endif -%}
+          {%- if settings.social_snapchat_link != blank -%}
+            <li><a href="{{ settings.social_snapchat_link }}" class="social-item social-snapchat"><i class="icon icon-snapchat"></i></a></li>
+          {%- endif -%}
+        </ul>
+      </div>
+
+      <div class="topbar__localization">
+        {%- form 'localization', id: 'HeaderLanguageForm', class: 'localization-form' -%}
+          <div class="localization-form__select">
+            {%- render 'language-localization', localPosition: 'HeaderLanguage' -%}
+          </div>
+          <div class="localization-form__select">
+            {%- render 'currency-localization', localPosition: 'HeaderCurrency' -%}
+          </div>
+          <input type="hidden" name="locale_code" value="{{ form.current_locale.iso_code }}">
+        {%- endform -%}
+      </div>
     </div>
   </div>
 </div>
@@ -49,27 +55,98 @@
 {% stylesheet %}
 .topbar {
   padding: 8px 0;
-  text-align: center;
   font-size: 14px;
   line-height: 1.4;
 }
 
 .topbar__content {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
-.topbar__announcement {
+.topbar__social {
+  display: none;
+}
+
+@media screen and (min-width: 1200px) {
+  .topbar__social {
+    display: block;
+  }
+}
+
+.social-icons {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 15px;
+}
+
+.social-item {
+  color: var(--color-foreground);
+  transition: color 0.3s ease;
+}
+
+.social-item:hover {
+  color: var(--color-button);
+}
+
+.topbar__localization {
+  display: flex;
+  gap: 1rem;
+}
+
+.localization-form {
+  display: flex;
+  gap: 1rem;
+}
+
+.localization-form__select {
+  position: relative;
+}
+
+.disclosure__button {
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-foreground);
+}
+
+.disclosure__list-wrapper {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 0.5rem;
+  z-index: 100;
+}
+
+.disclosure__list {
+  list-style: none;
+  padding: 0;
   margin: 0;
 }
 
-.topbar__announcement-link {
+.disclosure__item {
+  padding: 0.5rem;
+}
+
+.disclosure__link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   text-decoration: none;
   color: inherit;
 }
 
-.topbar__announcement-link:hover {
+.disclosure__link:hover {
   text-decoration: underline;
 }
 {% endstylesheet %} 
