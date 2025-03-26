@@ -1,0 +1,75 @@
+{% schema %}
+{
+  "name": "Topbar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Announcement text",
+      "default": "Welcome to our store"
+    },
+    {
+      "type": "url",
+      "id": "announcement_link",
+      "label": "Announcement link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Topbar"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="topbar color-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="topbar__content">
+      {%- if section.settings.announcement_text != blank -%}
+        <div class="topbar__announcement">
+          {%- if section.settings.announcement_link != blank -%}
+            <a href="{{ section.settings.announcement_link }}" class="topbar__announcement-link">
+          {%- endif -%}
+            {{ section.settings.announcement_text }}
+          {%- if section.settings.announcement_link != blank -%}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+.topbar {
+  padding: 8px 0;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.topbar__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.topbar__announcement {
+  margin: 0;
+}
+
+.topbar__announcement-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.topbar__announcement-link:hover {
+  text-decoration: underline;
+}
+{% endstylesheet %} 

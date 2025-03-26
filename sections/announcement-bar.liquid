@@ -18,6 +18,25 @@
   {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
 {% endif %}
 
+{%- if section.settings.announcement_text != blank -%}
+  <div class="announcement-bar color-{{ section.settings.color_scheme }}" role="region" aria-label="{{ 'sections.header.announcement' | t }}">
+    <div class="page-width">
+      <div class="announcement-bar__message h5">
+        {%- if section.settings.announcement_link != blank -%}
+          <a href="{{ section.settings.announcement_link }}" class="announcement-bar__link link link--text focus-inset animate-arrow">
+        {%- endif -%}
+            <p class="announcement-bar__message h5">
+              {{ section.settings.announcement_text | escape }}
+            </p>
+        {%- if section.settings.announcement_link != blank -%}
+            {% render 'icon-arrow' %}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
 <div
   class="utility-bar color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %}"
 >
@@ -164,93 +183,74 @@
 
 {% schema %}
 {
-  "name": "t:sections.announcement-bar.name",
+  "name": "Announcement bar",
   "max_blocks": 12,
-  "class": "announcement-bar-section",
-  "enabled_on": {
-    "groups": ["header"]
-  },
-  "settings": [
-    {
-      "type": "checkbox",
-      "id": "auto_rotate",
-      "label": "t:sections.announcement-bar.settings.auto_rotate.label",
-      "default": false
-    },
-    {
-      "type": "range",
-      "id": "change_slides_speed",
-      "min": 3,
-      "max": 10,
-      "step": 1,
-      "unit": "s",
-      "label": "t:sections.announcement-bar.settings.change_slides_speed.label",
-      "default": 5
-    },    
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:sections.all.colors.label",
-      "default": "scheme-4"
-    },  
-    {
-      "type": "checkbox",
-      "id": "show_line_separator",
-      "default": true,
-      "label": "t:sections.header.settings.show_line_separator.label"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.announcement-bar.settings.heading_utilities.content"
-    },
-    {
-      "type": "paragraph",
-         "content": "t:sections.announcement-bar.settings.paragraph.content"
-    },             
-    {
-      "type": "checkbox",
-      "id": "show_social",
-      "default": false,
-      "label": "t:sections.announcement-bar.settings.show_social.label",
-      "info": "t:sections.announcement-bar.settings.show_social.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_country_selector",
-      "default": false,
-      "label": "t:sections.announcement-bar.settings.enable_country_selector.label",
-      "info": "t:sections.announcement-bar.settings.enable_country_selector.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_language_selector",
-      "default": false,
-      "label": "t:sections.announcement-bar.settings.enable_language_selector.label",
-      "info": "t:sections.announcement-bar.settings.enable_language_selector.info"
-    }
-  ],
   "blocks": [
     {
       "type": "announcement",
-      "name": "t:sections.announcement-bar.blocks.announcement.name",
+      "name": "Announcement",
       "settings": [
         {
           "type": "text",
           "id": "text",
-          "default": "t:sections.announcement-bar.blocks.announcement.settings.text.default",
-          "label": "t:sections.announcement-bar.blocks.announcement.settings.text.label"
+          "default": "Welcome to our store",
+          "label": "Text"
         },
         {
           "type": "url",
           "id": "link",
-          "label": "t:sections.announcement-bar.blocks.announcement.settings.link.label"
+          "label": "Link"
         }
       ]
     }
   ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "announcement_text_1",
+      "label": "Announcement text 1",
+      "default": "Return extended to 60 days"
+    },
+    {
+      "type": "text",
+      "id": "announcement_text_2",
+      "label": "Announcement text 2",
+      "default": "Life-time Guarantees"
+    },
+    {
+      "type": "text",
+      "id": "announcement_text_3",
+      "label": "Announcement text 3",
+      "default": "Limited-Time Offer"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social_icons",
+      "label": "Show social icons",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_language_selector",
+      "label": "Show language selector",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_currency_selector",
+      "label": "Show currency selector",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1"
+    }
+  ],
   "presets": [
     {
-      "name": "t:sections.announcement-bar.presets.name",
+      "name": "Announcement bar",
       "blocks": [
         {
           "type": "announcement"
@@ -260,3 +260,190 @@
   ]
 }
 {% endschema %}
+
+<div class="tf-topbar bg-dark-5 topbar-bg">
+  <div class="container">
+    <div class="topbar-wraper">
+      {%- if section.settings.show_social_icons and social_icons -%}
+        <div class="d-none d-xl-block flex-shrink-0">
+          <ul class="tf-social-icon topbar-left">
+            {%- if settings.social_facebook_link != blank -%}
+              <li><a href="{{ settings.social_facebook_link }}" class="social-item social-facebook"><i class="icon icon-fb"></i></a></li>
+            {%- endif -%}
+            {%- if settings.social_instagram_link != blank -%}
+              <li><a href="{{ settings.social_instagram_link }}" class="social-item social-instagram"><i class="icon icon-instagram"></i></a></li>
+            {%- endif -%}
+            {%- if settings.social_twitter_link != blank -%}
+              <li><a href="{{ settings.social_twitter_link }}" class="social-item social-x"><i class="icon icon-x"></i></a></li>
+            {%- endif -%}
+            {%- if settings.social_snapchat_link != blank -%}
+              <li><a href="{{ settings.social_snapchat_link }}" class="social-item social-snapchat"><i class="icon icon-snapchat"></i></a></li>
+            {%- endif -%}
+          </ul>
+        </div>
+      {%- endif -%}
+
+      <div class="overflow-hidden">
+        <div class="topbar-center marquee-wrapper">
+          <div class="initial-child-container">
+            {%- if section.settings.announcement_text_1 != blank -%}
+              <div class="marquee-child-item">
+                <p>{{ section.settings.announcement_text_1 }}</p>
+              </div>
+              <div class="marquee-child-item"><span class="dot"></span></div>
+            {%- endif -%}
+            {%- if section.settings.announcement_text_2 != blank -%}
+              <div class="marquee-child-item">
+                <p>{{ section.settings.announcement_text_2 }}</p>
+              </div>
+              <div class="marquee-child-item"><span class="dot"></span></div>
+            {%- endif -%}
+            {%- if section.settings.announcement_text_3 != blank -%}
+              <div class="marquee-child-item">
+                <p>{{ section.settings.announcement_text_3 }}</p>
+              </div>
+              <div class="marquee-child-item"><span class="dot"></span></div>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+
+      <div class="d-none d-xl-block flex-shrink-0">
+        <div class="topbar-right">
+          {%- if section.settings.show_language_selector and localization.available_languages.size > 1 -%}
+            <div class="tf-languages">
+              <localization-form>
+                {%- form 'localization', id: 'AnnouncementLanguageForm', class: 'localization-form' -%}
+                  <select class="image-select center style-default type-languages" name="locale_code">
+                    {%- for language in localization.available_languages -%}
+                      <option value="{{ language.iso_code }}" {% if language.iso_code == localization.language.iso_code %}selected{% endif %}>
+                        {{ language.endonym_name }}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                {%- endform -%}
+              </localization-form>
+            </div>
+          {%- endif -%}
+          {%- if section.settings.show_currency_selector and localization.available_countries.size > 1 -%}
+            <div class="tf-currencies">
+              <localization-form>
+                {%- form 'localization', id: 'AnnouncementCountryForm', class: 'localization-form' -%}
+                  <select class="image-select center style-default type-currencies" name="country_code">
+                    {%- for country in localization.available_countries -%}
+                      <option value="{{ country.iso_code }}" {% if country.iso_code == localization.country.iso_code %}selected{% endif %}>
+                        {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                {%- endform -%}
+              </localization-form>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+.tf-topbar {
+  padding: 8px 0;
+  background-color: rgb(var(--color-background));
+}
+
+.topbar-wraper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tf-social-icon {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 15px;
+}
+
+.social-item {
+  color: rgb(var(--color-foreground));
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.social-item:hover {
+  color: rgb(var(--color-button));
+}
+
+.marquee-wrapper {
+  overflow: hidden;
+  flex: 1;
+  margin: 0 20px;
+}
+
+.initial-child-container {
+  display: flex;
+  animation: marquee 30s linear infinite;
+}
+
+.marquee-child-item {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 0 10px;
+}
+
+.marquee-child-item p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  background-color: rgb(var(--color-foreground));
+  border-radius: 50%;
+  margin: 0 10px;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.tf-languages,
+.tf-currencies {
+  position: relative;
+}
+
+.image-select {
+  appearance: none;
+  background: transparent;
+  border: none;
+  color: rgb(var(--color-foreground));
+  font-size: 14px;
+  padding: 5px 25px 5px 0;
+  cursor: pointer;
+}
+
+.image-select:focus {
+  outline: none;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .d-none.d-xl-block {
+    display: none !important;
+  }
+}
+{% endstylesheet %}

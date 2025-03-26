@@ -28,12 +28,43 @@
 
     {% render 'meta-tags' %}
 
+    <!-- Vineta CSS Files -->
+    <link rel="stylesheet" href="{{ 'vineta-bootstrap.min.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'vineta-swiper-bundle.min.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'vineta-animate.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'vineta-bootstrap-select.min.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'vineta-jquery.fancybox.min.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'vineta-photoswipe.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'vineta-drift-basic.min.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'vineta-image-compare-viewer.min.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'vineta-fonts.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'vineta-font-icons.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'vineta-styles.css' | asset_url }}">
+
+    <!-- Dawn's Original Scripts -->
     <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
+
+    <!-- Vineta JavaScript Files -->
+    <script src="{{ 'vineta-jquery.min.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'vineta-bootstrap.min.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'vineta-bootstrap-select.min.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'vineta-swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'vineta-wow.min.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'vineta-lazysize.min.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'vineta-drift.min.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'vineta-photoswipe-lightbox.esm.min.js' | asset_url }}" type="module" defer="defer"></script>
+    <script src="{{ 'vineta-photoswipe.esm.min.js' | asset_url }}" type="module" defer="defer"></script>
+    <script src="{{ 'vineta-image-compare-viewer.min.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'vineta-count-down.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'vineta-carousel.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'vineta-paralaxei.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'vineta-shop.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'vineta-main.js' | asset_url }}" defer="defer"></script>
 
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
@@ -296,6 +327,11 @@
         document.documentElement.classList.add('shopify-design-mode');
       }
     </script>
+
+    <!-- Vineta Theme Assets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    {{ 'vineta-styles.css' | asset_url | stylesheet_tag }}
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
@@ -307,13 +343,14 @@
       {%- render 'cart-drawer' -%}
     {%- endif -%}
 
-    {% sections 'header-group' %}
+    {% section 'topbar' %}
+    {% section 'header' %}
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>
 
-    {% sections 'footer-group' %}
+    {% section 'footer' %}
 
     <ul hidden>
       <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
@@ -372,5 +409,8 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+
+    <!-- Vineta Theme Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
