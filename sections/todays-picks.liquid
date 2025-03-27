@@ -27,28 +27,34 @@
 }
 
 .todays-picks .swiper {
-  margin: 0 -12px;
-  padding: 0 12px;
+  margin: 0 auto;
+  padding: 0;
+  overflow: visible;
 }
 
 .todays-picks .swiper-wrapper {
   display: flex;
-  justify-content: center;
   align-items: stretch;
+  justify-content: center;
+  margin: 0 -12px;
 }
 
 .todays-picks .swiper-slide {
   height: auto;
   display: flex;
   justify-content: center;
+  flex: 0 0 calc(25% - 24px);
+  margin: 0 12px;
 }
 
 .vineta-product-card {
   position: relative;
-  margin-bottom: 30px;
   width: 100%;
-  max-width: 300px;
   background-color: var(--vineta-bg);
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  max-width: 300px;
 }
 
 .vineta-product-card__wrapper {
@@ -260,7 +266,26 @@
       <h4 class="vineta-section-header__title">{{ section.settings.title }}</h4>
     </div>
     <div class="fl-control-sw2 pos2 wow fadeInUp">
-      <div class="swiper swiper-picks">
+      <div dir="ltr" class="swiper tf-swiper hover-sw-nav wow fadeInUp" data-swiper='{
+        "slidesPerView": "auto",
+        "centeredSlides": true,
+        "spaceBetween": 24,
+        "speed": 800,
+        "observer": true,
+        "observeParents": true,
+        "navigation": {
+          "clickable": true,
+          "nextEl": ".nav-next-picks",
+          "prevEl": ".nav-prev-picks"
+        },
+        "pagination": { "el": ".sw-pagination-picks", "clickable": true },
+        "breakpoints": {
+          "320": { "slidesPerView": 1, "spaceBetween": 12, "centeredSlides": true },
+          "575": { "slidesPerView": 2, "spaceBetween": 12, "centeredSlides": false },
+          "768": { "slidesPerView": 3, "spaceBetween": 24, "centeredSlides": false },
+          "1200": { "slidesPerView": 4, "spaceBetween": 24, "centeredSlides": false }
+        }
+      }'>
         <div class="swiper-wrapper">
           {% for block in section.blocks %}
             <div class="swiper-slide">
