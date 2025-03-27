@@ -16,9 +16,27 @@
   position: relative;
   width: 100%;
   height: 0;
-  padding-bottom: 100%;
+  padding-bottom: 125%;
   overflow: hidden;
   border-radius: 0;
+}
+
+@media (min-width: 575px) {
+  .wg-cls {
+    padding-bottom: 125%;
+  }
+}
+
+@media (min-width: 768px) {
+  .wg-cls {
+    padding-bottom: 125%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .wg-cls {
+    padding-bottom: 125%;
+  }
 }
 
 .wg-cls.style-abs {
@@ -35,13 +53,21 @@
 
 .wg-cls .image img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: ect-fit: cover;
   transition: transform 0.6s ease;
 }
 
 .wg-cls.hover-img:hover .image img {
   transform: scale(1.1);
+}
+
+.wg-cls .image.img-style {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 0 !important;
+  overflow: hidden;
+  display: block;
 }
 
 .cls-btn {
@@ -114,11 +140,29 @@
 
 .collection-categories__content {
   position: absolute;
-  bottom: 0;
+  bottom: 30px;
   left: 0;
   right: 0;
-  padding: 24px;
   text-align: center;
+  z-index: 2;
+}
+
+@media screen and (min-width: 768px) {
+  .collection-categories .swiper-slide {
+    width: calc(33.333% - 20px);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .collection-categories .swiper-slide {
+    width: calc(50% - 10px);
+  }
+}
+
+@media screen and (max-width: 574px) {
+  .collection-categories .swiper-slide {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 991px) {
@@ -130,7 +174,40 @@
 
 <section class="collection-categories">
   <div class="container">
-    <div dir="ltr" class="swiper tf-swiper hover-sw-nav">
+    <div dir="ltr" class="swiper tf-swiper hover-sw-nav" data-swiper='{
+      "slidesPerView": 1,
+      "spaceBetween": 12,
+      "speed": 800,
+      "observer": true,
+      "observeParents": true,
+      "slidesPerGroup": 1,
+      "watchOverflow": true,
+      "navigation": {
+        "nextEl": ".nav-next-cls",
+        "prevEl": ".nav-prev-cls"
+      },
+      "pagination": {
+        "el": ".sw-pagination-cls",
+        "clickable": true
+      },
+      "breakpoints": {
+        "575": {
+          "slidesPerView": 2,
+          "spaceBetween": 12,
+          "slidesPerGroup": 1
+        },
+        "768": {
+          "slidesPerView": 3,
+          "spaceBetween": 24,
+          "slidesPerGroup": 1
+        },
+        "1200": {
+          "slidesPerView": 3,
+          "spaceBetween": 30,
+          "slidesPerGroup": 1
+        }
+      }
+    }'>
       <div class="swiper-wrapper">
         {%- for block in section.blocks -%}
           <div class="swiper-slide" {{ block.shopify_attributes }}>
@@ -172,39 +249,27 @@
 <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    new Swiper('.collection-categories .tf-swiper', {
-      slidesPerView: 1,
-      spaceBetween: 12,
-      speed: 800,
-      observer: true,
-      observeParents: true,
-      slidesPerGroup: 1,
-      navigation: {
-        nextEl: '.nav-next-cls',
-        prevEl: '.nav-prev-cls'
-      },
-      pagination: {
-        el: '.sw-pagination-cls',
-        clickable: true
-      },
-      breakpoints: {
-        575: {
-          slidesPerView: 2,
-          spaceBetween: 12,
-          slidesPerGroup: 2
-        },
-        768: {
-          slidesPerView: 3,
-          spaceBetween: 12,
-          slidesPerGroup: 3
-        },
-        1200: {
-          slidesPerView: 3,
-          spaceBetween: 24,
-          slidesPerGroup: 3
+    const initSwiper = () => {
+      const swipers = document.querySelectorAll('.tf-swiper');
+      swipers.forEach(element => {
+        if (!element.swiper && element.dataset.swiper) {
+          const options = JSON.parse(element.dataset.swiper);
+          new Swiper(element, options);
         }
-      }
-    });
+      });
+    };
+
+    // Initialize immediately
+    initSwiper();
+
+    // Re-initialize on Shopify section load
+    if (Shopify.designMode) {
+      document.addEventListener('shopify:section:load', function(event) {
+        if (event.target.classList.contains('collection-categories')) {
+          setTimeout(initSwiper, 100);
+        }
+      });
+    }
   });
 </script>
 

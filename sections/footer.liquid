@@ -23,17 +23,20 @@
 
 /* Footer default styles */
 .footer-default {
-  /* Reset any inherited styles */
-  all: unset;
-  /* Then apply Vineta's styles */
   font-family: "Poppins", sans-serif !important;
   font-size: 16px !important;
   line-height: 24px !important;
-  /* Add !important to ensure our styles take precedence */
+  background-color: var(--white);
 }
 
 .footer-default a {
   color: var(--text);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-default a:hover {
+  color: var(--primary);
 }
 
 /* Footer top section */
@@ -43,8 +46,7 @@
   width: 100% !important;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  padding-top: 40px;
-  padding-bottom: 32px;
+  padding: 40px 0;
 }
 
 .footer-default .footer-top-wrap {
@@ -68,6 +70,7 @@
 
 .footer-logo > a img {
   width: 100%;
+  height: auto;
 }
 
 /* Social icons */
@@ -103,20 +106,10 @@
   margin: 0 !important;
   padding: 0 !important;
   width: 100% !important;
-  padding-top: 40px;
-  padding-bottom: 20px;
-}
-
-.footer-default .footer-body .btn-line-dark {
-  color: #444444;
-}
-
-.footer-default .footer-body .btn-line-dark::after {
-  background-color: #444444;
+  padding: 40px 0;
 }
 
 .row-footer {
-  display: grid !important;
   grid-template-columns: repeat(4, 1fr) !important;
   gap: 30px !important;
 }
@@ -193,6 +186,11 @@
   border: none;
   color: var(--white);
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.subscribe-button:hover {
+  background-color: var(--dark);
 }
 
 /* Footer menu */
@@ -227,7 +225,7 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding: 32px 0px;
+  padding: 32px 0;
   position: relative;
   gap: 15px;
 }
@@ -249,13 +247,7 @@
   max-width: 40px;
 }
 
-.footer-bottom-wrap .box-right {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-}
-
-/* Responsive styles */
+/* Mobile styles */
 @media screen and (max-width: 991px) {
   .row-footer {
     grid-template-columns: repeat(2, 1fr) !important;
@@ -284,6 +276,7 @@
     position: relative;
     padding-right: 20px;
     line-height: 24px;
+    cursor: pointer;
   }
   
   .footer-heading-mobile::after {
@@ -321,68 +314,14 @@
   .footer-col-block .tf-collapse-content {
     display: none;
   }
-}
-
-.footer {
-  padding-top: {{ section.settings.padding_top }}px;
-  padding-bottom: {{ section.settings.padding_bottom }}px;
-  margin-top: {{ section.settings.margin_top }}px;
-}
-
-.footer__content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-}
-
-.footer__block {
-  margin-bottom: 2rem;
-}
-
-.footer__heading {
-  margin-bottom: 1rem;
-  font-size: 1.6rem;
-  font-weight: 600;
-}
-
-.footer__menu-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer__menu-item {
-  margin-bottom: 0.8rem;
-}
-
-.footer__text {
-  margin-bottom: 1rem;
-}
-
-.newsletter-form {
-  margin-top: 1rem;
-}
-
-.newsletter-form__field-wrapper {
-  display: flex;
-  gap: 1rem;
-}
-
-.newsletter-form__field {
-  flex-grow: 1;
-  padding: 1rem;
-  border: 1px solid rgba(var(--color-foreground), 0.1);
-}
-
-.newsletter-form__button {
-  padding: 1rem 2rem;
-  background-color: rgb(var(--color-button));
-  color: rgb(var(--color-button-text));
-  border: none;
+  
+  .footer-col-block.open .tf-collapse-content {
+    display: block;
+  }
 }
 {%- endstyle -%}
 
-<footer id="footer" class="footer-default xl-pb-70">
+<footer id="footer" class="footer-default">
   <div class="footer-top">
     <div class="container">
       <div class="footer-top-wrap">
@@ -477,10 +416,11 @@
               <p>
                 We invite you to register to read the latest news, offers and events about our company. We promise not spam your inbox.
               </p>
-              <form action="#" class="form-newsletter" method="post" accept-charset="utf-8" data-mailchimp="true">
+              {%- form 'customer', class: 'form-newsletter' -%}
+                <input type="hidden" name="contact[tags]" value="newsletter">
                 <div class="subscribe-content">
                   <fieldset class="email">
-                    <input type="email" name="email-form" class="subscribe-email" placeholder="Email address" tabindex="0" aria-required="true" required>
+                    <input type="email" name="contact[email]" class="subscribe-email" placeholder="Email address" tabindex="0" aria-required="true" required>
                   </fieldset>
                   <div class="button-submit">
                     <button class="subscribe-button animate-btn" type="submit">
@@ -488,7 +428,7 @@
                     </button>
                   </div>
                 </div>
-              </form>
+              {%- endform -%}
             </div>
           </div>
         </div>
@@ -525,173 +465,78 @@
   <div class="footer-bottom">
     <div class="container">
       <div class="footer-bottom-wrap">
-        <p class="text-dark">Copyright © 2025 by <span class="fw-medium">Vineta.</span> All Rights Reserved.</p>
-        <ul class="tf-payment">
-          <li class="item"><img src="images/payment/EximBank.png" alt="payment"></li>
-          <li class="item"><img src="images/payment/ApplePay.png" alt="payment"></li>
-          <li class="item"><img src="images/payment/DinersClub.png" alt="payment"></li>
-          <li class="item"><img src="images/payment/Discover.png" alt="payment"></li>
-          <li class="item"><img src="images/payment/GooglePay.png" alt="payment"></li>
-          <li class="item"><img src="images/payment/Mastercard-2.png" alt="payment"></li>
-          <li class="item"><img src="images/payment/Mastercard.png" alt="payment"></li>
-          <li class="item"><img src="images/payment/Shop.png" alt="payment"></li>
-          <li class="item"><img src="images/payment/UnionPay.png" alt="payment"></li>
-          <li class="item"><img src="images/payment/Visa.png" alt="payment"></li>
-        </ul>
+        <div class="box-left">
+          <p>© {{ 'now' | date: "%Y" }} {{ shop.name }}. All rights reserved.</p>
+        </div>
+        <div class="box-right">
+          <div class="tf-payment">
+            <div class="item">
+              <img src="{{ 'payment-1.png' | asset_url }}" alt="Payment method">
+            </div>
+            <div class="item">
+              <img src="{{ 'payment-2.png' | asset_url }}" alt="Payment method">
+            </div>
+            <div class="item">
+              <img src="{{ 'payment-3.png' | asset_url }}" alt="Payment method">
+            </div>
+            <div class="item">
+              <img src="{{ 'payment-4.png' | asset_url }}" alt="Payment method">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </footer>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Mobile menu functionality
+    const footerHeadings = document.querySelectorAll('.footer-heading-mobile');
+    
+    footerHeadings.forEach(heading => {
+      heading.addEventListener('click', function() {
+        const parent = this.closest('.footer-col-block');
+        parent.classList.toggle('open');
+      });
+    });
+  });
+</script>
+
 {% schema %}
 {
-  "name": "t:sections.footer.name",
+  "name": "Footer",
   "settings": [
     {
-      "type": "image_picker",
-      "id": "logo",
-      "label": "Logo"
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 36
     },
     {
-      "type": "url",
-      "id": "social_facebook_link",
-      "label": "Facebook link"
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 36
     },
     {
-      "type": "url",
-      "id": "social_instagram_link",
-      "label": "Instagram link"
-    },
-    {
-      "type": "url",
-      "id": "social_twitter_link",
-      "label": "Twitter/X link"
-    },
-    {
-      "type": "url",
-      "id": "social_linkedin_link",
-      "label": "LinkedIn link"
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin top",
+      "default": 0
     }
   ]
 }
 {% endschema %}
-
-{% stylesheet %}
-.footer {
-  padding: 60px 0 30px;
-  background-color: rgb(var(--color-background));
-}
-
-.footer-block {
-  margin-bottom: 30px;
-}
-
-.footer-block__heading {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 20px;
-  color: rgb(var(--color-foreground));
-}
-
-.contact-item {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 15px;
-}
-
-.contact-item i {
-  margin-right: 10px;
-  color: rgb(var(--color-button));
-}
-
-.contact-item p {
-  margin: 0;
-  font-size: 14px;
-}
-
-.contact-item a {
-  color: rgb(var(--color-foreground));
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.contact-item a:hover {
-  color: rgb(var(--color-button));
-}
-
-.newsletter-form {
-  margin-top: 20px;
-}
-
-.newsletter-form__field-wrapper {
-  display: flex;
-  gap: 10px;
-}
-
-.field {
-  flex: 1;
-}
-
-.field__input {
-  width: 100%;
-  padding: 10px 15px;
-  border: 1px solid rgb(var(--color-border));
-  border-radius: 4px;
-  background-color: transparent;
-  color: rgb(var(--color-foreground));
-}
-
-.newsletter-form__button {
-  padding: 10px 20px;
-  background-color: rgb(var(--color-button));
-  color: rgb(var(--color-button-text));
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.newsletter-form__button:hover {
-  background-color: rgb(var(--color-button-hover));
-}
-
-.footer__content-bottom {
-  margin-top: 40px;
-  padding-top: 20px;
-  border-top: 1px solid rgb(var(--color-border));
-}
-
-.footer__content-bottom-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.copyright__content {
-  font-size: 12px;
-  color: rgb(var(--color-foreground));
-}
-
-.list-payment {
-  display: flex;
-  gap: 10px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.list-payment__item {
-  display: flex;
-  align-items: center;
-}
-
-@media screen and (max-width: 991px) {
-  .footer {
-    padding: 40px 0 20px;
-  }
-  
-  .footer-block {
-    margin-bottom: 20px;
-  }
-}
-{% endstylesheet %}

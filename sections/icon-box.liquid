@@ -1,0 +1,249 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding: 80px 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .container {
+    max-width: 1488px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+
+  .mw-1 {
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  .tf-icon-box.style-2 {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 24px;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .tf-icon-box.style-2:hover {
+    background: var(--color-background);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transform: translateY(-5px);
+  }
+
+  .tf-icon-box.style-2 .box-icon {
+    width: 64px;
+    height: 64px;
+    background: var(--gradient-base-accent-1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .tf-icon-box.style-2 .box-icon .icon {
+    font-size: 24px;
+    color: #fff;
+  }
+
+  .tf-icon-box.style-2 .content {
+    flex: 1;
+  }
+
+  .tf-icon-box.style-2 .title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: var(--color-foreground);
+  }
+
+  .tf-icon-box.style-2 .desc {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+    color: var(--color-foreground);
+    opacity: 0.8;
+  }
+
+  .sw-dot-default {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 8px;
+  }
+
+  .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-border);
+    opacity: 0.5;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .swiper-pagination-bullet-active {
+    opacity: 1;
+    background: var(--gradient-base-accent-1);
+    transform: scale(1.2);
+  }
+
+  @media screen and (max-width: 1200px) {
+    .section-{{ section.id }}-padding {
+      padding: 60px 0;
+    }
+
+    .tf-icon-box.style-2 {
+      padding: 20px;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .section-{{ section.id }}-padding {
+      padding: 40px 0;
+    }
+
+    .tf-icon-box.style-2 {
+      padding: 16px;
+    }
+
+    .tf-icon-box.style-2 .box-icon {
+      width: 56px;
+      height: 56px;
+    }
+
+    .tf-icon-box.style-2 .box-icon .icon {
+      font-size: 20px;
+    }
+  }
+{%- endstyle -%}
+
+<link rel="stylesheet" href="{{ 'swiper-bundle.min.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'icon-font.css' | asset_url }}">
+
+<div class="section-{{ section.id }}-padding">
+  <div class="container">
+    <div class="mw-1 m-auto">
+      <div dir="ltr" class="swiper tf-swiper wow fadeInUp" data-swiper='{
+        "slidesPerView": 1,
+        "spaceBetween": 12,
+        "speed": 800,
+        "observer": true,
+        "observeParents": true,
+        "pagination": { "el": ".sw-pagination-iconbox", "clickable": true },
+        "breakpoints": {
+          "575": { "slidesPerView": 2, "spaceBetween": 12, "slidesPerGroup": 2}, 
+          "768": { "slidesPerView": 3, "spaceBetween": 24, "slidesPerGroup": 2},
+          "1200": { "slidesPerView": 4, "spaceBetween": 42, "slidesPerGroup": 2}
+        }
+      }'>
+        <div class="swiper-wrapper">
+          {%- for block in section.blocks -%}
+            <div class="swiper-slide" {{ block.shopify_attributes }}>
+              <div class="tf-icon-box style-2">
+                <div class="box-icon">
+                  <i class="icon {{ block.settings.icon }}"></i>
+                </div>
+                <div class="content">
+                  <div class="title">{{ block.settings.title }}</div>
+                  <p class="desc">{{ block.settings.description }}</p>
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+        <div class="d-flex d-xl-none sw-dot-default sw-pagination-iconbox justify-content-center"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer></script>
+<script src="{{ 'wow.min.js' | asset_url }}" defer></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Swiper
+    const swipers = document.querySelectorAll('.tf-swiper');
+    swipers.forEach(element => {
+      const options = JSON.parse(element.dataset.swiper);
+      new Swiper(element, options);
+    });
+
+    // Initialize WOW.js
+    new WOW().init();
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Icon Box",
+  "tag": "section",
+  "class": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "icon_box",
+      "name": "Icon Box",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon class",
+          "default": "icon-shipping"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Free Shipping"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Enjoy free shipping on all orders"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icon Box",
+      "blocks": [
+        {
+          "type": "icon_box",
+          "settings": {
+            "icon": "icon-shipping",
+            "title": "Free Shipping",
+            "description": "Enjoy free shipping on all orders"
+          }
+        },
+        {
+          "type": "icon_box",
+          "settings": {
+            "icon": "icon-gift",
+            "title": "Gift Package",
+            "description": "Perfectly packaged for gifting"
+          }
+        },
+        {
+          "type": "icon_box",
+          "settings": {
+            "icon": "icon-return",
+            "title": "Free Returns",
+            "description": "Within 14 days for a return"
+          }
+        },
+        {
+          "type": "icon_box",
+          "settings": {
+            "icon": "icon-support",
+            "title": "Support Online",
+            "description": "We support customers 24/7"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %} 

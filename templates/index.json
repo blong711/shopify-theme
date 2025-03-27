@@ -267,144 +267,223 @@
         "testimonial-1": {
           "type": "testimonial",
           "settings": {
-            "author": "Sarah Johnson",
-            "role": "Fashion Enthusiast",
-            "image": "shopify://shop_images/testimonial-1.jpg",
-            "content": "Amazing quality and style. The customer service is exceptional!"
+            "author": "Emily T.",
+            "text": "<p>The quality of the clothes exceeded my expectations. Every piece feels premium, and the designs are so trendy. I'm obsessed with my new wardrobe additions!</p>",
+            "rating": 5,
+            "show_purchase": true,
+            "product": "crop-t-shirt",
+            "author_image": "shopify://shop_images/author-fs1.jpg"
           }
         },
         "testimonial-2": {
           "type": "testimonial",
           "settings": {
-            "author": "Michael Chen",
-            "role": "Regular Customer",
-            "image": "shopify://shop_images/testimonial-2.jpg",
-            "content": "Best fashion store I've found. Great prices and fast shipping."
+            "author": "Jessica M.",
+            "text": "<p>I love the dress I purchased! The fabric is so soft, and the fit is perfect. I've gotten so many compliments on it. Will definitely shop here again!</p>",
+            "rating": 5,
+            "show_purchase": true,
+            "product": "short-sleeve-sweat",
+            "author_image": "shopify://shop_images/author-fs2.jpg"
+          }
+        },
+        "testimonial-3": {
+          "type": "testimonial",
+          "settings": {
+            "author": "Lisa P.",
+            "text": "<p>I was pleasantly surprised by how fast my order arrived. The customer service team was helpful and responsive. Great shopping experience!</p>",
+            "rating": 5,
+            "show_purchase": true,
+            "product": "long-sleeve-basic-t-shirt",
+            "author_image": "shopify://shop_images/author-fs3.jpg"
+          }
+        },
+        "testimonial-4": {
+          "type": "testimonial",
+          "settings": {
+            "author": "Emily T.",
+            "text": "<p>The quality of the clothes exceeded my expectations. Every piece feels premium, and the designs are so trendy. I'm obsessed with my new wardrobe additions!</p>",
+            "rating": 5,
+            "show_purchase": true,
+            "product": "crop-t-shirt",
+            "author_image": "shopify://shop_images/author-fs4.jpg"
+          }
+        },
+        "testimonial-5": {
+          "type": "testimonial",
+          "settings": {
+            "author": "Jessica M.",
+            "text": "<p>I love the dress I purchased! The fabric is so soft, and the fit is perfect. I've gotten so many compliments on it. Will definitely shop here again!</p>",
+            "rating": 5,
+            "show_purchase": true,
+            "product": "loose-fit-tee",
+            "author_image": "shopify://shop_images/author-fs5.jpg"
           }
         }
       },
       "block_order": [
         "testimonial-1",
-        "testimonial-2"
+        "testimonial-2",
+        "testimonial-3",
+        "testimonial-4",
+        "testimonial-5"
       ],
       "settings": {
-        "title": "What Our Customers Say",
-        "show_rating": true
+        "title": "Happy Customers"
       }
     },
     "brands": {
       "type": "brands",
       "blocks": {
-        "brand-0": {
+        "brand1": {
           "type": "brand",
           "settings": {
-            "image": "shopify://shop_images/brand-1.png",
-            "link": "/collections/brand-1"
+            "image": "shopify://shop_images/zara.png"
           }
         },
-        "brand-1": {
+        "brand2": {
           "type": "brand",
           "settings": {
-            "image": "shopify://shop_images/brand-2.png",
-            "link": "/collections/brand-2"
+            "image": "shopify://shop_images/bear.png"
           }
         },
-        "brand-2": {
+        "brand3": {
           "type": "brand",
           "settings": {
-            "image": "shopify://shop_images/brand-3.png",
-            "link": "/collections/brand-3"
+            "image": "shopify://shop_images/nike.png"
+          }
+        },
+        "brand4": {
+          "type": "brand",
+          "settings": {
+            "image": "shopify://shop_images/asos.png"
+          }
+        },
+        "brand5": {
+          "type": "brand",
+          "settings": {
+            "image": "shopify://shop_images/burberry.png"
+          }
+        },
+        "brand6": {
+          "type": "brand",
+          "settings": {
+            "image": "shopify://shop_images/forever.png"
           }
         }
       },
       "block_order": [
-        "brand-0",
-        "brand-1",
-        "brand-2"
-      ],
-      "settings": {
-        "title": "Our Brands",
-        "description": "<p>Shop from our trusted brands</p>",
-        "background_color": "#f8f8f8",
-        "show_border": true
-      }
+        "brand1",
+        "brand2",
+        "brand3",
+        "brand4",
+        "brand5",
+        "brand6"
+      ]
     },
     "shop_gram": {
       "type": "shop-gram",
+      "settings": {
+        "title": "Shop by @Gram"
+      },
       "blocks": {
-        "gram-1": {
-          "type": "image",
+        "gallery1": {
+          "type": "gallery",
           "settings": {
-            "image": "shopify://shop_images/instagram-1.jpg",
-            "link": "https://instagram.com"
+            "image": "shopify://shop_images/gallery-fashion-1.jpg",
+            "product": ""
           }
         },
-        "gram-2": {
-          "type": "image",
+        "gallery2": {
+          "type": "gallery",
           "settings": {
-            "image": "shopify://shop_images/instagram-2.jpg",
-            "link": "https://instagram.com"
+            "image": "shopify://shop_images/gallery-fashion-2.jpg",
+            "product": ""
+          }
+        },
+        "gallery3": {
+          "type": "gallery",
+          "settings": {
+            "image": "shopify://shop_images/gallery-fashion-3.jpg",
+            "product": ""
+          }
+        },
+        "gallery4": {
+          "type": "gallery",
+          "settings": {
+            "image": "shopify://shop_images/gallery-fashion-4.jpg",
+            "product": ""
+          }
+        },
+        "gallery5": {
+          "type": "gallery",
+          "settings": {
+            "image": "shopify://shop_images/gallery-fashion-5.jpg",
+            "product": ""
           }
         }
       },
       "block_order": [
-        "gram-1",
-        "gram-2"
-      ],
-      "settings": {
-        "title": "Shop Our Instagram",
-        "subtitle": "Follow us @yourstore"
-      }
+        "gallery1",
+        "gallery2",
+        "gallery3",
+        "gallery4",
+        "gallery5"
+      ]
     },
-    "icon_boxes": {
-      "type": "icon-boxes",
+    "icon_box": {
+      "type": "icon-box",
       "blocks": {
-        "box-1": {
+        "icon_box-1": {
           "type": "icon_box",
           "settings": {
-            "icon": "truck",
+            "icon": "icon-shipping",
             "title": "Free Shipping",
-            "text": "On orders over $50"
+            "description": "Enjoy free shipping on all orders"
           }
         },
-        "box-2": {
+        "icon_box-2": {
           "type": "icon_box",
           "settings": {
-            "icon": "shield",
-            "title": "Secure Payment",
-            "text": "100% secure payment"
+            "icon": "icon-gift",
+            "title": "Gift Package",
+            "description": "Perfectly packaged for gifting"
           }
         },
-        "box-3": {
+        "icon_box-3": {
           "type": "icon_box",
           "settings": {
-            "icon": "return",
-            "title": "Easy Returns",
-            "text": "30 day return policy"
+            "icon": "icon-return",
+            "title": "Free Returns",
+            "description": "Within 14 days for a return"
+          }
+        },
+        "icon_box-4": {
+          "type": "icon_box",
+          "settings": {
+            "icon": "icon-support",
+            "title": "Support Online",
+            "description": "We support customers 24/7"
           }
         }
       },
       "block_order": [
-        "box-1",
-        "box-2",
-        "box-3"
-      ],
-      "settings": {
-        "background_color": "#ffffff",
-        "show_border": true
-      }
+        "icon_box-1",
+        "icon_box-2",
+        "icon_box-3",
+        "icon_box-4"
+      ]
     }
   },
   "order": [
     "slideshow",
     "collection_categories",
+    "best_sellers",
     "banner_countdown",
     "categories",
     "todays_picks",
-    "best_sellers",
     "testimonials",
     "brands",
     "shop_gram",
-    "icon_boxes"
+    "icon_box"
   ]
 }

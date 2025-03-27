@@ -90,41 +90,142 @@
     font-size: 28px;
   }
 }
+
+.section-{{ section.id }}-padding {
+  padding: 40px 0;
+}
+
+.container {
+  max-width: 1488px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.flat-title {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.flat-title .title {
+  font-size: 42px;
+  font-weight: 500;
+  margin: 0;
+  color: var(--color-foreground);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.flat-title .subtitle {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-foreground);
+  margin: 16px auto 0;
+  max-width: 600px;
+}
+
+.brand-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 30px;
+}
+
+.brand-item img {
+  max-width: 100%;
+  height: auto;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.brand-item:hover img {
+  opacity: 1;
+}
+
+@media screen and (max-width: 767px) {
+  .brand-item {
+    padding: 10px 20px;
+  }
+}
 {%- endstyle -%}
 
-<div class="brands">
-  <div class="container">
-    <div class="brands__header">
-      {%- if section.settings.title != blank -%}
-        <h2 class="brands__title">{{ section.settings.title }}</h2>
-      {%- endif -%}
-      {%- if section.settings.description != blank -%}
-        <div class="brands__description">{{ section.settings.description }}</div>
-      {%- endif -%}
-    </div>
+<link rel="stylesheet" href="{{ 'swiper-bundle.min.css' | asset_url }}">
 
-    <div class="brands__grid">
-      {%- for block in section.blocks -%}
-        <div class="brand-item" {{ block.shopify_attributes }}>
-          {%- if block.settings.link != blank -%}
-            <a href="{{ block.settings.link }}">
-          {%- endif -%}
-            {%- if block.settings.image != blank -%}
-              {{ block.settings.image | image_url: width: 200 | image_tag:
-                loading: 'lazy',
-                class: 'brand-item__image',
-                width: block.settings.image.width,
-                height: block.settings.image.height
-              }}
+<section class="section-{{ section.id }}-padding">
+  <div class="container">
+    {%- if section.settings.title != blank or section.settings.subtitle != blank -%}
+      <div class="flat-title wow fadeInUp">
+        {%- if section.settings.title != blank -%}
+          <h4 class="title">{{ section.settings.title }}</h4>
+        {%- endif -%}
+        {%- if section.settings.subtitle != blank -%}
+          <p class="subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div dir="ltr" class="swiper tf-swiper" data-swiper='{
+      "slidesPerView": 6,
+      "spaceBetween": 24,
+      "speed": 800,
+      "loop": true,
+      "autoplay": {
+        "delay": 3000,
+        "disableOnInteraction": false
+      },
+      "breakpoints": {
+        "320": { "slidesPerView": 2, "spaceBetween": 12 },
+        "576": { "slidesPerView": 3, "spaceBetween": 16 },
+        "768": { "slidesPerView": 4, "spaceBetween": 20 },
+        "992": { "slidesPerView": 5, "spaceBetween": 24 },
+        "1200": { "slidesPerView": 6, "spaceBetween": 24 }
+      }
+    }'>
+      <div class="swiper-wrapper">
+        {%- for block in section.blocks -%}
+          <div class="swiper-slide" {{ block.shopify_attributes }}>
+            {%- if block.settings.link != blank -%}
+              <a href="{{ block.settings.link }}" class="brand-item wow fadeInUp" data-wow-delay="{{ forloop.index0 | times: 0.1 }}s">
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 200 | image_tag }}
+                {%- endif -%}
+              </a>
+            {%- else -%}
+              <div class="brand-item wow fadeInUp" data-wow-delay="{{ forloop.index0 | times: 0.1 }}s">
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 200 | image_tag }}
+                {%- endif -%}
+              </div>
             {%- endif -%}
-          {%- if block.settings.link != blank -%}
-            </a>
-          {%- endif -%}
-        </div>
-      {%- endfor -%}
+          </div>
+        {%- endfor -%}
+      </div>
     </div>
   </div>
-</div>
+</section>
+
+<script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer></script>
+<script src="{{ 'wow.min.js' | asset_url }}" defer></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Swiper
+    const swipers = document.querySelectorAll('.tf-swiper');
+    swipers.forEach(element => {
+      const options = JSON.parse(element.dataset.swiper);
+      new Swiper(element, options);
+    });
+
+    // Initialize WOW.js
+    new WOW().init();
+  });
+</script>
+
+<script src="{{ 'infinityslide.js' | asset_url }}" defer></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize infiniteslide
+    $('.infiniteslide').infiniteslide();
+  });
+</script>
 
 {% schema %}
 {
@@ -139,10 +240,10 @@
       "label": "Heading"
     },
     {
-      "type": "richtext",
-      "id": "description",
-      "default": "<p>We partner with the best brands to bring you quality products</p>",
-      "label": "Description"
+      "type": "text",
+      "id": "subtitle",
+      "default": "We collaborate with the world's leading brands to bring you the best products",
+      "label": "Subheading"
     },
     {
       "type": "color",
@@ -161,17 +262,16 @@
     {
       "type": "brand",
       "name": "Brand",
-      "limit": 6,
       "settings": [
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Image"
+          "label": "Brand logo"
         },
         {
           "type": "url",
           "id": "link",
-          "label": "Link"
+          "label": "Brand link"
         }
       ]
     }

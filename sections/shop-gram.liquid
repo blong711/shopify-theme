@@ -1,126 +1,248 @@
 {%- style -%}
-.flat-spacing-4 {
-  padding: 80px 0;
-}
-
-.pt-0 {
-  padding-top: 0;
-}
-
-.flat-title {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.flat-title .title {
-  font-size: 36px;
-  margin-bottom: 10px;
-}
-
-.flat-title .subtitle {
-  font-size: 16px;
-  color: var(--color-foreground-50);
-}
-
-.shop-gram-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-@media screen and (min-width: 768px) {
-  .shop-gram-grid {
-    grid-template-columns: repeat(3, 1fr);
+  .section-{{ section.id }}-padding {
+    padding: 80px 0 0;
   }
-}
 
-@media screen and (min-width: 1200px) {
-  .shop-gram-grid {
-    grid-template-columns: repeat(5, 1fr);
+  .container {
+    max-width: 1488px;
+    margin: 0 auto;
+    padding: 0 15px;
   }
-}
 
-.shop-gram-item {
-  position: relative;
-  padding-bottom: 100%;
-  overflow: hidden;
-}
+  .flat-title {
+    text-align: center;
+    margin-bottom: 40px;
+  }
 
-.shop-gram-item img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
+  .flat-title .title {
+    font-size: 42px;
+    font-weight: 500;
+    margin: 0;
+    color: var(--color-foreground);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
 
-.shop-gram-item:hover img {
-  transform: scale(1.1);
-}
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+  }
 
-.shop-gram-link {
-  display: block;
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
+  .image.img-style {
+    position: relative;
+    padding-bottom: 100%;
+    overflow: hidden;
+  }
+
+  .image.img-style img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .gallery-item:hover .image.img-style img {
+    transform: scale(1.1);
+  }
+
+  .box-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px;
+    height: 44px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 2;
+  }
+
+  .box-icon .icon {
+    color: var(--gradient-base-accent-1);
+    font-size: 18px;
+  }
+
+  .box-icon .tooltip {
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    color: var(--gradient-base-accent-1);
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  .hover-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 1;
+  }
+
+  .gallery-item:hover .box-icon,
+  .gallery-item:hover::before {
+    opacity: 1;
+  }
+
+  .gallery-item:hover .box-icon .tooltip {
+    opacity: 1;
+    bottom: -40px;
+  }
+
+  .sw-dot-default {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 8px;
+  }
+
+  .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-border);
+    opacity: 0.5;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .swiper-pagination-bullet-active {
+    opacity: 1;
+    background: var(--gradient-base-accent-1);
+    transform: scale(1.2);
+  }
+
+  @media screen and (max-width: 1200px) {
+    .section-{{ section.id }}-padding {
+      padding: 60px 0 0;
+    }
+
+    .flat-title .title {
+      font-size: 36px;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .section-{{ section.id }}-padding {
+      padding: 40px 0 0;
+    }
+
+    .flat-title .title {
+      font-size: 32px;
+    }
+  }
 {%- endstyle -%}
 
-<section class="flat-spacing-4 pt-0">
+<link rel="stylesheet" href="{{ 'swiper-bundle.min.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'icon-font.css' | asset_url }}">
+
+<section class="section-{{ section.id }}-padding">
   <div class="container">
-    <div class="flat-title">
+    <div class="flat-title wow fadeInUp">
       <h4 class="title">{{ section.settings.title }}</h4>
-      {%- if section.settings.subtitle != blank -%}
-        <div class="subtitle">{{ section.settings.subtitle }}</div>
-      {%- endif -%}
     </div>
 
-    <div class="shop-gram-grid">
-      {%- for block in section.blocks -%}
-        <div class="shop-gram-item" {{ block.shopify_attributes }}>
-          <a href="{{ block.settings.link }}" class="shop-gram-link">
-            {%- if block.settings.image != blank -%}
-              {{ block.settings.image | image_url: width: 400 | image_tag:
-                loading: 'lazy',
-                width: 400,
-                height: 400,
-                alt: block.settings.image.alt | escape
-              }}
-            {%- else -%}
-              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-            {%- endif -%}
-          </a>
-        </div>
-      {%- endfor -%}
+    <div dir="ltr" class="swiper tf-swiper" data-swiper='{
+      "slidesPerView": 2,
+      "spaceBetween": 24,
+      "speed": 800,
+      "observer": true,
+      "observeParents": true,
+      "slidesPerGroup": 1,
+      "pagination": { "el": ".sw-pagination-gallery", "clickable": true },
+      "breakpoints": {
+        "320": { "slidesPerView": 2, "spaceBetween": 24 },
+        "768": { "slidesPerView": 3, "spaceBetween": 24 },
+        "1200": { "slidesPerView": 5, "spaceBetween": 24 }
+      }
+    }'>
+      <div class="swiper-wrapper">
+        {%- for block in section.blocks -%}
+          <div class="swiper-slide" {{ block.shopify_attributes }}>
+            <div class="gallery-item hover-img hover-overlay wow fadeInLeft" data-wow-delay="{{ forloop.index0 | times: 0.1 }}s">
+              <div class="image img-style">
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 400 | image_tag:
+                    loading: 'lazy',
+                    class: 'lazyload'
+                  }}
+                {%- endif -%}
+              </div>
+              {%- if block.settings.product != blank -%}
+                <a href="{{ block.settings.product.url }}" class="box-icon hover-tooltip">
+                  <span class="icon icon-cart2"></span>
+                  <span class="tooltip">View Product</span>
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+      <span class="sw-dot-default sw-pagination-gallery"></span>
     </div>
   </div>
 </section>
 
+<script src="{{ 'vineta-jquery.min.js' | asset_url }}" defer></script>
+<script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer></script>
+<script src="{{ 'wow.min.js' | asset_url }}" defer></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Wait for jQuery to load
+    var checkJquery = setInterval(function() {
+      if (window.jQuery) {
+        clearInterval(checkJquery);
+        
+        // Initialize Swiper
+        $('.tf-swiper').each(function() {
+          const options = $(this).data('swiper');
+          new Swiper(this, options);
+        });
+
+        // Initialize WOW.js
+        new WOW().init();
+      }
+    }, 100);
+  });
+</script>
+
 {% schema %}
 {
-  "name": "Shop Instagram",
+  "name": "Shop by @Gram",
   "tag": "section",
   "class": "section",
   "settings": [
     {
       "type": "text",
       "id": "title",
-      "label": "Title",
-      "default": "Shop by @Gram"
-    },
-    {
-      "type": "text",
-      "id": "subtitle",
-      "label": "Subtitle",
-      "default": "Follow us @yourstore"
+      "default": "Shop by @Gram",
+      "label": "Heading"
     }
   ],
   "blocks": [
     {
-      "type": "image",
-      "name": "Instagram Image",
+      "type": "gallery",
+      "name": "Gallery Item",
       "settings": [
         {
           "type": "image_picker",
@@ -128,32 +250,31 @@
           "label": "Image"
         },
         {
-          "type": "url",
-          "id": "link",
-          "label": "Link",
-          "default": ""
+          "type": "product",
+          "id": "product",
+          "label": "Product"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Shop Instagram",
+      "name": "Shop by @Gram",
       "blocks": [
         {
-          "type": "image"
+          "type": "gallery"
         },
         {
-          "type": "image"
+          "type": "gallery"
         },
         {
-          "type": "image"
+          "type": "gallery"
         },
         {
-          "type": "image"
+          "type": "gallery"
         },
         {
-          "type": "image"
+          "type": "gallery"
         }
       ]
     }

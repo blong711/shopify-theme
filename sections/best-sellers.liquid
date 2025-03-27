@@ -29,13 +29,23 @@
   padding: 0 12px;
 }
 
+.best-sellers .swiper-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .best-sellers .swiper-slide {
   height: auto;
+  display: flex;
+  justify-content: center;
 }
 
 .card-product {
   position: relative;
   margin-bottom: 30px;
+  width: 100%;
+  max-width: 300px;
 }
 
 .card-product-wrapper {
@@ -238,7 +248,44 @@
       <h4 class="title">{{ section.settings.title }}</h4>
     </div>
     <div class="fl-control-sw2 pos2 wow fadeInUp">
-      <div dir="ltr" class="swiper tf-swiper wrap-sw-over">
+      <div dir="ltr" class="swiper tf-swiper wrap-sw-over" data-swiper='{
+        "slidesPerView": 1,
+        "spaceBetween": 24,
+        "speed": 800,
+        "observer": true,
+        "observeParents": true,
+        "watchOverflow": true,
+        "navigation": {
+          "nextEl": ".nav-next-seller",
+          "prevEl": ".nav-prev-seller"
+        },
+        "pagination": {
+          "el": ".sw-pagination-seller",
+          "clickable": true
+        },
+        "breakpoints": {
+          "575": {
+            "slidesPerView": 2,
+            "spaceBetween": 24,
+            "slidesPerGroup": 1
+          },
+          "768": {
+            "slidesPerView": 3,
+            "spaceBetween": 24,
+            "slidesPerGroup": 1
+          },
+          "992": {
+            "slidesPerView": 4,
+            "spaceBetween": 24,
+            "slidesPerGroup": 1
+          },
+          "1200": {
+            "slidesPerView": 5,
+            "spaceBetween": 24,
+            "slidesPerGroup": 1
+          }
+        }
+      }'>
         <div class="swiper-wrapper">
           {%- for block in section.blocks -%}
             <div class="swiper-slide" {{ block.shopify_attributes }}>
@@ -320,34 +367,27 @@
 <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    new Swiper('.best-sellers .tf-swiper', {
-      slidesPerView: 2,
-      spaceBetween: 12,
-      speed: 800,
-      observer: true,
-      observeParents: true,
-      slidesPerGroup: 2,
-      navigation: {
-        nextEl: '.nav-next-seller',
-        prevEl: '.nav-prev-seller'
-      },
-      pagination: {
-        el: '.sw-pagination-seller',
-        clickable: true
-      },
-      breakpoints: {
-        768: {
-          slidesPerView: 3,
-          spaceBetween: 12,
-          slidesPerGroup: 3
-        },
-        1200: {
-          slidesPerView: 4,
-          spaceBetween: 24,
-          slidesPerGroup: 4
+    const initSwiper = () => {
+      const swipers = document.querySelectorAll('.tf-swiper');
+      swipers.forEach(element => {
+        if (!element.swiper && element.dataset.swiper) {
+          const options = JSON.parse(element.dataset.swiper);
+          new Swiper(element, options);
         }
-      }
-    });
+      });
+    };
+
+    // Initialize immediately
+    initSwiper();
+
+    // Re-initialize on Shopify section load
+    if (Shopify.designMode) {
+      document.addEventListener('shopify:section:load', function(event) {
+        if (event.target.classList.contains('best-sellers')) {
+          setTimeout(initSwiper, 100);
+        }
+      });
+    }
   });
 </script>
 
