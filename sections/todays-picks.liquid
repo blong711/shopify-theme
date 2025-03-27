@@ -1,257 +1,388 @@
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{{ 'vineta-font-icons.css' | asset_url | stylesheet_tag }}
+
 {%- style -%}
+.todays-picks {
+  padding: var(--vineta-section-spacing-desktop) 0;
+  overflow: hidden;
+  background-color: var(--vineta-bg);
+}
+
+.todays-picks .container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.todays-picks .vineta-section-header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.todays-picks .vineta-section-header__title {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 0;
+  color: var(--vineta-dark);
+}
+
+.todays-picks .swiper {
+  margin: 0 -12px;
+  padding: 0 12px;
+}
+
+.todays-picks .swiper-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.todays-picks .swiper-slide {
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.vineta-product-card {
+  position: relative;
+  margin-bottom: 30px;
+  width: 100%;
+  max-width: 300px;
+  background-color: var(--vineta-bg);
+}
+
+.vineta-product-card__wrapper {
+  position: relative;
+}
+
+.vineta-product-card__image {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.vineta-product-card__img,
+.vineta-product-card__img-hover {
+  width: 100%;
+  height: auto;
+  transition: transform 0.6s ease;
+}
+
+.vineta-product-card__img-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.vineta-product-card__image:hover .vineta-product-card__img {
+  opacity: 0;
+}
+
+.vineta-product-card__image:hover .vineta-product-card__img-hover {
+  opacity: 1;
+}
+
+.vineta-product-card__actions {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 2;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: all 0.3s ease;
+}
+
+.vineta-product-card:hover .vineta-product-card__actions {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.vineta-product-card__action-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--vineta-bg);
+  border-radius: 50%;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+  color: var(--vineta-dark);
+}
+
+.vineta-product-card__action-btn:hover {
+  background: var(--vineta-dark);
+  color: var(--vineta-bg);
+}
+
+.vineta-tooltip {
+  position: relative;
+}
+
+.vineta-tooltip__text {
+  position: absolute;
+  left: -120px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--vineta-dark);
+  color: var(--vineta-bg);
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.vineta-tooltip__text::after {
+  content: '';
+  position: absolute;
+  right: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left: 4px solid var(--vineta-dark);
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+}
+
+.vineta-tooltip:hover .vineta-tooltip__text {
+  opacity: 1;
+  visibility: visible;
+  left: -100px;
+}
+
+.vineta-badge-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 2;
+}
+
+.vineta-badge {
+  display: inline-block;
+  padding: 5px 12px;
+  background: var(--vineta-dark);
+  color: var(--vineta-bg);
+  font-size: 12px;
+  border-radius: 30px;
+}
+
+.vineta-product-card__content {
+  padding: 20px 0;
+  text-align: center;
+}
+
+.vineta-product-card__title {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: var(--vineta-dark);
+  text-decoration: none;
+}
+
+.vineta-product-card__title:hover {
+  color: var(--vineta-primary);
+}
+
+.vineta-product-card__price-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.vineta-product-card__price {
+  color: var(--vineta-primary);
+}
+
+.vineta-product-card__compare-price {
+  color: var(--vineta-gray);
+  text-decoration: line-through;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  width: 50px;
+  height: 50px;
+  background: var(--vineta-bg);
+  border-radius: 50%;
+  box-shadow: var(--vineta-shadow-md);
+  color: var(--vineta-dark);
+  transition: all 0.3s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: var(--vineta-dark);
+  color: var(--vineta-bg);
+}
+
+.sw-pagination-picks {
+  margin-top: 30px;
+}
+
+.sw-pagination-picks .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background: var(--vineta-light-gray);
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.sw-pagination-picks .swiper-pagination-bullet-active {
+  background: var(--vineta-dark);
+}
+
+@media screen and (max-width: 991px) {
   .todays-picks {
-    padding: 80px 0;
-    background-color: var(--color-background);
-    overflow: hidden;
+    padding: var(--vineta-section-spacing-tablet) 0;
   }
+}
 
-  .todays-picks__header {
-    text-align: center;
-    margin-bottom: 48px;
+@media screen and (max-width: 767px) {
+  .todays-picks {
+    padding: var(--vineta-section-spacing-mobile) 0;
   }
-
-  .todays-picks__title {
-    font-size: 2.4rem;
-    font-weight: 600;
-    margin-bottom: 16px;
-    color: var(--color-dark);
-  }
-
-  .todays-picks__subtitle {
-    font-size: 1.1rem;
-    color: var(--color-text);
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .todays-picks__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 30px;
-    margin: 0;
-  }
-
-  .todays-picks__item {
-    position: relative;
-    border-radius: 12px;
-    overflow: hidden;
-    background-color: var(--color-white);
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  }
-
-  .todays-picks__item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-  }
-
-  .todays-picks__image {
-    position: relative;
-    padding-bottom: 100%;
-    overflow: hidden;
-  }
-
-  .todays-picks__image img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-  }
-
-  .todays-picks__item:hover .todays-picks__image img {
-    transform: scale(1.1);
-  }
-
-  .todays-picks__badge {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    padding: 6px 12px;
-    background-color: var(--color-primary);
-    color: var(--color-white);
-    font-size: 0.9rem;
-    font-weight: 500;
-    border-radius: 4px;
-    z-index: 1;
-  }
-
-  .todays-picks__content {
-    padding: 24px;
-  }
-
-  .todays-picks__product-title {
-    font-size: 1.1rem;
-    font-weight: 500;
-    margin-bottom: 12px;
-    color: var(--color-dark);
-    line-height: 1.4;
-  }
-
-  .todays-picks__price {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-
-  .todays-picks__price-current {
-    color: var(--color-primary);
-    font-size: 1.2rem;
-    font-weight: 600;
-  }
-
-  .todays-picks__price-compare {
-    color: var(--color-text);
-    text-decoration: line-through;
-    font-size: 0.9rem;
-  }
-
-  .todays-picks__actions {
-    display: flex;
-    gap: 12px;
-  }
-
-  .todays-picks__button {
-    flex: 1;
-    padding: 12px 24px;
-    background-color: var(--color-primary);
-    color: var(--color-white);
-    border: none;
-    border-radius: 6px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-  }
-
-  .todays-picks__button:hover {
-    background-color: var(--color-primary-dark);
-    transform: translateY(-2px);
-  }
-
-  .todays-picks__button svg {
-    width: 16px;
-    height: 16px;
-  }
-
-  @media screen and (max-width: 749px) {
-    .todays-picks {
-      padding: 40px 0;
-    }
-
-    .todays-picks__title {
-      font-size: 2rem;
-    }
-
-    .todays-picks__grid {
-      gap: 20px;
-    }
-
-    .todays-picks__content {
-      padding: 16px;
-    }
-
-    .todays-picks__button {
-      padding: 10px 20px;
-    }
-  }
+}
 {%- endstyle -%}
 
-<div class="todays-picks">
-  <div class="todays-picks__header">
-    {%- if section.settings.title != blank -%}
-      <h2 class="todays-picks__title">{{ section.settings.title }}</h2>
-    {%- endif -%}
-    {%- if section.settings.subtitle != blank -%}
-      <p class="todays-picks__subtitle">{{ section.settings.subtitle }}</p>
-    {%- endif -%}
-  </div>
+<section class="todays-picks">
+  <div class="container">
+    <div class="vineta-section-header wow fadeInUp">
+      <h4 class="vineta-section-header__title">{{ section.settings.title }}</h4>
+    </div>
+    <div class="fl-control-sw2 pos2 wow fadeInUp">
+      <div class="swiper swiper-picks">
+        <div class="swiper-wrapper">
+          {% for block in section.blocks %}
+            <div class="swiper-slide">
+              <div class="vineta-product-card">
+                <div class="vineta-product-card__wrapper">
+                  <a href="{{ block.settings.product_url }}" class="vineta-product-card__image">
+                    <img
+                      src="{{ block.settings.product_image | img_url: '600x' }}"
+                      alt="{{ block.settings.title }}"
+                      class="vineta-product-card__img"
+                      loading="lazy"
+                      width="600"
+                      height="600"
+                    >
+                    {% if block.settings.hover_image != blank %}
+                      <img
+                        src="{{ block.settings.hover_image | img_url: '600x' }}"
+                        alt="{{ block.settings.title }}"
+                        class="vineta-product-card__img-hover"
+                        loading="lazy"
+                        width="600"
+                        height="600"
+                      >
+                    {% endif %}
+                  </a>
 
-  <div class="page-width">
-    <div class="todays-picks__grid">
-      {%- for block in section.blocks -%}
-        <div class="todays-picks__item" {{ block.shopify_attributes }}>
-          {%- if block.settings.image != blank -%}
-            <div class="todays-picks__image">
-              {{ block.settings.image | image_url: width: 600 | image_tag:
-                loading: 'lazy',
-                width: block.settings.image.width,
-                height: block.settings.image.height,
-                alt: block.settings.image.alt | escape
-              }}
+                  <ul class="vineta-product-card__actions">
+                    <li>
+                      <div class="vineta-tooltip">
+                        <button class="vineta-product-card__action-btn">
+                          <i class="icon-cart"></i>
+                        </button>
+                        <span class="vineta-tooltip__text">Add to Cart</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="vineta-tooltip">
+                        <button class="vineta-product-card__action-btn">
+                          <i class="icon-heart"></i>
+                        </button>
+                        <span class="vineta-tooltip__text">Add to Wishlist</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="vineta-tooltip">
+                        <button class="vineta-product-card__action-btn">
+                          <i class="icon-eye"></i>
+                        </button>
+                        <span class="vineta-tooltip__text">Quick View</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="vineta-tooltip">
+                        <button class="vineta-product-card__action-btn">
+                          <i class="icon-compare"></i>
+                        </button>
+                        <span class="vineta-tooltip__text">Compare</span>
+                      </div>
+                    </li>
+                  </ul>
+
+                  {% if block.settings.badge_text != blank %}
+                    <div class="vineta-badge-container">
+                      <span class="vineta-badge">{{ block.settings.badge_text }}</span>
+                    </div>
+                  {% endif %}
+                </div>
+
+                <div class="vineta-product-card__content">
+                  <a href="{{ block.settings.product_url }}" class="vineta-product-card__title">
+                    {{ block.settings.title }}
+                  </a>
+                  <div class="vineta-product-card__price-wrap">
+                    <span class="vineta-product-card__price">{{ block.settings.price }}</span>
+                    {% if block.settings.compare_price != blank %}
+                      <span class="vineta-product-card__compare-price">{{ block.settings.compare_price }}</span>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
             </div>
-          {%- endif -%}
-
-          {%- if block.settings.badge != blank -%}
-            <div class="todays-picks__badge">{{ block.settings.badge }}</div>
-          {%- endif -%}
-
-          <div class="todays-picks__content">
-            {%- if block.settings.title != blank -%}
-              <h3 class="todays-picks__product-title">{{ block.settings.title }}</h3>
-            {%- endif -%}
-
-            <div class="todays-picks__price">
-              <span class="todays-picks__price-current">{{ block.settings.price }}</span>
-              {%- if block.settings.compare_price != blank -%}
-                <span class="todays-picks__price-compare">{{ block.settings.compare_price }}</span>
-              {%- endif -%}
-            </div>
-
-            <div class="todays-picks__actions">
-              <button class="todays-picks__button">
-                {% render 'icon-cart' %}
-                {{ 'products.product.add_to_cart' | t }}
-              </button>
-            </div>
-          </div>
+          {% endfor %}
         </div>
-      {%- endfor -%}
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination sw-pagination-picks"></div>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
 {% schema %}
 {
   "name": "Today's Picks",
-  "tag": "section",
-  "class": "section",
   "settings": [
     {
       "type": "text",
       "id": "title",
       "label": "Title",
       "default": "Today's Picks"
-    },
-    {
-      "type": "text",
-      "id": "subtitle",
-      "label": "Subtitle",
-      "default": "Discover our handpicked selection of the best products for you"
     }
   ],
   "blocks": [
     {
       "type": "product",
       "name": "Product",
-      "limit": 8,
       "settings": [
         {
           "type": "image_picker",
-          "id": "image",
-          "label": "Image"
+          "id": "product_image",
+          "label": "Product Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "hover_image",
+          "label": "Hover Image"
         },
         {
           "type": "text",
           "id": "title",
-          "label": "Title",
-          "default": "Product name"
+          "label": "Product Title",
+          "default": "Product Title"
         },
         {
           "type": "text",
@@ -262,13 +393,17 @@
         {
           "type": "text",
           "id": "compare_price",
-          "label": "Compare at price"
+          "label": "Compare Price"
         },
         {
           "type": "text",
-          "id": "badge",
-          "label": "Badge",
-          "default": "New"
+          "id": "badge_text",
+          "label": "Badge Text"
+        },
+        {
+          "type": "url",
+          "id": "product_url",
+          "label": "Product URL"
         }
       ]
     }
@@ -276,7 +411,36 @@
   "presets": [
     {
       "name": "Today's Picks",
-      "category": "Product"
+      "blocks": [
+        {
+          "type": "product",
+          "settings": {
+            "title": "Product Title 1",
+            "price": "$99.00"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "Product Title 2",
+            "price": "$89.00"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "Product Title 3",
+            "price": "$79.00"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "Product Title 4",
+            "price": "$69.00"
+          }
+        }
+      ]
     }
   ]
 }

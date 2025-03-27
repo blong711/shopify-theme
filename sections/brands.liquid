@@ -1,3 +1,6 @@
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{{ 'vineta-font-icons.css' | asset_url | stylesheet_tag }}
+
 {%- style -%}
 /* Root variables for consistent styling */
 :root {
@@ -11,83 +14,121 @@
 
 /* Brands styles */
 .brands {
-  padding: 60px 0;
-  background-color: {{ section.settings.background_color }};
+  padding: var(--vineta-section-spacing-desktop) 0;
+  overflow: hidden;
+  background-color: var(--vineta-bg);
 }
 
-.brands__header {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.brands__title {
-  font-size: 32px;
-  font-weight: 600;
-  margin-bottom: 16px;
-  color: var(--dark);
-}
-
-.brands__description {
-  font-size: 16px;
-  color: var(--text);
-  max-width: 600px;
+.brands .container {
+  max-width: var(--container-max-width);
   margin: 0 auto;
+  padding: 0 15px;
 }
 
-.brands__grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 30px;
-  margin-top: 40px;
+.brands .vineta-section-header {
+  margin-bottom: 40px;
+  text-align: center;
 }
 
-.brand-item {
+.brands .vineta-section-header__title {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 0;
+  color: var(--vineta-dark);
+}
+
+.brands .swiper {
+  margin: 0 -12px;
+  padding: 0 12px;
+}
+
+.brands .swiper-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.brands .swiper-slide {
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.vineta-brand-card {
   position: relative;
-  padding: 20px;
-  background: var(--white);
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  {% if section.settings.show_border %}
-  border: 1px solid var(--line);
-  {% endif %}
-}
-
-.brand-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
-
-.brand-item__image {
+  margin-bottom: 30px;
   width: 100%;
-  height: 80px;
-  object-fit: contain;
-  filter: grayscale(100%);
-  transition: filter 0.3s ease;
+  max-width: 200px;
+  background-color: var(--vineta-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.brand-item:hover .brand-item__image {
-  filter: grayscale(0%);
+.vineta-brand-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--vineta-shadow-lg);
 }
 
-@media screen and (max-width: 1200px) {
-  .brands__grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
+.vineta-brand-card__image {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.vineta-brand-card:hover .vineta-brand-card__image {
+  opacity: 1;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  width: 50px;
+  height: 50px;
+  background: var(--vineta-bg);
+  border-radius: 50%;
+  box-shadow: var(--vineta-shadow-md);
+  color: var(--vineta-dark);
+  transition: all 0.3s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: var(--vineta-dark);
+  color: var(--vineta-bg);
+}
+
+.sw-pagination-brands {
+  margin-top: 30px;
+}
+
+.sw-pagination-brands .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background: var(--vineta-light-gray);
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.sw-pagination-brands .swiper-pagination-bullet-active {
+  background: var(--vineta-dark);
 }
 
 @media screen and (max-width: 991px) {
-  .brands__grid {
-    grid-template-columns: repeat(3, 1fr);
+  .brands {
+    padding: var(--vineta-section-spacing-tablet) 0;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .brands__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .brands__title {
-    font-size: 28px;
+  .brands {
+    padding: var(--vineta-section-spacing-mobile) 0;
   }
 }
 
@@ -150,54 +191,34 @@
 
 <link rel="stylesheet" href="{{ 'swiper-bundle.min.css' | asset_url }}">
 
-<section class="section-{{ section.id }}-padding">
+<section class="brands">
   <div class="container">
-    {%- if section.settings.title != blank or section.settings.subtitle != blank -%}
-      <div class="flat-title wow fadeInUp">
-        {%- if section.settings.title != blank -%}
-          <h4 class="title">{{ section.settings.title }}</h4>
-        {%- endif -%}
-        {%- if section.settings.subtitle != blank -%}
-          <p class="subtitle">{{ section.settings.subtitle }}</p>
-        {%- endif -%}
-      </div>
-    {%- endif -%}
-
-    <div dir="ltr" class="swiper tf-swiper" data-swiper='{
-      "slidesPerView": 6,
-      "spaceBetween": 24,
-      "speed": 800,
-      "loop": true,
-      "autoplay": {
-        "delay": 3000,
-        "disableOnInteraction": false
-      },
-      "breakpoints": {
-        "320": { "slidesPerView": 2, "spaceBetween": 12 },
-        "576": { "slidesPerView": 3, "spaceBetween": 16 },
-        "768": { "slidesPerView": 4, "spaceBetween": 20 },
-        "992": { "slidesPerView": 5, "spaceBetween": 24 },
-        "1200": { "slidesPerView": 6, "spaceBetween": 24 }
-      }
-    }'>
-      <div class="swiper-wrapper">
-        {%- for block in section.blocks -%}
-          <div class="swiper-slide" {{ block.shopify_attributes }}>
-            {%- if block.settings.link != blank -%}
-              <a href="{{ block.settings.link }}" class="brand-item wow fadeInUp" data-wow-delay="{{ forloop.index0 | times: 0.1 }}s">
-                {%- if block.settings.image != blank -%}
-                  {{ block.settings.image | image_url: width: 200 | image_tag }}
-                {%- endif -%}
-              </a>
-            {%- else -%}
-              <div class="brand-item wow fadeInUp" data-wow-delay="{{ forloop.index0 | times: 0.1 }}s">
-                {%- if block.settings.image != blank -%}
-                  {{ block.settings.image | image_url: width: 200 | image_tag }}
-                {%- endif -%}
+    <div class="vineta-section-header wow fadeInUp">
+      <h4 class="vineta-section-header__title">{{ section.settings.title }}</h4>
+    </div>
+    <div class="fl-control-sw2 pos2 wow fadeInUp">
+      <div class="swiper swiper-brands">
+        <div class="swiper-wrapper">
+          {% for block in section.blocks %}
+            <div class="swiper-slide">
+              <div class="vineta-brand-card">
+                <a href="{{ block.settings.brand_url }}" class="vineta-brand-card__image" target="_blank" rel="noopener">
+                  <img
+                    src="{{ block.settings.brand_logo | img_url: '200x' }}"
+                    alt="{{ block.settings.brand_name }}"
+                    class="vineta-brand-card__img"
+                    loading="lazy"
+                    width="200"
+                    height="100"
+                  >
+                </a>
               </div>
-            {%- endif -%}
-          </div>
-        {%- endfor -%}
+            </div>
+          {% endfor %}
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination sw-pagination-brands"></div>
       </div>
     </div>
   </div>
@@ -236,26 +257,8 @@
     {
       "type": "text",
       "id": "title",
-      "default": "Our Brands",
-      "label": "Heading"
-    },
-    {
-      "type": "text",
-      "id": "subtitle",
-      "default": "We collaborate with the world's leading brands to bring you the best products",
-      "label": "Subheading"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_border",
-      "label": "Show border",
-      "default": true
+      "label": "Title",
+      "default": "Our Brands"
     }
   ],
   "blocks": [
@@ -265,13 +268,19 @@
       "settings": [
         {
           "type": "image_picker",
-          "id": "image",
-          "label": "Brand logo"
+          "id": "brand_logo",
+          "label": "Brand Logo"
+        },
+        {
+          "type": "text",
+          "id": "brand_name",
+          "label": "Brand Name",
+          "default": "Brand Name"
         },
         {
           "type": "url",
-          "id": "link",
-          "label": "Brand link"
+          "id": "brand_url",
+          "label": "Brand URL"
         }
       ]
     }
@@ -281,22 +290,34 @@
       "name": "Brands",
       "blocks": [
         {
-          "type": "brand"
+          "type": "brand",
+          "settings": {
+            "brand_name": "Brand 1"
+          }
         },
         {
-          "type": "brand"
+          "type": "brand",
+          "settings": {
+            "brand_name": "Brand 2"
+          }
         },
         {
-          "type": "brand"
+          "type": "brand",
+          "settings": {
+            "brand_name": "Brand 3"
+          }
         },
         {
-          "type": "brand"
+          "type": "brand",
+          "settings": {
+            "brand_name": "Brand 4"
+          }
         },
         {
-          "type": "brand"
-        },
-        {
-          "type": "brand"
+          "type": "brand",
+          "settings": {
+            "brand_name": "Brand 5"
+          }
         }
       ]
     }

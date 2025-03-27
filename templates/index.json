@@ -70,43 +70,48 @@
       "type": "collection-categories",
       "blocks": {
         "tops": {
-          "type": "collection",
+          "type": "category",
           "settings": {
-            "collection": "tops",
+            "category_image": "shopify://shop_images/top.jpg",
             "title": "Tops",
-            "image": "shopify://shop_images/top.jpg"
+            "product_count": "120",
+            "category_url": "/collections/tops"
           }
         },
         "accessories": {
-          "type": "collection",
+          "type": "category",
           "settings": {
-            "collection": "accessories",
+            "category_image": "shopify://shop_images/accessories.jpg",
             "title": "Accessories",
-            "image": "shopify://shop_images/accessories.jpg"
+            "product_count": "90",
+            "category_url": "/collections/accessories"
           }
         },
         "sportwear": {
-          "type": "collection",
+          "type": "category",
           "settings": {
-            "collection": "sportwear",
+            "category_image": "shopify://shop_images/sportwear.jpg",
             "title": "Sportwear",
-            "image": "shopify://shop_images/sportwear.jpg"
+            "product_count": "75",
+            "category_url": "/collections/sportwear"
           }
         },
         "men": {
-          "type": "collection",
+          "type": "category",
           "settings": {
-            "collection": "men",
+            "category_image": "shopify://shop_images/men.jpg",
             "title": "Men",
-            "image": "shopify://shop_images/men.jpg"
+            "product_count": "150",
+            "category_url": "/collections/men"
           }
         },
         "kids": {
-          "type": "collection",
+          "type": "category",
           "settings": {
-            "collection": "kids",
+            "category_image": "shopify://shop_images/kid.jpg",
             "title": "Kids",
-            "image": "shopify://shop_images/kid.jpg"
+            "product_count": "60",
+            "category_url": "/collections/kids"
           }
         }
       },
@@ -117,7 +122,9 @@
         "men",
         "kids"
       ],
-      "settings": {}
+      "settings": {
+        "title": "Shop by Category"
+      }
     },
     "banner_countdown": {
       "type": "banner-countdown",
@@ -201,12 +208,23 @@
             "compare_price": "$180.00",
             "badge": "New"
           }
+        },
+        "product-3": {
+          "type": "product",
+          "settings": {
+            "image": "shopify://shop_images/product-4.jpg",
+            "title": "Summer Dress",
+            "price": "$120.00",
+            "compare_price": "$150.00",
+            "badge": "Sale"
+          }
         }
       },
       "block_order": [
         "product-0",
         "product-1",
-        "product-2"
+        "product-2",
+        "product-3"
       ],
       "settings": {
         "title": "Today's Picks"
@@ -222,7 +240,8 @@
             "price": "$29.99",
             "compare_price": "$39.99",
             "badge": "20% Off",
-            "image": "shopify://shop_images/product-4.jpg"
+            "image": "shopify://shop_images/product-4.jpg",
+            "hover_image": "shopify://shop_images/product-4-hover.jpg"
           }
         },
         "product2": {
@@ -231,7 +250,8 @@
             "title": "Denim Jacket",
             "price": "$89.99",
             "badge": "New",
-            "image": "shopify://shop_images/product-5.jpg"
+            "image": "shopify://shop_images/product-5.jpg",
+            "hover_image": "shopify://shop_images/product-5-hover.jpg"
           }
         },
         "product3": {
@@ -241,25 +261,144 @@
             "price": "$129.99",
             "compare_price": "$159.99",
             "badge": "Sale",
-            "image": "shopify://shop_images/product-6.jpg"
+            "image": "shopify://shop_images/product-6.jpg",
+            "hover_image": "shopify://shop_images/product-6-hover.jpg"
           }
         },
         "product4": {
           "type": "product",
           "settings": {
             "title": "Summer Dress",
-            "price": "$59.99",
+            "price": "$79.99",
+            "compare_price": "$99.99",
             "badge": "Trending",
-            "image": "shopify://shop_images/product-7.jpg"
+            "image": "shopify://shop_images/product-7.jpg",
+            "hover_image": "shopify://shop_images/product-7-hover.jpg"
+          }
+        },
+        "product5": {
+          "type": "product",
+          "settings": {
+            "title": "Casual Sneakers",
+            "price": "$69.99",
+            "compare_price": "$89.99",
+            "badge": "Popular",
+            "image": "shopify://shop_images/product-8.jpg",
+            "hover_image": "shopify://shop_images/product-8-hover.jpg"
           }
         }
       },
-      "block_order": ["product1", "product2", "product3", "product4"],
+      "block_order": [
+        "product1",
+        "product2",
+        "product3",
+        "product4",
+        "product5"
+      ],
       "settings": {
         "title": "Best Sellers",
         "show_view_all": true,
-        "products_to_show": 4
+        "products_to_show": 5
       }
+    },
+    "shop_gram": {
+      "type": "shop-gram",
+      "blocks": {
+        "instagram-1": {
+          "type": "instagram",
+          "settings": {
+            "title": "Summer Collection",
+            "subtitle": "@yourstore",
+            "image": "shopify://shop_images/instagram-1.jpg",
+            "instagram_url": "https://instagram.com/yourstore"
+          }
+        },
+        "instagram-2": {
+          "type": "instagram",
+          "settings": {
+            "title": "New Arrivals",
+            "subtitle": "@yourstore",
+            "image": "shopify://shop_images/instagram-2.jpg",
+            "instagram_url": "https://instagram.com/yourstore"
+          }
+        },
+        "instagram-3": {
+          "type": "instagram",
+          "settings": {
+            "title": "Trending Now",
+            "subtitle": "@yourstore",
+            "image": "shopify://shop_images/instagram-3.jpg",
+            "instagram_url": "https://instagram.com/yourstore"
+          }
+        },
+        "instagram-4": {
+          "type": "instagram",
+          "settings": {
+            "title": "Best Sellers",
+            "subtitle": "@yourstore",
+            "image": "shopify://shop_images/instagram-4.jpg",
+            "instagram_url": "https://instagram.com/yourstore"
+          }
+        }
+      },
+      "block_order": [
+        "instagram-1",
+        "instagram-2",
+        "instagram-3",
+        "instagram-4"
+      ],
+      "settings": {
+        "title": "Shop Instagram"
+      }
+    },
+    "brands": {
+      "type": "brands",
+      "blocks": {
+        "brand1": {
+          "type": "brand",
+          "settings": {
+            "image": "shopify://shop_images/zara.png"
+          }
+        },
+        "brand2": {
+          "type": "brand",
+          "settings": {
+            "image": "shopify://shop_images/bear.png"
+          }
+        },
+        "brand3": {
+          "type": "brand",
+          "settings": {
+            "image": "shopify://shop_images/nike.png"
+          }
+        },
+        "brand4": {
+          "type": "brand",
+          "settings": {
+            "image": "shopify://shop_images/asos.png"
+          }
+        },
+        "brand5": {
+          "type": "brand",
+          "settings": {
+            "image": "shopify://shop_images/burberry.png"
+          }
+        },
+        "brand6": {
+          "type": "brand",
+          "settings": {
+            "image": "shopify://shop_images/forever.png"
+          }
+        }
+      },
+      "block_order": [
+        "brand1",
+        "brand2",
+        "brand3",
+        "brand4",
+        "brand5",
+        "brand6"
+      ]
     },
     "testimonials": {
       "type": "testimonials",
@@ -331,105 +470,6 @@
         "title": "Happy Customers"
       }
     },
-    "brands": {
-      "type": "brands",
-      "blocks": {
-        "brand1": {
-          "type": "brand",
-          "settings": {
-            "image": "shopify://shop_images/zara.png"
-          }
-        },
-        "brand2": {
-          "type": "brand",
-          "settings": {
-            "image": "shopify://shop_images/bear.png"
-          }
-        },
-        "brand3": {
-          "type": "brand",
-          "settings": {
-            "image": "shopify://shop_images/nike.png"
-          }
-        },
-        "brand4": {
-          "type": "brand",
-          "settings": {
-            "image": "shopify://shop_images/asos.png"
-          }
-        },
-        "brand5": {
-          "type": "brand",
-          "settings": {
-            "image": "shopify://shop_images/burberry.png"
-          }
-        },
-        "brand6": {
-          "type": "brand",
-          "settings": {
-            "image": "shopify://shop_images/forever.png"
-          }
-        }
-      },
-      "block_order": [
-        "brand1",
-        "brand2",
-        "brand3",
-        "brand4",
-        "brand5",
-        "brand6"
-      ]
-    },
-    "shop_gram": {
-      "type": "shop-gram",
-      "settings": {
-        "title": "Shop by @Gram"
-      },
-      "blocks": {
-        "gallery1": {
-          "type": "gallery",
-          "settings": {
-            "image": "shopify://shop_images/gallery-fashion-1.jpg",
-            "product": ""
-          }
-        },
-        "gallery2": {
-          "type": "gallery",
-          "settings": {
-            "image": "shopify://shop_images/gallery-fashion-2.jpg",
-            "product": ""
-          }
-        },
-        "gallery3": {
-          "type": "gallery",
-          "settings": {
-            "image": "shopify://shop_images/gallery-fashion-3.jpg",
-            "product": ""
-          }
-        },
-        "gallery4": {
-          "type": "gallery",
-          "settings": {
-            "image": "shopify://shop_images/gallery-fashion-4.jpg",
-            "product": ""
-          }
-        },
-        "gallery5": {
-          "type": "gallery",
-          "settings": {
-            "image": "shopify://shop_images/gallery-fashion-5.jpg",
-            "product": ""
-          }
-        }
-      },
-      "block_order": [
-        "gallery1",
-        "gallery2",
-        "gallery3",
-        "gallery4",
-        "gallery5"
-      ]
-    },
     "icon_box": {
       "type": "icon-box",
       "blocks": {
@@ -477,13 +517,13 @@
   "order": [
     "slideshow",
     "collection_categories",
-    "best_sellers",
     "banner_countdown",
     "categories",
     "todays_picks",
-    "testimonials",
-    "brands",
+    "best_sellers",
     "shop_gram",
+    "brands",
+    "testimonials",
     "icon_box"
   ]
 }

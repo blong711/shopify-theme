@@ -3,25 +3,27 @@
 
 {%- style -%}
 .best-sellers {
-  padding: 80px 0;
+  padding: var(--vineta-section-spacing-desktop) 0;
   overflow: hidden;
+  background-color: var(--vineta-bg);
 }
 
 .best-sellers .container {
-  max-width: 1488px;
+  max-width: var(--container-max-width);
   margin: 0 auto;
   padding: 0 15px;
 }
 
-.best-sellers .flat-title {
+.best-sellers .vineta-section-header {
   margin-bottom: 40px;
   text-align: center;
 }
 
-.best-sellers .title {
+.best-sellers .vineta-section-header__title {
   font-size: 24px;
   font-weight: 500;
   margin-bottom: 0;
+  color: var(--vineta-dark);
 }
 
 .best-sellers .swiper {
@@ -41,47 +43,48 @@
   justify-content: center;
 }
 
-.card-product {
+.vineta-product-card {
   position: relative;
   margin-bottom: 30px;
   width: 100%;
   max-width: 300px;
+  background-color: var(--vineta-bg);
 }
 
-.card-product-wrapper {
+.vineta-product-card__wrapper {
   position: relative;
 }
 
-.product-img {
+.vineta-product-card__image {
   position: relative;
   display: block;
   overflow: hidden;
   border-radius: 8px;
 }
 
-.img-product,
-.img-hover {
+.vineta-product-card__img,
+.vineta-product-card__img-hover {
   width: 100%;
   height: auto;
   transition: transform 0.6s ease;
 }
 
-.img-hover {
+.vineta-product-card__img-hover {
   position: absolute;
   top: 0;
   left: 0;
   opacity: 0;
 }
 
-.product-img:hover .img-product {
+.vineta-product-card__image:hover .vineta-product-card__img {
   opacity: 0;
 }
 
-.product-img:hover .img-hover {
+.vineta-product-card__image:hover .vineta-product-card__img-hover {
   opacity: 1;
 }
 
-.list-product-btn {
+.vineta-product-card__actions {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -94,39 +97,40 @@
   transition: all 0.3s ease;
 }
 
-.card-product:hover .list-product-btn {
+.vineta-product-card:hover .vineta-product-card__actions {
   opacity: 1;
   transform: translateX(0);
 }
 
-.box-icon {
+.vineta-product-card__action-btn {
   width: 40px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--white);
+  background: var(--vineta-bg);
   border-radius: 50%;
   margin-bottom: 10px;
   transition: all 0.3s ease;
+  color: var(--vineta-dark);
 }
 
-.box-icon:hover {
-  background: var(--dark);
-  color: var(--white);
+.vineta-product-card__action-btn:hover {
+  background: var(--vineta-dark);
+  color: var(--vineta-bg);
 }
 
-.hover-tooltip {
+.vineta-tooltip {
   position: relative;
 }
 
-.tooltip {
+.vineta-tooltip__text {
   position: absolute;
   left: -120px;
   top: 50%;
   transform: translateY(-50%);
-  background: var(--dark);
-  color: var(--white);
+  background: var(--vineta-dark);
+  color: var(--vineta-bg);
   font-size: 12px;
   padding: 5px 10px;
   border-radius: 4px;
@@ -136,58 +140,58 @@
   transition: all 0.3s ease;
 }
 
-.tooltip::after {
+.vineta-tooltip__text::after {
   content: '';
   position: absolute;
   right: -4px;
   top: 50%;
   transform: translateY(-50%);
-  border-left: 4px solid var(--dark);
+  border-left: 4px solid var(--vineta-dark);
   border-top: 4px solid transparent;
   border-bottom: 4px solid transparent;
 }
 
-.hover-tooltip:hover .tooltip {
+.vineta-tooltip:hover .vineta-tooltip__text {
   opacity: 1;
   visibility: visible;
   left: -100px;
 }
 
-.on-sale-wrap {
+.vineta-badge-container {
   position: absolute;
   top: 20px;
   left: 20px;
   z-index: 2;
 }
 
-.on-sale-item {
+.vineta-badge {
   display: inline-block;
   padding: 5px 12px;
-  background: var(--dark);
-  color: var(--white);
+  background: var(--vineta-dark);
+  color: var(--vineta-bg);
   font-size: 12px;
   border-radius: 30px;
 }
 
-.card-product-info {
+.vineta-product-card__content {
   padding: 20px 0;
   text-align: center;
 }
 
-.name-product {
+.vineta-product-card__title {
   display: block;
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 10px;
-  color: var(--dark);
+  color: var(--vineta-dark);
   text-decoration: none;
 }
 
-.name-product:hover {
-  color: var(--primary);
+.vineta-product-card__title:hover {
+  color: var(--vineta-primary);
 }
 
-.price-wrap {
+.vineta-product-card__price-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -195,28 +199,30 @@
   margin: 0;
 }
 
-.price-new {
-  color: var(--primary);
+.vineta-product-card__price {
+  color: var(--vineta-primary);
 }
 
-.price-old {
-  color: var(--text-light);
+.vineta-product-card__compare-price {
+  color: var(--vineta-gray);
   text-decoration: line-through;
 }
 
-.nav-swiper {
+.swiper-button-next,
+.swiper-button-prev {
   width: 50px;
   height: 50px;
-  background: var(--white);
+  background: var(--vineta-bg);
   border-radius: 50%;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-  color: var(--dark);
+  box-shadow: var(--vineta-shadow-md);
+  color: var(--vineta-dark);
   transition: all 0.3s ease;
 }
 
-.nav-swiper:hover {
-  background: var(--dark);
-  color: var(--white);
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: var(--vineta-dark);
+  color: var(--vineta-bg);
 }
 
 .sw-pagination-seller {
@@ -226,176 +232,129 @@
 .sw-pagination-seller .swiper-pagination-bullet {
   width: 10px;
   height: 10px;
-  background: var(--line);
+  background: var(--vineta-light-gray);
   opacity: 1;
   transition: all 0.3s ease;
 }
 
 .sw-pagination-seller .swiper-pagination-bullet-active {
-  background: var(--dark);
+  background: var(--vineta-dark);
 }
 
 @media screen and (max-width: 991px) {
   .best-sellers {
-    padding: 60px 0;
+    padding: var(--vineta-section-spacing-tablet) 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .best-sellers {
+    padding: var(--vineta-section-spacing-mobile) 0;
   }
 }
 {%- endstyle -%}
 
 <section class="best-sellers">
   <div class="container">
-    <div class="flat-title wow fadeInUp">
-      <h4 class="title">{{ section.settings.title }}</h4>
+    <div class="vineta-section-header wow fadeInUp">
+      <h4 class="vineta-section-header__title">{{ section.settings.title }}</h4>
     </div>
     <div class="fl-control-sw2 pos2 wow fadeInUp">
-      <div dir="ltr" class="swiper tf-swiper wrap-sw-over" data-swiper='{
-        "slidesPerView": 1,
-        "spaceBetween": 24,
-        "speed": 800,
-        "observer": true,
-        "observeParents": true,
-        "watchOverflow": true,
-        "navigation": {
-          "nextEl": ".nav-next-seller",
-          "prevEl": ".nav-prev-seller"
-        },
-        "pagination": {
-          "el": ".sw-pagination-seller",
-          "clickable": true
-        },
-        "breakpoints": {
-          "575": {
-            "slidesPerView": 2,
-            "spaceBetween": 24,
-            "slidesPerGroup": 1
-          },
-          "768": {
-            "slidesPerView": 3,
-            "spaceBetween": 24,
-            "slidesPerGroup": 1
-          },
-          "992": {
-            "slidesPerView": 4,
-            "spaceBetween": 24,
-            "slidesPerGroup": 1
-          },
-          "1200": {
-            "slidesPerView": 5,
-            "spaceBetween": 24,
-            "slidesPerGroup": 1
-          }
-        }
-      }'>
+      <div class="swiper swiper-seller">
         <div class="swiper-wrapper">
-          {%- for block in section.blocks -%}
-            <div class="swiper-slide" {{ block.shopify_attributes }}>
-              <div class="card-product">
-                <div class="card-product-wrapper">
-                  <a href="{{ block.settings.product_url }}" class="product-img">
-                    {%- if block.settings.image != blank -%}
-                      {{ block.settings.image | image_url: width: 600 | image_tag:
-                        loading: 'lazy',
-                        class: 'img-product lazyload',
-                        widths: '300, 400, 600',
-                        sizes: '(min-width: 1200px) 25vw, (min-width: 768px) 33vw, (min-width: 576px) 50vw, 100vw'
-                      }}
-                      {%- if block.settings.hover_image != blank -%}
-                        {{ block.settings.hover_image | image_url: width: 600 | image_tag:
-                          loading: 'lazy',
-                          class: 'img-hover lazyload',
-                          widths: '300, 400, 600',
-                          sizes: '(min-width: 1200px) 25vw, (min-width: 768px) 33vw, (min-width: 576px) 50vw, 100vw'
-                        }}
-                      {%- endif -%}
-                    {%- else -%}
-                      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
-                    {%- endif -%}
+          {% for block in section.blocks %}
+            <div class="swiper-slide">
+              <div class="vineta-product-card">
+                <div class="vineta-product-card__wrapper">
+                  <a href="{{ block.settings.product_url }}" class="vineta-product-card__image">
+                    <img
+                      src="{{ block.settings.product_image | img_url: '600x' }}"
+                      alt="{{ block.settings.title }}"
+                      class="vineta-product-card__img"
+                      loading="lazy"
+                      width="600"
+                      height="600"
+                    >
+                    {% if block.settings.hover_image != blank %}
+                      <img
+                        src="{{ block.settings.hover_image | img_url: '600x' }}"
+                        alt="{{ block.settings.title }}"
+                        class="vineta-product-card__img-hover"
+                        loading="lazy"
+                        width="600"
+                        height="600"
+                      >
+                    {% endif %}
                   </a>
-                  <ul class="list-product-btn">
+
+                  <ul class="vineta-product-card__actions">
                     <li>
-                      <a href="#shoppingCart" data-bs-toggle="offcanvas" class="box-icon hover-tooltip tooltip-left">
-                        <i class="icon-cart2"></i>
-                        <span class="tooltip">Add to Cart</span>
-                      </a>
+                      <div class="vineta-tooltip">
+                        <button class="vineta-product-card__action-btn">
+                          <i class="icon-cart"></i>
+                        </button>
+                        <span class="vineta-tooltip__text">Add to Cart</span>
+                      </div>
                     </li>
                     <li>
-                      <a href="javascript:void(0);" class="box-icon hover-tooltip tooltip-left">
-                        <i class="icon-heart2"></i>
-                        <span class="tooltip">Add to Wishlist</span>
-                      </a>
+                      <div class="vineta-tooltip">
+                        <button class="vineta-product-card__action-btn">
+                          <i class="icon-heart"></i>
+                        </button>
+                        <span class="vineta-tooltip__text">Add to Wishlist</span>
+                      </div>
                     </li>
                     <li>
-                      <a href="#quickView" data-bs-toggle="modal" class="box-icon hover-tooltip tooltip-left">
-                        <i class="icon-view"></i>
-                        <span class="tooltip">Quick View</span>
-                      </a>
+                      <div class="vineta-tooltip">
+                        <button class="vineta-product-card__action-btn">
+                          <i class="icon-eye"></i>
+                        </button>
+                        <span class="vineta-tooltip__text">Quick View</span>
+                      </div>
                     </li>
                     <li>
-                      <a href="#compare" data-bs-toggle="modal" class="box-icon hover-tooltip tooltip-left">
-                        <i class="icon-compare"></i>
-                        <span class="tooltip">Add to Compare</span>
-                      </a>
+                      <div class="vineta-tooltip">
+                        <button class="vineta-product-card__action-btn">
+                          <i class="icon-compare"></i>
+                        </button>
+                        <span class="vineta-tooltip__text">Compare</span>
+                      </div>
                     </li>
                   </ul>
-                  {%- if block.settings.badge != blank -%}
-                    <div class="on-sale-wrap">
-                      <span class="on-sale-item">{{ block.settings.badge }}</span>
+
+                  {% if block.settings.badge_text != blank %}
+                    <div class="vineta-badge-container">
+                      <span class="vineta-badge">{{ block.settings.badge_text }}</span>
                     </div>
-                  {%- endif -%}
+                  {% endif %}
                 </div>
-                <div class="card-product-info">
-                  <a href="{{ block.settings.product_url }}" class="name-product">{{ block.settings.title }}</a>
-                  <p class="price-wrap">
-                    <span class="price-new">{{ block.settings.price }}</span>
-                    {%- if block.settings.compare_price != blank -%}
-                      <span class="price-old">{{ block.settings.compare_price }}</span>
-                    {%- endif -%}
-                  </p>
+
+                <div class="vineta-product-card__content">
+                  <a href="{{ block.settings.product_url }}" class="vineta-product-card__title">
+                    {{ block.settings.title }}
+                  </a>
+                  <div class="vineta-product-card__price-wrap">
+                    <span class="vineta-product-card__price">{{ block.settings.price }}</span>
+                    {% if block.settings.compare_price != blank %}
+                      <span class="vineta-product-card__compare-price">{{ block.settings.compare_price }}</span>
+                    {% endif %}
+                  </div>
                 </div>
               </div>
             </div>
-          {%- endfor -%}
+          {% endfor %}
         </div>
-        <div class="d-flex d-xl-none sw-dot-default sw-pagination-seller justify-content-center"></div>
-        <div class="d-none d-xl-flex swiper-button-next nav-swiper nav-next-seller"></div>
-        <div class="d-none d-xl-flex swiper-button-prev nav-swiper nav-prev-seller"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination sw-pagination-seller"></div>
       </div>
     </div>
   </div>
 </section>
 
-<script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const initSwiper = () => {
-      const swipers = document.querySelectorAll('.tf-swiper');
-      swipers.forEach(element => {
-        if (!element.swiper && element.dataset.swiper) {
-          const options = JSON.parse(element.dataset.swiper);
-          new Swiper(element, options);
-        }
-      });
-    };
-
-    // Initialize immediately
-    initSwiper();
-
-    // Re-initialize on Shopify section load
-    if (Shopify.designMode) {
-      document.addEventListener('shopify:section:load', function(event) {
-        if (event.target.classList.contains('best-sellers')) {
-          setTimeout(initSwiper, 100);
-        }
-      });
-    }
-  });
-</script>
-
 {% schema %}
 {
   "name": "Best Sellers",
-  "tag": "section",
-  "class": "section",
   "settings": [
     {
       "type": "text",
@@ -411,7 +370,7 @@
       "settings": [
         {
           "type": "image_picker",
-          "id": "image",
+          "id": "product_image",
           "label": "Product Image"
         },
         {
@@ -438,7 +397,7 @@
         },
         {
           "type": "text",
-          "id": "badge",
+          "id": "badge_text",
           "label": "Badge Text"
         },
         {
@@ -456,36 +415,36 @@
         {
           "type": "product",
           "settings": {
-            "title": "Turtleneck T-shirt",
-            "price": "$100.00",
-            "compare_price": "$130.00",
-            "badge": "20% Off"
+            "title": "Product Title 1",
+            "price": "$99.00"
           }
         },
         {
           "type": "product",
           "settings": {
-            "title": "Loose Fit Tee",
-            "price": "$130.00",
-            "badge": "Trending"
+            "title": "Product Title 2",
+            "price": "$89.00"
           }
         },
         {
           "type": "product",
           "settings": {
-            "title": "Crop T-shirt",
-            "price": "$120.00",
-            "compare_price": "$140.00",
-            "badge": "10% Off"
+            "title": "Product Title 3",
+            "price": "$79.00"
           }
         },
         {
           "type": "product",
           "settings": {
-            "title": "Short Sleeve Sweat",
-            "price": "$80.00",
-            "compare_price": "$100.00",
-            "badge": "10% Off"
+            "title": "Product Title 4",
+            "price": "$69.00"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "Product Title 5",
+            "price": "$59.00"
           }
         }
       ]
