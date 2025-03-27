@@ -31,43 +31,23 @@
 .wg-cls {
   position: relative;
   width: 100%;
-  height: 0;
-  padding-bottom: 125%;
-  overflow: hidden;
-  border-radius: 0;
-}
-
-@media (min-width: 575px) {
-  .wg-cls {
-    padding-bottom: 125%;
-  }
-}
-
-@media (min-width: 768px) {
-  .wg-cls {
-    padding-bottom: 125%;
-  }
-}
-
-@media (min-width: 1200px) {
-  .wg-cls {
-    padding-bottom: 125%;
-  }
-}
-
-.wg-cls.style-abs {
-  background: var(--vineta-dark);
+  height: auto;
+  background: transparent;
 }
 
 .wg-cls .image {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100%;
-  height: 100%;
+  padding-bottom: 75%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--vineta-light);
 }
 
 .wg-cls .image img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -79,54 +59,76 @@
 }
 
 .wg-cls .image.img-style {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 0 !important;
-  overflow: hidden;
   display: block;
+  border-radius: 2% !important;
 }
 
 .cls-btn {
   position: absolute;
-  bottom: 30px;
+  bottom: 24px;
   left: 0;
   width: 100%;
+  text-align: center;
   z-index: 2;
+}
+
+.wg-cls::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(to top, rgba(0,0,0,0.3), transparent);
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.wg-cls:hover::after {
+  opacity: 1;
 }
 
 .tf-btn.btn-cls {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 30px;
-  background: var(--vineta-bg);
-  color: var(--vineta-dark);
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: #fff;
+  color: #000;
   font-size: 14px;
   font-weight: 500;
-  border-radius: 30px;
-  transition: all 0.3s ease;
+  border-radius: 100px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  white-space: nowrap;
+  min-width: 140px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .tf-btn.btn-cls:hover {
-  background: var(--vineta-dark);
-  color: var(--vineta-bg);
+  background: #000;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .tf-btn.btn-cls i {
-  font-size: 20px;
-  transition: transform 0.3s ease;
+  font-size: 16px;
+  margin-left: 4px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  top: 1px;
 }
 
 .tf-btn.btn-cls:hover i {
-  transform: translate(-5px, -5px);
+  transform: translateX(4px);
 }
 
 .nav-swiper {
   width: 50px;
   height: 50px;
   background: var(--vineta-bg);
-  border-radius: 50%;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   color: var(--vineta-dark);
   transition: all 0.3s ease;
@@ -161,6 +163,12 @@
   .collection-categories .vineta-section-header__title {
     font-size: 36px;
   }
+  
+  .tf-btn.btn-cls {
+    padding: 10px 25px;
+    font-size: 14px;
+    min-width: 140px;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -170,6 +178,12 @@
   
   .collection-categories .vineta-section-header__title {
     font-size: 32px;
+  }
+  
+  .tf-btn.btn-cls {
+    padding: 8px 20px;
+    font-size: 14px;
+    min-width: 120px;
   }
 }
 {%- endstyle -%}
@@ -181,7 +195,7 @@
     </div>
     <div dir="ltr" class="swiper tf-swiper hover-sw-nav wow fadeInUp" data-swiper='{
       "slidesPerView": 1,
-      "spaceBetween": 12,
+      "spaceBetween": 24,
       "speed": 800,
       "observer": true,
       "observeParents": true,
@@ -193,9 +207,9 @@
       },
       "pagination": { "el": ".sw-pagination-cls", "clickable": true },
       "breakpoints": {
-        "575": { "slidesPerView": 2, "spaceBetween": 12, "slidesPerGroup": 2 },
-        "768": { "slidesPerView": 3, "spaceBetween": 12, "slidesPerGroup": 3 },
-        "1200": { "slidesPerView": 3, "spaceBetween": 24, "slidesPerGroup": 3}
+        "575": { "slidesPerView": 2, "spaceBetween": 24, "slidesPerGroup": 2 },
+        "768": { "slidesPerView": 3, "spaceBetween": 24, "slidesPerGroup": 3 },
+        "1200": { "slidesPerView": 3, "spaceBetween": 30, "slidesPerGroup": 3}
       }
     }'>
       <div class="swiper-wrapper">
@@ -203,13 +217,10 @@
           <div class="swiper-slide">
             <div class="wg-cls style-abs asp-1 hover-img">
               <a href="{{ block.settings.category_url }}" class="image img-style d-block">
-                <img
+                <img 
                   src="{{ block.settings.category_image | img_url: '600x' }}"
-                  alt="{{ block.settings.title }}"
+                  alt="{{ block.settings.title }}" 
                   class="lazyload"
-                  loading="lazy"
-                  width="600"
-                  height="600"
                 >
               </a>
               <div class="cls-btn text-center">

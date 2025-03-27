@@ -152,7 +152,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 10px;
   height: 10px;
   background-color: var(--vineta-light-gray);
-  opacity: 1;
+    opacity: 1;
 }
 
 .swiper-pagination-bullet-active {
@@ -187,8 +187,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .vineta-product-card__content {
   padding: 20px;
-  text-align: center;
-}
+    text-align: center;
+  }
 
 .vineta-product-card__title {
   font-size: 16px;
