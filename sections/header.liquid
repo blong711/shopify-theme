@@ -249,6 +249,7 @@
   padding: 8px 0;
   background-color: #2b2b2b;
   color: #fff;
+  font-size: 14px;
 }
 
 .topbar-wraper {
@@ -283,18 +284,29 @@
   overflow: hidden;
   flex: 1;
   margin: 0 20px;
+  position: relative;
 }
 
 .initial-child-container {
   display: flex;
-  animation: marquee 30s linear infinite;
+  justify-content: center;
   color: #fff;
+  animation: marquee 20s linear infinite;
+  white-space: nowrap;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .marquee-child-item {
   display: flex;
   align-items: center;
-  white-space: nowrap;
   padding: 0 10px;
 }
 
@@ -302,6 +314,7 @@
   margin: 0;
   font-size: 14px;
   color: #fff;
+  white-space: nowrap;
 }
 
 .dot {
@@ -310,6 +323,7 @@
   background-color: #fff;
   border-radius: 50%;
   margin: 0 10px;
+  display: inline-block;
 }
 
 .topbar-right {
@@ -335,15 +349,6 @@
 
 .image-select:focus {
   outline: none;
-}
-
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
 }
 
 @media screen and (max-width: 1199px) {
@@ -391,85 +396,76 @@
     endif
   -%}
   <div class="tf-topbar">
-  <div class="topbar-wraper">
-    <div class="d-none d-xl-block flex-shrink-0">
-      <ul class="tf-social-icon">
-        {%- if settings.social_facebook_link != blank -%}
-          <li><a href="{{ settings.social_facebook_link }}" class="social-item"><i class="icon-fb"></i></a></li>
-        {%- endif -%}
-        {%- if settings.social_instagram_link != blank -%}
-          <li><a href="{{ settings.social_instagram_link }}" class="social-item"><i class="icon-instagram"></i></a></li>
-        {%- endif -%}
-        {%- if settings.social_twitter_link != blank -%}
-          <li><a href="{{ settings.social_twitter_link }}" class="social-item"><i class="icon-x"></i></a></li>
-        {%- endif -%}
-        {%- if settings.social_snapchat_link != blank -%}
-          <li><a href="{{ settings.social_snapchat_link }}" class="social-item"><i class="icon-snapchat"></i></a></li>
-        {%- endif -%}
-      </ul>
-    </div>
+    <div class="topbar-wraper">
+      <div class="d-none d-xl-block flex-shrink-0">
+        <ul class="tf-social-icon">
+          {%- if settings.social_facebook_link != blank -%}
+            <li><a href="{{ settings.social_facebook_link }}" class="social-item"><i class="icon-fb"></i></a></li>
+          {%- endif -%}
+          {%- if settings.social_instagram_link != blank -%}
+            <li><a href="{{ settings.social_instagram_link }}" class="social-item"><i class="icon-instagram"></i></a></li>
+          {%- endif -%}
+          {%- if settings.social_twitter_link != blank -%}
+            <li><a href="{{ settings.social_twitter_link }}" class="social-item"><i class="icon-x"></i></a></li>
+          {%- endif -%}
+          {%- if settings.social_snapchat_link != blank -%}
+            <li><a href="{{ settings.social_snapchat_link }}" class="social-item"><i class="icon-snapchat"></i></a></li>
+          {%- endif -%}
+        </ul>
+      </div>
 
-    <div class="overflow-hidden">
-      <div class="marquee-wrapper">
-        <div class="initial-child-container">
-          {%- if section.settings.announcement_text_1 != blank -%}
-            <div class="marquee-child-item">
-              <p>{{ section.settings.announcement_text_1 }}</p>
-            </div>
-            <div class="marquee-child-item"><span class="dot"></span></div>
-          {%- endif -%}
-          {%- if section.settings.announcement_text_2 != blank -%}
-            <div class="marquee-child-item">
-              <p>{{ section.settings.announcement_text_2 }}</p>
-            </div>
-            <div class="marquee-child-item"><span class="dot"></span></div>
-          {%- endif -%}
-          {%- if section.settings.announcement_text_3 != blank -%}
-            <div class="marquee-child-item">
-              <p>{{ section.settings.announcement_text_3 }}</p>
-            </div>
-            <div class="marquee-child-item"><span class="dot"></span></div>
-          {%- endif -%}
+      <div class="overflow-hidden">
+        <div class="marquee-wrapper">
+          <div class="initial-child-container">
+            {%- if section.settings.announcement_text_1 != blank -%}
+              <div class="marquee-child-item">
+                <p>{{ section.settings.announcement_text_1 }}</p>
+              </div>
+              <div class="marquee-child-item"><span class="dot"></span></div>
+            {%- endif -%}
+            {%- if section.settings.announcement_text_2 != blank -%}
+              <div class="marquee-child-item">
+                <p>{{ section.settings.announcement_text_2 }}</p>
+              </div>
+              <div class="marquee-child-item"><span class="dot"></span></div>
+            {%- endif -%}
+            {%- if section.settings.announcement_text_3 != blank -%}
+              <div class="marquee-child-item">
+                <p>{{ section.settings.announcement_text_3 }}</p>
+              </div>
+              <div class="marquee-child-item"><span class="dot"></span></div>
+            {%- endif -%}
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="d-none d-xl-block flex-shrink-0">
-      <div class="topbar-right">
-        {%- if section.settings.show_language_selector and localization.available_languages.size > 1 -%}
+      <div class="topbar-right d-none d-xl-flex">
+        {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
           <div class="tf-languages">
-            <localization-form>
-              {%- form 'localization', id: 'TopBarLanguageForm', class: 'localization-form' -%}
-                <select class="image-select" name="locale_code">
-                  {%- for language in localization.available_languages -%}
-                    <option value="{{ language.iso_code }}" {% if language.iso_code == localization.language.iso_code %}selected{% endif %}>
-                      {{ language.endonym_name }}
-                    </option>
-                  {%- endfor -%}
-                </select>
-              {%- endform -%}
-            </localization-form>
+            <select class="image-select">
+              {%- for language in localization.available_languages -%}
+                <option value="{{ language.iso_code }}" {% if language.iso_code == localization.language.iso_code %}selected{% endif %}>
+                  {{ language.endonym_name }}
+                </option>
+              {%- endfor -%}
+            </select>
           </div>
         {%- endif -%}
-        {%- if section.settings.show_currency_selector and localization.available_countries.size > 1 -%}
+
+        {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
           <div class="tf-currencies">
-            <localization-form>
-              {%- form 'localization', id: 'TopBarCountryForm', class: 'localization-form' -%}
-                <select class="image-select" name="country_code">
-                  {%- for country in localization.available_countries -%}
-                    <option value="{{ country.iso_code }}" {% if country.iso_code == localization.country.iso_code %}selected{% endif %}>
-                      {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
-                    </option>
-                  {%- endfor -%}
-                </select>
-              {%- endform -%}
-            </localization-form>
+            <select class="image-select">
+              {%- for country in localization.available_countries -%}
+                <option value="{{ country.iso_code }}" {% if country.iso_code == localization.country.iso_code %}selected{% endif %}>
+                  {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                </option>
+              {%- endfor -%}
+            </select>
           </div>
         {%- endif -%}
       </div>
     </div>
   </div>
-</div>
   <header id="header" class="header-default">
     <div class="container">
       <div class="row wrapper-header align-items-center">
