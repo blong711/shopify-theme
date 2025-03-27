@@ -12,134 +12,164 @@
   max-width: var(--container-max-width);
   margin: 0 auto;
   padding: 0 15px;
+  width: 100%;
 }
 
-.testimonials .vineta-section-header {
-  margin-bottom: 40px;
+.testimonials .flat-title {
   text-align: center;
+  margin-bottom: 60px;
 }
 
-.testimonials .vineta-section-header__title {
-  font-size: 24px;
+.testimonials .flat-title .title {
+  font-size: 42px;
   font-weight: 500;
-  margin-bottom: 0;
+  margin: 0;
   color: var(--vineta-dark);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
 .testimonials .swiper {
-  margin: 0 -12px;
-  padding: 0 12px;
+  margin: 0 auto;
+  padding: 0;
+  overflow: visible;
+  width: 100%;
 }
 
 .testimonials .swiper-wrapper {
   display: flex;
-  justify-content: center;
   align-items: stretch;
+  margin: 0 -12px;
 }
 
 .testimonials .swiper-slide {
   height: auto;
   display: flex;
-  justify-content: center;
 }
 
-.vineta-testimonial-card {
-  position: relative;
-  margin-bottom: 30px;
+.wg-testimonial {
   width: 100%;
-  max-width: 600px;
-  background-color: var(--vineta-bg);
+  padding: 30px;
+  background: var(--vineta-bg);
   border-radius: 8px;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  padding: 40px;
-  text-align: center;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
 }
 
-.vineta-testimonial-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--vineta-shadow-lg);
+.wg-testimonial .content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.vineta-testimonial-card__quote {
-  position: relative;
-  font-size: 24px;
-  font-weight: 500;
-  color: var(--vineta-dark);
-  margin-bottom: 30px;
-  line-height: 1.5;
+.wg-testimonial .content-top {
+  flex-grow: 1;
 }
 
-.vineta-testimonial-card__quote::before {
-  content: '"';
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 60px;
-  color: var(--vineta-primary);
-  opacity: 0.2;
-}
-
-.vineta-testimonial-card__author {
+.wg-testimonial .box-author {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 30px;
+  gap: 10px;
+  margin-bottom: 15px;
 }
 
-.vineta-testimonial-card__avatar {
-  width: 60px;
-  height: 60px;
+.wg-testimonial .name-author {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--vineta-dark);
+  margin: 0;
+}
+
+.wg-testimonial .box-verified {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--vineta-primary);
+}
+
+.wg-testimonial .box-verified i {
+  font-size: 16px;
+}
+
+.wg-testimonial .box-verified p {
+  font-size: 12px;
+  margin: 0;
+}
+
+.wg-testimonial .list-star-default {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 15px;
+  color: #FFB800;
+}
+
+.wg-testimonial .list-star-default i {
+  font-size: 16px;
+}
+
+.wg-testimonial .text-review {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--vineta-text);
+  margin-bottom: 20px;
+}
+
+.wg-testimonial .br-line {
+  width: 100%;
+  height: 1px;
+  background: var(--vineta-line);
+  margin: 20px 0;
+}
+
+.wg-testimonial .box-avt {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.wg-testimonial .avatar {
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   overflow: hidden;
 }
 
-.vineta-testimonial-card__avatar img {
+.wg-testimonial .avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.vineta-testimonial-card__info {
-  text-align: left;
+.wg-testimonial .box-price {
+  flex-grow: 1;
 }
 
-.vineta-testimonial-card__name {
-  font-size: 18px;
+.wg-testimonial .name-item {
+  font-size: 12px;
+  color: var(--vineta-text);
+  margin: 0 0 5px;
+}
+
+.wg-testimonial .name-item .link {
+  color: var(--vineta-dark);
+  text-decoration: none;
+}
+
+.wg-testimonial .name-item .link:hover {
+  color: var(--vineta-primary);
+}
+
+.wg-testimonial .price {
+  font-size: 16px;
   font-weight: 500;
   color: var(--vineta-dark);
-  margin-bottom: 5px;
+  margin: 0;
 }
 
-.vineta-testimonial-card__position {
-  font-size: 14px;
-  color: var(--vineta-gray);
-}
-
-.swiper-button-next,
-.swiper-button-prev {
-  width: 50px;
-  height: 50px;
-  background: var(--vineta-bg);
-  border-radius: 50%;
-  box-shadow: var(--vineta-shadow-md);
-  color: var(--vineta-dark);
-  transition: all 0.3s ease;
-}
-
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-  background: var(--vineta-dark);
-  color: var(--vineta-bg);
-}
-
-.sw-pagination-testimonials {
+.sw-pagination-tes {
   margin-top: 30px;
 }
 
-.sw-pagination-testimonials .swiper-pagination-bullet {
+.sw-pagination-tes .swiper-pagination-bullet {
   width: 10px;
   height: 10px;
   background: var(--vineta-light-gray);
@@ -147,8 +177,14 @@
   transition: all 0.3s ease;
 }
 
-.sw-pagination-testimonials .swiper-pagination-bullet-active {
+.sw-pagination-tes .swiper-pagination-bullet-active {
   background: var(--vineta-dark);
+}
+
+@media screen and (max-width: 1200px) {
+  .testimonials .flat-title .title {
+    font-size: 36px;
+  }
 }
 
 @media screen and (max-width: 991px) {
@@ -156,12 +192,8 @@
     padding: var(--vineta-section-spacing-tablet) 0;
   }
   
-  .vineta-testimonial-card {
-    padding: 30px;
-  }
-  
-  .vineta-testimonial-card__quote {
-    font-size: 20px;
+  .testimonials .flat-title .title {
+    font-size: 32px;
   }
 }
 
@@ -170,55 +202,80 @@
     padding: var(--vineta-section-spacing-mobile) 0;
   }
   
-  .vineta-testimonial-card {
-    padding: 20px;
+  .testimonials .flat-title .title {
+    font-size: 28px;
   }
   
-  .vineta-testimonial-card__quote {
-    font-size: 18px;
+  .wg-testimonial {
+    padding: 20px;
   }
 }
 {%- endstyle -%}
 
 <section class="testimonials">
   <div class="container">
-    <div class="vineta-section-header wow fadeInUp">
-      <h4 class="vineta-section-header__title">{{ section.settings.title }}</h4>
+    <div class="flat-title wow fadeInUp">
+      <h4 class="title">{{ section.settings.title }}</h4>
     </div>
-    <div class="fl-control-sw2 pos2 wow fadeInUp">
-      <div class="swiper swiper-testimonials">
-        <div class="swiper-wrapper">
-          {% for block in section.blocks %}
-            <div class="swiper-slide">
-              <div class="vineta-testimonial-card">
-                <div class="vineta-testimonial-card__quote">
-                  {{ block.settings.quote }}
-                </div>
-                <div class="vineta-testimonial-card__author">
-                  {% if block.settings.author_image != blank %}
-                    <div class="vineta-testimonial-card__avatar">
-                      <img
-                        src="{{ block.settings.author_image | img_url: '120x' }}"
-                        alt="{{ block.settings.author_name }}"
-                        loading="lazy"
-                        width="120"
-                        height="120"
-                      >
+    <div dir="ltr" class="swiper tf-swiper wow fadeInUp" data-swiper='{
+      "slidesPerView": 1,
+      "spaceBetween": 12,
+      "speed": 800,
+      "observer": true,
+      "observeParents": true,
+      "slidesPerGroup": 1,
+      "pagination": { "el": ".sw-pagination-tes", "clickable": true },
+      "breakpoints": {
+        "768": { "slidesPerView": 2, "spaceBetween": 24, "slidesPerGroup": 2 },
+        "1200": { "slidesPerView": 3, "spaceBetween": 24, "slidesPerGroup": 3}
+      }
+    }'>
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="swiper-slide">
+            <div class="wg-testimonial wow fadeInLeft" {% if forloop.index > 1 %}data-wow-delay="{{ forloop.index | minus: 1 | times: 0.1 }}s"{% endif %}>
+              <div class="content">
+                <div class="content-top">
+                  <div class="box-author">
+                    <p class="name-author">{{ block.settings.author_name }}</p>
+                    <div class="box-verified">
+                      <i class="icon-verifi"></i>
+                      <p>Verified Buyer</p>
                     </div>
-                  {% endif %}
-                  <div class="vineta-testimonial-card__info">
-                    <h5 class="vineta-testimonial-card__name">{{ block.settings.author_name }}</h5>
-                    <span class="vineta-testimonial-card__position">{{ block.settings.author_position }}</span>
+                  </div>
+                  <div class="list-star-default">
+                    <i class="icon-star"></i>
+                    <i class="icon-star"></i>
+                    <i class="icon-star"></i>
+                    <i class="icon-star"></i>
+                    <i class="icon-star"></i>
+                  </div>
+                  <p class="text-review">{{ block.settings.quote }}</p>
+                </div>
+                <span class="br-line"></span>
+                <div class="box-avt">
+                  <div class="avatar">
+                    <img
+                      src="{{ block.settings.author_image | img_url: '100x' }}"
+                      alt="{{ block.settings.author_name }}"
+                      loading="lazy"
+                      width="100"
+                      height="100"
+                    >
+                  </div>
+                  <div class="box-price">
+                    <p class="name-item">
+                      Item purchased: <a href="{{ block.settings.product_url }}" class="link">{{ block.settings.product_name }}</a>
+                    </p>
+                    <p class="price">{{ block.settings.product_price }}</p>
                   </div>
                 </div>
               </div>
             </div>
-          {% endfor %}
-        </div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-pagination sw-pagination-testimonials"></div>
+          </div>
+        {% endfor %}
       </div>
+      <span class="sw-dot-default sw-pagination-tes justify-content-center"></span>
     </div>
   </div>
 </section>
@@ -231,7 +288,7 @@
       "type": "text",
       "id": "title",
       "label": "Title",
-      "default": "What Our Customers Say"
+      "default": "Happy Customers"
     }
   ],
   "blocks": [
@@ -240,27 +297,38 @@
       "name": "Testimonial",
       "settings": [
         {
+          "type": "text",
+          "id": "author_name",
+          "label": "Customer Name",
+          "default": "Emily T."
+        },
+        {
           "type": "textarea",
           "id": "quote",
-          "label": "Quote",
-          "default": "Share what your customers are saying about your products or services."
+          "label": "Review Text",
+          "default": "The quality of the clothes exceeded my expectations. Every piece feels premium, and the designs are so trendy. I'm obsessed with my new wardrobe additions!"
         },
         {
           "type": "image_picker",
           "id": "author_image",
-          "label": "Author Image"
+          "label": "Customer Image"
         },
         {
           "type": "text",
-          "id": "author_name",
-          "label": "Author Name",
-          "default": "Customer Name"
+          "id": "product_name",
+          "label": "Product Name",
+          "default": "Crop T-shirt"
         },
         {
           "type": "text",
-          "id": "author_position",
-          "label": "Author Position",
-          "default": "Customer"
+          "id": "product_price",
+          "label": "Product Price",
+          "default": "$150.00"
+        },
+        {
+          "type": "url",
+          "id": "product_url",
+          "label": "Product URL"
         }
       ]
     }
@@ -272,25 +340,28 @@
         {
           "type": "testimonial",
           "settings": {
-            "quote": "I absolutely love the quality and style of the products. The customer service is exceptional!",
-            "author_name": "Sarah Johnson",
-            "author_position": "Verified Buyer"
+            "author_name": "Emily T.",
+            "quote": "The quality of the clothes exceeded my expectations. Every piece feels premium, and the designs are so trendy. I'm obsessed with my new wardrobe additions!",
+            "product_name": "Crop T-shirt",
+            "product_price": "$150.00"
           }
         },
         {
           "type": "testimonial",
           "settings": {
-            "quote": "The best shopping experience I've had in a long time. Will definitely be back for more!",
-            "author_name": "Michael Brown",
-            "author_position": "Verified Buyer"
+            "author_name": "Jessica M.",
+            "quote": "I love the dress I purchased! The fabric is so soft, and the fit is perfect. I've gotten so many compliments on it. Will definitely shop here again!",
+            "product_name": "Short Sleeve Sweat",
+            "product_price": "$150.00"
           }
         },
         {
           "type": "testimonial",
           "settings": {
-            "quote": "Fast shipping and beautiful packaging. The products exceeded my expectations!",
-            "author_name": "Emma Davis",
-            "author_position": "Verified Buyer"
+            "author_name": "Lisa P.",
+            "quote": "I was pleasantly surprised by how fast my order arrived. The customer service team was helpful and responsive. Great shopping experience!",
+            "product_name": "Long Sleeve Basic T-Shirt",
+            "product_price": "$150.00"
           }
         }
       ]
