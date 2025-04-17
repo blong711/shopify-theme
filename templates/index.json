@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "slideshow": {
@@ -8,15 +17,9 @@
           "settings": {
             "image": "shopify://shop_images/slider-fashion-1.png",
             "title": "Style\nRedefined",
-            "title_size": "medium",
             "subheading": "Discover the latest trends in fashion that speak your style.",
             "button_label": "Shop Collection",
-            "button_link": "/collections/all",
-            "button_style": "dark",
-            "box_align": "left",
-            "show_text_below": false,
-            "text_alignment": "left",
-            "image_overlay_opacity": 0
+            "button_link": "/collections/all"
           }
         },
         "slide-2": {
@@ -24,15 +27,9 @@
           "settings": {
             "image": "shopify://shop_images/slider-fashion-2.png",
             "title": "Elegance\nRedefined",
-            "title_size": "medium",
             "subheading": "Discover timeless styles for every occasion.",
             "button_label": "Shop Collection",
-            "button_link": "/collections/all",
-            "button_style": "dark",
-            "box_align": "left",
-            "show_text_below": false,
-            "text_alignment": "left",
-            "image_overlay_opacity": 0
+            "button_link": "/collections/all"
           }
         },
         "slide-3": {
@@ -40,15 +37,9 @@
           "settings": {
             "image": "shopify://shop_images/slider-fashion-3.png",
             "title": "Elevate Your\nWardrobe",
-            "title_size": "medium",
             "subheading": "Timeless pieces to refresh your look for every season.",
             "button_label": "Shop Collection",
-            "button_link": "/collections/all",
-            "button_style": "dark",
-            "box_align": "right",
-            "show_text_below": false,
-            "text_alignment": "left",
-            "image_overlay_opacity": 0
+            "button_link": "/collections/all"
           }
         }
       },
@@ -57,14 +48,7 @@
         "slide-2",
         "slide-3"
       ],
-      "settings": {
-        "auto_play": true,
-        "interval": 5,
-        "show_arrows": true,
-        "show_dots": true,
-        "transition": "fade",
-        "transition_speed": 800
-      }
+      "settings": {}
     },
     "collection_categories": {
       "type": "collection-categories",
@@ -74,7 +58,6 @@
           "settings": {
             "category_image": "shopify://shop_images/top.jpg",
             "title": "Tops",
-            "product_count": "120",
             "category_url": "/collections/tops"
           }
         },
@@ -83,7 +66,6 @@
           "settings": {
             "category_image": "shopify://shop_images/accessories.jpg",
             "title": "Accessories",
-            "product_count": "90",
             "category_url": "/collections/accessories"
           }
         },
@@ -92,7 +74,6 @@
           "settings": {
             "category_image": "shopify://shop_images/sportwear.jpg",
             "title": "Sportwear",
-            "product_count": "75",
             "category_url": "/collections/sportwear"
           }
         },
@@ -101,7 +82,6 @@
           "settings": {
             "category_image": "shopify://shop_images/men.jpg",
             "title": "Men",
-            "product_count": "150",
             "category_url": "/collections/men"
           }
         },
@@ -110,7 +90,6 @@
           "settings": {
             "category_image": "shopify://shop_images/kid.jpg",
             "title": "Kids",
-            "product_count": "60",
             "category_url": "/collections/kids"
           }
         }
@@ -134,47 +113,78 @@
         "discount_text": "50% OFF",
         "promo_code_text": "WITH PROMOTE CODE: 12D34E",
         "button_text": "Shop Now",
+        "button_link": "",
         "end_date": "2024-12-31 23:59:59"
       }
     },
     "categories": {
       "type": "categories",
       "blocks": {
-        "womens": {
-          "type": "category_group",
+        "category_VpPzJL": {
+          "type": "category",
           "settings": {
-            "title": "Womens",
-            "categories": [
-              "Dress",
-              "Partywear",
-              "Jewelry",
-              "Tops",
-              "Bottoms",
-              "Sportwear"
-            ]
+            "collection": "accessories",
+            "title": "Category Title",
+            "link": ""
           }
         },
-        "mens": {
-          "type": "category_group",
+        "category_pyMbYb": {
+          "type": "category",
           "settings": {
-            "title": "Mens",
-            "categories": [
-              "Dress",
-              "Partywear",
-              "Jewelry",
-              "Tops",
-              "Bottoms",
-              "Sportwear"
-            ]
+            "collection": "baby",
+            "title": "Category Title",
+            "link": ""
+          }
+        },
+        "category_HfAtYB": {
+          "type": "category",
+          "settings": {
+            "collection": "bike",
+            "title": "Category Title",
+            "link": ""
+          }
+        },
+        "category_j3E7qy": {
+          "type": "category",
+          "settings": {
+            "collection": "fruit",
+            "title": "Category Title",
+            "link": ""
+          }
+        },
+        "category_LHTdz3": {
+          "type": "category",
+          "settings": {
+            "collection": "houseware",
+            "title": "Category Title",
+            "link": ""
+          }
+        },
+        "category_gJCf97": {
+          "type": "category",
+          "settings": {
+            "collection": "men",
+            "title": "Category Title",
+            "link": ""
           }
         }
       },
       "block_order": [
-        "womens",
-        "mens"
+        "category_VpPzJL",
+        "category_pyMbYb",
+        "category_HfAtYB",
+        "category_j3E7qy",
+        "category_LHTdz3",
+        "category_gJCf97"
       ],
       "settings": {
-        "title": "Categories"
+        "layout": "layout2",
+        "title": "Categories",
+        "subtitle": "built for speed, durability, and adventure.",
+        "button_text": "Categories",
+        "button_link": "",
+        "products_to_show": 6,
+        "products_per_collection": 6
       }
     },
     "todays_picks": {
@@ -183,40 +193,41 @@
         "product-0": {
           "type": "product",
           "settings": {
-            "image": "shopify://shop_images/product-1.jpg",
             "title": "Polo Neck T-Shirt",
             "price": "$100.00",
             "compare_price": "$130.00",
-            "badge": "20% Off"
+            "badge_text": "",
+            "product_url": ""
           }
         },
         "product-1": {
           "type": "product",
           "settings": {
-            "image": "shopify://shop_images/product-2.jpg",
             "title": "Loose Fit Tee",
             "price": "$130.00",
-            "badge": "Trending"
+            "compare_price": "",
+            "badge_text": "",
+            "product_url": ""
           }
         },
         "product-2": {
           "type": "product",
           "settings": {
-            "image": "shopify://shop_images/product-3.jpg",
             "title": "Classic Denim Jacket",
             "price": "$150.00",
             "compare_price": "$180.00",
-            "badge": "New"
+            "badge_text": "",
+            "product_url": ""
           }
         },
         "product-3": {
           "type": "product",
           "settings": {
-            "image": "shopify://shop_images/product-4.jpg",
             "title": "Summer Dress",
             "price": "$120.00",
             "compare_price": "$150.00",
-            "badge": "Sale"
+            "badge_text": "",
+            "product_url": ""
           }
         }
       },
@@ -239,9 +250,8 @@
             "title": "Classic White T-Shirt",
             "price": "$29.99",
             "compare_price": "$39.99",
-            "badge": "20% Off",
-            "image": "shopify://shop_images/product-4.jpg",
-            "hover_image": "shopify://shop_images/product-4-hover.jpg"
+            "badge_text": "",
+            "product_url": ""
           }
         },
         "product2": {
@@ -249,9 +259,9 @@
           "settings": {
             "title": "Denim Jacket",
             "price": "$89.99",
-            "badge": "New",
-            "image": "shopify://shop_images/product-5.jpg",
-            "hover_image": "shopify://shop_images/product-5-hover.jpg"
+            "compare_price": "",
+            "badge_text": "",
+            "product_url": ""
           }
         },
         "product3": {
@@ -260,9 +270,8 @@
             "title": "Leather Handbag",
             "price": "$129.99",
             "compare_price": "$159.99",
-            "badge": "Sale",
-            "image": "shopify://shop_images/product-6.jpg",
-            "hover_image": "shopify://shop_images/product-6-hover.jpg"
+            "badge_text": "",
+            "product_url": ""
           }
         },
         "product4": {
@@ -271,9 +280,8 @@
             "title": "Summer Dress",
             "price": "$79.99",
             "compare_price": "$99.99",
-            "badge": "Trending",
-            "image": "shopify://shop_images/product-7.jpg",
-            "hover_image": "shopify://shop_images/product-7-hover.jpg"
+            "badge_text": "",
+            "product_url": ""
           }
         },
         "product5": {
@@ -282,9 +290,8 @@
             "title": "Casual Sneakers",
             "price": "$69.99",
             "compare_price": "$89.99",
-            "badge": "Popular",
-            "image": "shopify://shop_images/product-8.jpg",
-            "hover_image": "shopify://shop_images/product-8-hover.jpg"
+            "badge_text": "",
+            "product_url": ""
           }
         }
       },
@@ -296,9 +303,7 @@
         "product5"
       ],
       "settings": {
-        "title": "Best Sellers",
-        "show_view_all": true,
-        "products_to_show": 5
+        "title": "Best Sellers"
       }
     },
     "shop_gram": {
@@ -309,7 +314,6 @@
           "settings": {
             "title": "Summer Collection",
             "subtitle": "@yourstore",
-            "image": "shopify://shop_images/instagram-1.jpg",
             "instagram_url": "https://instagram.com/yourstore"
           }
         },
@@ -318,7 +322,6 @@
           "settings": {
             "title": "New Arrivals",
             "subtitle": "@yourstore",
-            "image": "shopify://shop_images/instagram-2.jpg",
             "instagram_url": "https://instagram.com/yourstore"
           }
         },
@@ -327,7 +330,6 @@
           "settings": {
             "title": "Trending Now",
             "subtitle": "@yourstore",
-            "image": "shopify://shop_images/instagram-3.jpg",
             "instagram_url": "https://instagram.com/yourstore"
           }
         },
@@ -336,7 +338,6 @@
           "settings": {
             "title": "Best Sellers",
             "subtitle": "@yourstore",
-            "image": "shopify://shop_images/instagram-4.jpg",
             "instagram_url": "https://instagram.com/yourstore"
           }
         }
@@ -357,37 +358,43 @@
         "brand1": {
           "type": "brand",
           "settings": {
-            "image": "shopify://shop_images/zara.png"
+            "brand_name": "Brand Name",
+            "brand_url": ""
           }
         },
         "brand2": {
           "type": "brand",
           "settings": {
-            "image": "shopify://shop_images/bear.png"
+            "brand_name": "Brand Name",
+            "brand_url": ""
           }
         },
         "brand3": {
           "type": "brand",
           "settings": {
-            "image": "shopify://shop_images/nike.png"
+            "brand_name": "Brand Name",
+            "brand_url": ""
           }
         },
         "brand4": {
           "type": "brand",
           "settings": {
-            "image": "shopify://shop_images/asos.png"
+            "brand_name": "Brand Name",
+            "brand_url": ""
           }
         },
         "brand5": {
           "type": "brand",
           "settings": {
-            "image": "shopify://shop_images/burberry.png"
+            "brand_name": "Brand Name",
+            "brand_url": ""
           }
         },
         "brand6": {
           "type": "brand",
           "settings": {
-            "image": "shopify://shop_images/forever.png"
+            "brand_name": "Brand Name",
+            "brand_url": ""
           }
         }
       },
@@ -398,7 +405,10 @@
         "brand4",
         "brand5",
         "brand6"
-      ]
+      ],
+      "settings": {
+        "title": "Our Brands"
+      }
     },
     "testimonials": {
       "type": "testimonials",
@@ -406,56 +416,51 @@
         "testimonial-1": {
           "type": "testimonial",
           "settings": {
-            "author": "Emily T.",
-            "text": "<p>The quality of the clothes exceeded my expectations. Every piece feels premium, and the designs are so trendy. I'm obsessed with my new wardrobe additions!</p>",
-            "rating": 5,
-            "show_purchase": true,
-            "product": "crop-t-shirt",
-            "author_image": "shopify://shop_images/author-fs1.jpg"
+            "author_name": "Emily T.",
+            "quote": "The quality of the clothes exceeded my expectations. Every piece feels premium, and the designs are so trendy. I'm obsessed with my new wardrobe additions!",
+            "product_name": "Crop T-shirt",
+            "product_price": "$150.00",
+            "product_url": ""
           }
         },
         "testimonial-2": {
           "type": "testimonial",
           "settings": {
-            "author": "Jessica M.",
-            "text": "<p>I love the dress I purchased! The fabric is so soft, and the fit is perfect. I've gotten so many compliments on it. Will definitely shop here again!</p>",
-            "rating": 5,
-            "show_purchase": true,
-            "product": "short-sleeve-sweat",
-            "author_image": "shopify://shop_images/author-fs2.jpg"
+            "author_name": "Emily T.",
+            "quote": "The quality of the clothes exceeded my expectations. Every piece feels premium, and the designs are so trendy. I'm obsessed with my new wardrobe additions!",
+            "product_name": "Crop T-shirt",
+            "product_price": "$150.00",
+            "product_url": ""
           }
         },
         "testimonial-3": {
           "type": "testimonial",
           "settings": {
-            "author": "Lisa P.",
-            "text": "<p>I was pleasantly surprised by how fast my order arrived. The customer service team was helpful and responsive. Great shopping experience!</p>",
-            "rating": 5,
-            "show_purchase": true,
-            "product": "long-sleeve-basic-t-shirt",
-            "author_image": "shopify://shop_images/author-fs3.jpg"
+            "author_name": "Emily T.",
+            "quote": "The quality of the clothes exceeded my expectations. Every piece feels premium, and the designs are so trendy. I'm obsessed with my new wardrobe additions!",
+            "product_name": "Crop T-shirt",
+            "product_price": "$150.00",
+            "product_url": ""
           }
         },
         "testimonial-4": {
           "type": "testimonial",
           "settings": {
-            "author": "Emily T.",
-            "text": "<p>The quality of the clothes exceeded my expectations. Every piece feels premium, and the designs are so trendy. I'm obsessed with my new wardrobe additions!</p>",
-            "rating": 5,
-            "show_purchase": true,
-            "product": "crop-t-shirt",
-            "author_image": "shopify://shop_images/author-fs4.jpg"
+            "author_name": "Emily T.",
+            "quote": "The quality of the clothes exceeded my expectations. Every piece feels premium, and the designs are so trendy. I'm obsessed with my new wardrobe additions!",
+            "product_name": "Crop T-shirt",
+            "product_price": "$150.00",
+            "product_url": ""
           }
         },
         "testimonial-5": {
           "type": "testimonial",
           "settings": {
-            "author": "Jessica M.",
-            "text": "<p>I love the dress I purchased! The fabric is so soft, and the fit is perfect. I've gotten so many compliments on it. Will definitely shop here again!</p>",
-            "rating": 5,
-            "show_purchase": true,
-            "product": "loose-fit-tee",
-            "author_image": "shopify://shop_images/author-fs5.jpg"
+            "author_name": "Emily T.",
+            "quote": "The quality of the clothes exceeded my expectations. Every piece feels premium, and the designs are so trendy. I'm obsessed with my new wardrobe additions!",
+            "product_name": "Crop T-shirt",
+            "product_price": "$150.00",
+            "product_url": ""
           }
         }
       },
@@ -511,7 +516,8 @@
         "icon_box-2",
         "icon_box-3",
         "icon_box-4"
-      ]
+      ],
+      "settings": {}
     }
   },
   "order": [
