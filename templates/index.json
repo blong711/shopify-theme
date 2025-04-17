@@ -169,7 +169,7 @@
         "layout": "home-electronic",
         "title": "Categories",
         "image_style": "circle",
-        "products_to_show": 6,
+        "collections_to_show": 6,
         "products_per_collection": 6
       }
     },
@@ -503,7 +503,14 @@
         "icon_box-3",
         "icon_box-4"
       ],
-      "settings": {}
+      "settings": {
+        "layout": "home-electronic",
+        "slides_per_view_mobile": 2,
+        "slides_per_view_tablet": 3,
+        "slides_per_view_desktop": 4,
+        "space_between": 10,
+        "show_pagination": true
+      }
     }
   },
   "order": [
