@@ -123,49 +123,37 @@
         "category_QcQGr7": {
           "type": "category",
           "settings": {
-            "collection": "accessories",
-            "title": "Category Title",
-            "link": ""
+            "collection": "accessories"
           }
         },
         "category_fpzWkk": {
           "type": "category",
           "settings": {
-            "collection": "baby",
-            "title": "Category Title",
-            "link": ""
+            "collection": "baby"
           }
         },
         "category_Tpaxey": {
           "type": "category",
           "settings": {
-            "collection": "bike",
-            "title": "Category Title",
-            "link": ""
+            "collection": "bike"
           }
         },
         "category_jNmdrL": {
           "type": "category",
           "settings": {
-            "collection": "houseware",
-            "title": "Category Title",
-            "link": ""
+            "collection": "houseware"
           }
         },
         "category_arkbTd": {
           "type": "category",
           "settings": {
-            "collection": "men",
-            "title": "Category Title",
-            "link": ""
+            "collection": "men"
           }
         },
         "category_FKEjKA": {
           "type": "category",
           "settings": {
-            "collection": "women",
-            "title": "Category Title",
-            "link": ""
+            "collection": "women"
           }
         }
       },
@@ -178,11 +166,9 @@
         "category_FKEjKA"
       ],
       "settings": {
-        "layout": "bicycle",
+        "layout": "layout2",
         "title": "Categories",
-        "subtitle": "built for speed, durability, and adventure.",
         "button_text": "Categories",
-        "button_link": "",
         "products_to_show": 6,
         "products_per_collection": 6
       }
