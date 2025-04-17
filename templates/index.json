@@ -58,7 +58,7 @@
         "slide-3"
       ],
       "settings": {
-        "layout": "home-electronic",
+        "layout": "default",
         "autoplay": true,
         "loop": true,
         "speed": 800
