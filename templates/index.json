@@ -120,69 +120,26 @@
     "categories": {
       "type": "categories",
       "blocks": {
-        "category_VpPzJL": {
+        "category_iXRKXR": {
           "type": "category",
           "settings": {
-            "collection": "accessories",
-            "title": "Category Title",
-            "link": ""
+            "collection": "bike"
           }
         },
-        "category_pyMbYb": {
+        "category_k4LGyD": {
           "type": "category",
           "settings": {
-            "collection": "baby",
-            "title": "Category Title",
-            "link": ""
-          }
-        },
-        "category_HfAtYB": {
-          "type": "category",
-          "settings": {
-            "collection": "bike",
-            "title": "Category Title",
-            "link": ""
-          }
-        },
-        "category_j3E7qy": {
-          "type": "category",
-          "settings": {
-            "collection": "fruit",
-            "title": "Category Title",
-            "link": ""
-          }
-        },
-        "category_LHTdz3": {
-          "type": "category",
-          "settings": {
-            "collection": "houseware",
-            "title": "Category Title",
-            "link": ""
-          }
-        },
-        "category_gJCf97": {
-          "type": "category",
-          "settings": {
-            "collection": "men",
-            "title": "Category Title",
-            "link": ""
+            "collection": "baby"
           }
         }
       },
       "block_order": [
-        "category_VpPzJL",
-        "category_pyMbYb",
-        "category_HfAtYB",
-        "category_j3E7qy",
-        "category_LHTdz3",
-        "category_gJCf97"
+        "category_iXRKXR",
+        "category_k4LGyD"
       ],
       "settings": {
         "layout": "bicycle",
         "title": "Categories",
-        "subtitle": "built for speed, durability, and adventure.",
-        "button_text": "Categories",
-        "button_link": "",
         "products_to_show": 6,
         "products_per_collection": 6
       }
