@@ -1,5 +1,5 @@
 <!-- Slider -->
-<section class="tf-slideshow {% if section.settings.layout == 'home-electronic' %}slider-electronic{% else %}slider-fashion-1{% endif %} slider-default">
+<section class="tf-slideshow {% if section.settings.layout == 'home-electronic' %}slider-electronic{% elsif section.settings.layout == 'fashion-women' %}slider-fashion-3 space-abs-header{% else %}slider-fashion-1{% endif %} slider-default">
     <div class="swiper tf-sw-slideshow slider-effect-fade" data-effect="fade" data-preview="1" data-tablet="1"
         data-mobile="1" data-centered="false" data-space="0" data-space-mb="0" data-loop="{{ section.settings.loop }}"
         data-auto-play="{{ section.settings.autoplay }}" data-speed="{{ section.settings.speed }}">
@@ -12,51 +12,93 @@
                     {% assign slide_class = 'reverse-slide' %}
                 {% endif %}
                 <div class="swiper-slide" {{ block.shopify_attributes }}>
-                    <div class="slider-wrap bg-type-{{ forloop.index }} {{ slide_class }}">
-                        <div class="image">
-                            {% if block.settings.image != blank %}
-                                <img src="{{ block.settings.image | img_url: 'master' }}"
-                                    data-src="{{ block.settings.image | img_url: 'master' }}" 
-                                    alt="{{ block.settings.image.alt | escape }}" 
-                                    class="lazyload"
-                                    width="{{ block.settings.image.width }}"
-                                    height="{{ block.settings.image.height }}">
-                            {% endif %}
-                        </div>
-                        <div class="box-content">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="{% if section.settings.layout == 'home-electronic' and block.settings.content_position == 'right' %}offset-lg-8 col-lg-4 col-sm-6 offset-6{% else %}col-lg-12 col-sm-6{% endif %} col-12">
-                                        <div class="content-slider">
-                                            <div class="box-title-slider">
-                                                {% if section.settings.layout == 'home-electronic' %}
-                                                    <p class="sub text-md fw-medium fade-item fade-item-1 text-dark-3">
-                                                        {{ block.settings.subtitle }}
+                    {% if section.settings.layout == 'fashion-women' %}
+                        <div class="slider-wrap bg-type-{{ forloop.index | plus: 6 }}">
+                            <div class="image">
+                                {% if block.settings.collection != blank %}
+                                    <img src="{{ block.settings.collection.featured_image | img_url: 'master' }}"
+                                        data-src="{{ block.settings.collection.featured_image | img_url: 'master' }}" 
+                                        alt="{{ block.settings.collection.title | escape }}" 
+                                        class="lazyload"
+                                        width="{{ block.settings.collection.featured_image.width }}"
+                                        height="{{ block.settings.collection.featured_image.height }}">
+                                {% endif %}
+                            </div>
+                            <div class="box-content">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-5 col-md-6 col-sm-7 col-10">
+                                            <div class="content-slider style-2 text-center">
+                                                <div class="box-title-slider">
+                                                    <p class="body-text-2 fw-semibold fade-item fade-item-1 font-2">
+                                                        {{ block.settings.subtitle | upcase }}
                                                     </p>
-                                                    <h2 class="heading fw-medium fade-item fade-item-2 text-dark-3">
-                                                        {{ block.settings.heading }}
-                                                    </h2>
-                                                {% else %}
-                                                    <h2 class="heading fw-medium fade-item fade-item-1 text-dark-5">
-                                                        {{ block.settings.heading }}
-                                                    </h2>
-                                                    <p class="sub text-md fade-item fade-item-2 text-dark-5">
-                                                        {{ block.settings.subheading }}
+                                                    <div class="heading display-lg-3 fade-item fade-item-2 font-2">
+                                                        {{ block.settings.collection.title }}
+                                                    </div>
+                                                    <p class="sub text-md fade-item fade-item-3 text-main">
+                                                        {{ block.settings.description }}
                                                     </p>
-                                                {% endif %}
-                                            </div>
-                                            <div class="box-btn-slider fade-item fade-item-3">
-                                                <a href="{{ block.settings.button_link }}" class="tf-btn btn-dark2 animate-btn">
-                                                    {{ block.settings.button_text }}
-                                                    <i class="icon icon-arr-right"></i>
-                                                </a>
+                                                </div>
+                                                <div class="box-btn-slider fade-item fade-item-4">
+                                                    <a href="{{ block.settings.collection.url }}" class="tf-btn animate-btn font-2">
+                                                        {{ block.settings.button_text }}
+                                                        <i class="icon icon-arr-right"></i>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    {% else %}
+                        <div class="slider-wrap bg-type-{{ forloop.index }} {{ slide_class }}">
+                            <div class="image">
+                                {% if block.settings.image != blank %}
+                                    <img src="{{ block.settings.image | img_url: 'master' }}"
+                                        data-src="{{ block.settings.image | img_url: 'master' }}" 
+                                        alt="{{ block.settings.image.alt | escape }}" 
+                                        class="lazyload"
+                                        width="{{ block.settings.image.width }}"
+                                        height="{{ block.settings.image.height }}">
+                                {% endif %}
+                            </div>
+                            <div class="box-content">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="{% if section.settings.layout == 'home-electronic' and block.settings.content_position == 'right' %}offset-lg-8 col-lg-4 col-sm-6 offset-6{% else %}col-lg-12 col-sm-6{% endif %} col-12">
+                                            <div class="content-slider">
+                                                <div class="box-title-slider">
+                                                    {% if section.settings.layout == 'home-electronic' %}
+                                                        <p class="sub text-md fw-medium fade-item fade-item-1 text-dark-3">
+                                                            {{ block.settings.subtitle }}
+                                                        </p>
+                                                        <h2 class="heading fw-medium fade-item fade-item-2 text-dark-3">
+                                                            {{ block.settings.heading }}
+                                                        </h2>
+                                                    {% else %}
+                                                        <h2 class="heading fw-medium fade-item fade-item-1 text-dark-5">
+                                                            {{ block.settings.heading }}
+                                                        </h2>
+                                                        <p class="sub text-md fade-item fade-item-2 text-dark-5">
+                                                            {{ block.settings.subheading }}
+                                                        </p>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="box-btn-slider fade-item fade-item-3">
+                                                    <a href="{{ block.settings.button_link }}" class="tf-btn btn-dark2 animate-btn">
+                                                        {{ block.settings.button_text }}
+                                                        <i class="icon icon-arr-right"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
@@ -79,7 +121,8 @@
             "label": "Section Layout",
             "options": [
                 { "value": "default", "label": "Default Fashion" },
-                { "value": "home-electronic", "label": "Home Electronic" }
+                { "value": "home-electronic", "label": "Home Electronic" },
+                { "value": "fashion-women", "label": "Fashion Women" }
             ],
             "default": "default"
         },
@@ -112,14 +155,19 @@
             "name": "Slide",
             "settings": [
                 {
+                    "type": "collection",
+                    "id": "collection",
+                    "label": "Collection (Fashion Women layout)"
+                },
+                {
                     "type": "image_picker",
                     "id": "image",
-                    "label": "Slide image"
+                    "label": "Slide image (Default & Electronic layouts)"
                 },
                 {
                     "type": "select",
                     "id": "image_position",
-                    "label": "Image Position",
+                    "label": "Image Position (Electronic layout)",
                     "options": [
                         { "value": "left", "label": "Left" },
                         { "value": "right", "label": "Right" }
@@ -129,7 +177,7 @@
                 {
                     "type": "select",
                     "id": "content_position",
-                    "label": "Content Position",
+                    "label": "Content Position (Electronic layout)",
                     "options": [
                         { "value": "left", "label": "Left" },
                         { "value": "right", "label": "Right" }
@@ -139,14 +187,20 @@
                 {
                     "type": "text",
                     "id": "subtitle",
-                    "label": "Subtitle (Electronic layout)",
-                    "default": "APPLE WATCHES COLLECTION"
+                    "label": "Subtitle",
+                    "default": "SUMMER COLLECTION"
                 },
                 {
                     "type": "text",
                     "id": "heading",
-                    "label": "Heading",
+                    "label": "Heading (Default & Electronic layouts)",
                     "default": "Style Redefined"
+                },
+                {
+                    "type": "text",
+                    "id": "description",
+                    "label": "Description (Fashion Women layout)",
+                    "default": "Find the perfect outfit for any occasion."
                 },
                 {
                     "type": "text",
@@ -158,12 +212,12 @@
                     "type": "text",
                     "id": "button_text",
                     "label": "Button text",
-                    "default": "Shop Now"
+                    "default": "Shop Collection"
                 },
                 {
                     "type": "url",
                     "id": "button_link",
-                    "label": "Button link"
+                    "label": "Button link (Default & Electronic layouts)"
                 }
             ]
         }
@@ -172,34 +226,31 @@
         {
             "name": "Hero Slider",
             "settings": {
-                "layout": "home-electronic"
+                "layout": "fashion-women"
             },
             "blocks": [
                 {
                     "type": "slide",
                     "settings": {
-                        "subtitle": "APPLE WATCHES COLLECTION",
-                        "heading": "Sale up to\n15% Off",
-                        "button_text": "Shop Now",
-                        "image_position": "right"
+                        "subtitle": "SUMMER COLLECTION",
+                        "description": "Versatile pieces for all-day style",
+                        "button_text": "Shop Collection"
                     }
                 },
                 {
                     "type": "slide",
                     "settings": {
-                        "subtitle": "APPLE MAGSAFE CHARGER",
-                        "heading": "Next-Level\nTech",
-                        "button_text": "Shop Now",
-                        "content_position": "right"
+                        "subtitle": "SUMMER COLLECTION",
+                        "description": "Stand out with chic, trend-setting women's fashion.",
+                        "button_text": "Shop Collection"
                     }
                 },
                 {
                     "type": "slide",
                     "settings": {
-                        "subtitle": "ON-EAR HEADPHONES",
-                        "heading": "Power Up\nYour Life",
-                        "button_text": "Shop Now",
-                        "image_position": "right"
+                        "subtitle": "SUMMER COLLECTION",
+                        "description": "Find the perfect outfit for any occasion.",
+                        "button_text": "Shop Collection"
                     }
                 }
             ]
