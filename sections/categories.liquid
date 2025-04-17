@@ -1,120 +1,158 @@
-{% schema %}
-{
-  "name": "Categories",
-  "settings": [
-    {
-      "type": "select",
-      "id": "layout",
-      "label": "Layout Style",
-      "options": [
-        {
-          "value": "default",
-          "label": "Default (Tabs)"
-        },
-        {
-          "value": "bicycle",
-          "label": "Bicycle Categories"
-        }
-      ],
-      "default": "default"
-    },
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Section Title",
-      "default": "Categories"
-    },
-    {
-      "type": "text",
-      "id": "button_text",
-      "label": "Top Button Text (Bicycle Layout)",
-      "default": "Categories"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "Top Button Link (Bicycle Layout)"
-    },
-    {
-      "type": "richtext",
-      "id": "description",
-      "label": "Description (Bicycle Layout)",
-      "default": "<p>Explore a variety of high-performance bikes, built for speed, durability, and adventure.</p>"
-    },
-    {
-      "type": "header",
-      "content": "Default Layout Settings"
-    },
-    {
-      "type": "text",
-      "id": "womens_tab",
-      "label": "Women's Tab Text",
-      "default": "Womens"
-    },
-    {
-      "type": "text",
-      "id": "mens_tab",
-      "label": "Men's Tab Text",
-      "default": "Mens"
-    },
-    {
-      "type": "collection_list",
-      "id": "womens_collections",
-      "label": "Women's Collections",
-      "limit": 6
-    },
-    {
-      "type": "collection_list",
-      "id": "mens_collections",
-      "label": "Men's Collections",
-      "limit": 6
-    }
-  ],
-  "blocks": [
-    {
-      "type": "category",
-      "name": "Category (Bicycle Layout)",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Category Image"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Category Title",
-          "default": "Category"
-        },
-        {
-          "type": "url",
-          "id": "link",
-          "label": "Category Link"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Categories"
-    }
-  ]
-}
-{% endschema %}
-
-<!-- Categories -->
-{% if section.settings.layout == 'bicycle' %}
-<section>
-    <div class="container">
-        <div class="flat-title-v2 style-2 text-center justify-items-center wow fadeInUp">
-            <a href="{{ section.settings.button_link }}" class="tf-btn btn-out-line-green btn-small text-uppercase">{{ section.settings.button_text }}</a>
-            <h4>
-                {{ section.settings.description }}
-            </h4>
+{%- if section.blocks.size > 0 -%}
+  {%- case section.settings.layout -%}
+    {%- when 'layout1' -%}
+      <section class="flat-spacing-3">
+        <div class="container">
+          <div class="flat-animate-tab">
+            <div class="flat-title-tab-categories wow fadeInUp text-center">
+              <h4 class="title">{{ section.settings.title }}</h4>
+              {% if section.blocks.size > 0 %}
+                <ul class="menu-tab-line justify-content-center" role="tablist">
+                  {% for block in section.blocks %}
+                    <li class="nav-tab-item" role="presentation" {{ block.shopify_attributes }}>
+                      <a href="#collection-{{ block.id }}" class="tab-link {% if forloop.first %}active{% endif %}" data-bs-toggle="tab">
+                        {{ collections[block.settings.collection].title }}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </div>
+            <div class="tab-content">
+              {% for block in section.blocks %}
+                <div class="tab-pane {% if forloop.first %}active show{% endif %}" id="collection-{{ block.id }}" role="tabpanel">
+                  <div dir="ltr" class="swiper tf-swiper" 
+                    data-swiper='{
+                      "slidesPerView": 2,
+                      "spaceBetween": 12,
+                      "speed": 800,
+                      "observer": true,
+                      "observeParents": true,
+                      "slidesPerGroup": 2,
+                      "pagination": { 
+                        "el": ".sw-pagination-{{ block.id }}", 
+                        "clickable": true 
+                      },
+                      "breakpoints": {
+                        "575": { 
+                          "slidesPerView": 3, 
+                          "spaceBetween": 12,
+                          "slidesPerGroup": 2 
+                        },    
+                        "768": { 
+                          "slidesPerView": 4, 
+                          "spaceBetween": 24, 
+                          "slidesPerGroup": 3 
+                        },
+                        "1200": { 
+                          "slidesPerView": {{ section.settings.products_to_show }}, 
+                          "spaceBetween": 64, 
+                          "slidesPerGroup": {{ section.settings.products_to_show }}
+                        }
+                      }
+                    }'>
+                    <div class="swiper-wrapper">
+                      {% for product in collections[block.settings.collection].products limit: section.settings.products_per_collection %}
+                        <div class="swiper-slide">
+                          <div class="wg-cls style-circle hover-img">
+                            <a href="{{ product.url }}" class="image img-style d-block">
+                              {% if product.featured_image != blank %}
+                                {{ product.featured_image | image_url: width: 300 | image_tag:
+                                  loading: 'lazy',
+                                  width: 300,
+                                  height: 300,
+                                  class: 'lazyload'
+                                }}
+                              {% else %}
+                                {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                              {% endif %}
+                            </a>
+                            <div class="cls-content text-center">
+                              <a href="{{ product.url }}" class="link text-md fw-medium">{{ product.title }}</a>
+                            </div>
+                          </div>
+                        </div>
+                      {% endfor %}
+                    </div>
+                    <span class="d-flex d-xl-none sw-dot-default sw-pagination-{{ block.id }} justify-content-center"></span>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
         </div>
-    </div>
-    <div class="slider-layout-right">
-        <div dir="ltr" class="swiper tf-swiper tf-sw-right" data-swiper='{
+      </section>
+    {%- when 'layout2' -%}
+      <section class="flat-spacing-3">
+        <div class="container">
+          <div class="flat-title text-start wow fadeInUp">
+            <h4 class="title">{{ section.settings.title }}</h4>
+          </div>
+          <div class="wow fadeInUp">
+            <div class="fl-control-sw pos1">
+              <div dir="ltr" class="swiper tf-swiper" data-swiper='{
+                "slidesPerView": 2,
+                "spaceBetween": 12,
+                "speed": 800,
+                "observer": true,
+                "observeParents": true,
+                "slidesPerGroup": 2,
+                "navigation": {
+                  "clickable": true,
+                  "nextEl": ".nav-next-categories",
+                  "prevEl": ".nav-prev-categories"
+                },
+                "pagination": { "el": ".sw-pagination-categories", "clickable": true },
+                "breakpoints": {
+                  "575": { "slidesPerView": 3, "spaceBetween": 12, "slidesPerGroup": 3 },
+                  "768": { "slidesPerView": 4, "spaceBetween": 12, "slidesPerGroup": 4 },
+                  "992": { "slidesPerView": 5, "spaceBetween": 24, "slidesPerGroup": 4 },
+                  "1200": { "slidesPerView": 6, "spaceBetween": 24, "slidesPerGroup": 4 }
+                }
+              }'>
+                <div class="swiper-wrapper">
+                  {%- for block in section.blocks -%}
+                    {%- assign collection = collections[block.settings.collection] -%}
+                    <div class="swiper-slide" {{ block.shopify_attributes }}>
+                      <div class="wg-cls style-square hover-img">
+                        <a href="{{ collection.url }}" class="image img-style d-block">
+                          {%- if collection.featured_image != blank -%}
+                            {{ collection.featured_image | image_url: width: 300 | image_tag:
+                              loading: 'lazy',
+                              width: 300,
+                              height: 300,
+                              class: 'lazyload'
+                            }}
+                          {%- endif -%}
+                        </a>
+                        <div class="cls-content text-center">
+                          <a href="{{ collection.url }}" class="link text-md fw-medium">{{ collection.title }}</a>
+                        </div>
+                      </div>
+                    </div>
+                  {%- endfor -%}
+                </div>
+                <div class="d-flex d-xl-none sw-dot-default sw-pagination-categories justify-content-center"></div>
+              </div>
+              <div class="swiper-button-next d-none d-xl-flex nav-swiper nav-next-categories"></div>
+              <div class="swiper-button-prev d-none d-xl-flex nav-swiper nav-prev-categories"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    {%- when 'bicycle' -%}
+      <section>
+        <div class="container">
+          <div class="flat-title-v2 style-2 text-center justify-items-center wow fadeInUp">
+            <a href="{{ section.settings.button_link | default: '#' }}"
+                class="tf-btn btn-out-line-green btn-small text-uppercase">{{ section.settings.button_text }}</a>
+            <h4>
+              {{ section.settings.title }} <br class="d-none d-xl-block">{{ section.settings.subtitle }}
+            </h4>
+          </div>
+        </div>
+        <div class="slider-layout-right">
+          <div dir="ltr" class="swiper tf-swiper tf-sw-right" data-swiper='{
             "slidesPerView": 2,
             "spaceBetween": 12,
             "speed": 1000,
@@ -123,157 +161,161 @@
             "slidesPerGroup": 2,
             "pagination": { "el": ".sw-pagination-cls-2", "clickable": true },
             "breakpoints": {
-            "768": { "slidesPerView": 2.7, "spaceBetween": 12, "slidesPerGroup": 2 },
-            "992": { "slidesPerView": 3.7, "spaceBetween": 24, "slidesPerGroup": 3 },
-            "1200": { "slidesPerView": 4.7, "spaceBetween": 24, "slidesPerGroup": 3}
+              "768": { "slidesPerView": 2.7, "spaceBetween": 12, "slidesPerGroup": 2 },
+              "992": { "slidesPerView": 3.7, "spaceBetween": 24, "slidesPerGroup": 3 },
+              "1200": { "slidesPerView": 4.7, "spaceBetween": 24, "slidesPerGroup": 3}
             }
-        }'>
+          }'>
             <div class="swiper-wrapper">
-                {% for block in section.blocks %}
-                    {% if block.type == 'category' %}
-                        <div class="swiper-slide">
-                            <div class="wg-cls style-abs type-2 hover-img">
-                                <a href="{{ block.settings.link }}" class="image img-style d-block">
-                                    {% if block.settings.image %}
-                                        <img src="{{ block.settings.image | img_url: 'master' }}"
-                                            data-src="{{ block.settings.image | img_url: 'master' }}"
-                                            alt="{{ block.settings.title | escape }}"
-                                            class="lazyload"
-                                            width="600"
-                                            height="400">
-                                    {% else %}
-                                        {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
-                                    {% endif %}
-                                </a>
-                                <div class="cls-btn text-center">
-                                    <a href="{{ block.settings.link }}" class="tf-btn btn-cls btn-white hover-dark">{{ block.settings.title }}</a>
-                                </div>
-                            </div>
-                        </div>
-                    {% endif %}
-                {% endfor %}
+              {%- for block in section.blocks -%}
+                <div class="swiper-slide" {{ block.shopify_attributes }}>
+                  <div class="wg-cls style-abs type-2 hover-img">
+                    <a href="{{ block.settings.link | default: '#' }}" class="image img-style d-block">
+                      {%- if block.settings.image != blank -%}
+                        {{ block.settings.image | image_url: width: 600 | image_tag:
+                          loading: 'lazy',
+                          width: 600,
+                          height: 600,
+                          class: 'lazyload'
+                        }}
+                      {%- else -%}
+                        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                      {%- endif -%}
+                    </a>
+                    <div class="cls-btn text-center">
+                      <a href="{{ block.settings.link | default: '#' }}" 
+                         class="tf-btn btn-cls btn-white hover-dark">{{ block.settings.title }}</a>
+                    </div>
+                  </div>
+                </div>
+              {%- endfor -%}
             </div>
             <div class="d-flex d-xl-none sw-dot-default sw-pagination-cls-2 justify-content-center"></div>
+          </div>
         </div>
-    </div>
-</section>
-{% else %}
-<section class="flat-spacing-3">
-    <div class="container">
-        <div class="flat-animate-tab">
-            <div class="flat-title-tab-categories wow fadeInUp text-center">
-                <h4 class="title">{{ section.settings.title }}</h4>
-                <ul class="menu-tab-line justify-content-center" role="tablist">
-                    <li class="nav-tab-item" role="presentation">
-                        <a href="#womens" class="tab-link active" data-bs-toggle="tab">{{ section.settings.womens_tab }}</a>
-                    </li>
-                    <li class="nav-tab-item" role="presentation">
-                        <a href="#mens" class="tab-link" data-bs-toggle="tab">{{ section.settings.mens_tab }}</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="tab-content">
-                <div class="tab-pane active show" id="womens" role="tabpanel">
-                    <div dir="ltr" class="swiper tf-swiper" data-swiper='{
-                            "slidesPerView": 2,
-                            "spaceBetween": 12,
-                            "speed": 800,
-                            "observer": true,
-                            "observeParents": true,
-                            "slidesPerGroup": 2,
-                            "navigation": {
-                                "clickable": true,
-                                "nextEl": ".nav-next-women",
-                                "prevEl": ".nav-prev-women"
-                            },
-                            "pagination": { "el": ".sw-pagination-women", "clickable": true },
-                            "breakpoints": {
-                            "575": { "slidesPerView": 3, "spaceBetween": 12 ,"slidesPerGroup": 2 },    
-                            "768": { "slidesPerView": 4, "spaceBetween": 24, "slidesPerGroup": 3 },
-                            "1200": { "slidesPerView": 6, "spaceBetween": 64, "slidesPerGroup": 3}
-                            }
-                        }'>
-                        <div class="swiper-wrapper">
-                            {% for collection in section.settings.womens_collections %}
-                            <div class="swiper-slide">
-                                <div class="box-category">
-                                    <a href="{{ collection.url }}" class="box-image">
-                                        {% if collection.featured_image %}
-                                        <img src="{{ collection.featured_image | img_url: 'master' }}" 
-                                             data-src="{{ collection.featured_image | img_url: 'master' }}" 
-                                             alt="{{ collection.title | escape }}" 
-                                             class="lazyload"
-                                             width="300"
-                                             height="300">
-                                        {% else %}
-                                        {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
-                                        {% endif %}
-                                    </a>
-                                    <div class="box-content">
-                                        <a href="{{ collection.url }}" class="name">{{ collection.title }}</a>
-                                        <span class="number">{{ collection.all_products_count }} items</span>
-                                    </div>
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                        <div class="swiper-pagination sw-pagination-women"></div>
-                        <div class="swiper-button-next nav-next-women"></div>
-                        <div class="swiper-button-prev nav-prev-women"></div>
-                    </div>
-                </div>
-                <div class="tab-pane" id="mens" role="tabpanel">
-                    <div dir="ltr" class="swiper tf-swiper" data-swiper='{
-                            "slidesPerView": 2,
-                            "spaceBetween": 12,
-                            "speed": 800,
-                            "observer": true,
-                            "observeParents": true,
-                            "slidesPerGroup": 2,
-                            "navigation": {
-                                "clickable": true,
-                                "nextEl": ".nav-next-men",
-                                "prevEl": ".nav-prev-men"
-                            },
-                            "pagination": { "el": ".sw-pagination-men", "clickable": true },
-                            "breakpoints": {
-                            "575": { "slidesPerView": 3, "spaceBetween": 12 ,"slidesPerGroup": 2 },    
-                            "768": { "slidesPerView": 4, "spaceBetween": 24, "slidesPerGroup": 3 },
-                            "1200": { "slidesPerView": 6, "spaceBetween": 64, "slidesPerGroup": 3}
-                            }
-                        }'>
-                        <div class="swiper-wrapper">
-                            {% for collection in section.settings.mens_collections %}
-                            <div class="swiper-slide">
-                                <div class="box-category">
-                                    <a href="{{ collection.url }}" class="box-image">
-                                        {% if collection.featured_image %}
-                                        <img src="{{ collection.featured_image | img_url: 'master' }}" 
-                                             data-src="{{ collection.featured_image | img_url: 'master' }}" 
-                                             alt="{{ collection.title | escape }}" 
-                                             class="lazyload"
-                                             width="300"
-                                             height="300">
-                                        {% else %}
-                                        {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
-                                        {% endif %}
-                                    </a>
-                                    <div class="box-content">
-                                        <a href="{{ collection.url }}" class="name">{{ collection.title }}</a>
-                                        <span class="number">{{ collection.all_products_count }} items</span>
-                                    </div>
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                        <div class="swiper-pagination sw-pagination-men"></div>
-                        <div class="swiper-button-next nav-next-men"></div>
-                        <div class="swiper-button-prev nav-prev-men"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-{% endif %}
-<!-- /Categories --> 
+      </section>
+  {%- endcase -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Categories",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "layout1",
+          "label": "Tab Layout"
+        },
+        {
+          "value": "layout2",
+          "label": "Slider Layout"
+        },
+        {
+          "value": "bicycle",
+          "label": "Bicycle Layout"
+        }
+      ],
+      "default": "layout1"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Categories"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "built for speed, durability, and adventure.",
+      "info": "Only used in bicycle layout"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Categories",
+      "info": "Only used in bicycle layout"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link",
+      "info": "Only used in bicycle layout"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "label": "Products to show at once",
+      "default": 6,
+      "info": "Number of products visible in the slider at the same time"
+    },
+    {
+      "type": "range",
+      "id": "products_per_collection",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "label": "Products per collection",
+      "default": 6,
+      "info": "Number of products to show from each collection"
+    }
+  ],
+  "max_blocks": 12,
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "600 x 600px recommended. Only used in bicycle layout."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Category Title",
+          "info": "Only used in bicycle layout"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link",
+          "info": "Only used in bicycle layout"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Categories",
+      "blocks": [
+        {
+          "type": "category"
+        },
+        {
+          "type": "category"
+        },
+        {
+          "type": "category"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
