@@ -1,194 +1,97 @@
-{%- style -%}
-  .section-{{ section.id }}-padding {
-    padding: 80px 0;
-    border-top: 1px solid var(--color-border);
-  }
-
-  .container {
-    max-width: 1488px;
-    margin: 0 auto;
-    padding: 0 15px;
-  }
-
-  .mw-1 {
-    max-width: 1200px;
-    margin: auto;
-  }
-
-  .tf-icon-box.style-2 {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 24px;
-    border-radius: 16px;
-    transition: all 0.3s ease;
-  }
-
-  .tf-icon-box.style-2:hover {
-    background: var(--color-background);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    transform: translateY(-5px);
-  }
-
-  .tf-icon-box.style-2 .box-icon {
-    width: 64px;
-    height: 64px;
-    background: var(--gradient-base-accent-1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .tf-icon-box.style-2 .box-icon .icon {
-    font-size: 24px;
-    color: #fff;
-  }
-
-  .tf-icon-box.style-2 .content {
-    flex: 1;
-  }
-
-  .tf-icon-box.style-2 .title {
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 4px;
-    color: var(--color-foreground);
-  }
-
-  .tf-icon-box.style-2 .desc {
-    font-size: 14px;
-    line-height: 1.6;
-    margin: 0;
-    color: var(--color-foreground);
-    opacity: 0.8;
-  }
-
-  .sw-dot-default {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-    gap: 8px;
-  }
-
-  .swiper-pagination-bullet {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--color-border);
-    opacity: 0.5;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .swiper-pagination-bullet-active {
-    opacity: 1;
-    background: var(--gradient-base-accent-1);
-    transform: scale(1.2);
-  }
-
-  @media screen and (max-width: 1200px) {
-    .section-{{ section.id }}-padding {
-      padding: 60px 0;
-    }
-
-    .tf-icon-box.style-2 {
-      padding: 20px;
-    }
-  }
-
-  @media screen and (max-width: 767px) {
-    .section-{{ section.id }}-padding {
-      padding: 40px 0;
-    }
-
-    .tf-icon-box.style-2 {
-      padding: 16px;
-    }
-
-    .tf-icon-box.style-2 .box-icon {
-      width: 56px;
-      height: 56px;
-    }
-
-    .tf-icon-box.style-2 .box-icon .icon {
-      font-size: 20px;
-    }
-  }
-{%- endstyle -%}
-
-<link rel="stylesheet" href="{{ 'swiper-bundle.min.css' | asset_url }}">
-<link rel="stylesheet" href="{{ 'icon-font.css' | asset_url }}">
-
-<div class="section-{{ section.id }}-padding">
-  <div class="container">
-    <div class="mw-1 m-auto">
-      <div dir="ltr" class="swiper tf-swiper wow fadeInUp" data-swiper='{
-        "slidesPerView": 1,
-        "spaceBetween": 12,
-        "speed": 800,
-        "observer": true,
-        "observeParents": true,
-        "pagination": { "el": ".sw-pagination-iconbox", "clickable": true },
-        "breakpoints": {
-          "575": { "slidesPerView": 2, "spaceBetween": 12, "slidesPerGroup": 2}, 
-          "768": { "slidesPerView": 3, "spaceBetween": 24, "slidesPerGroup": 2},
-          "1200": { "slidesPerView": 4, "spaceBetween": 42, "slidesPerGroup": 2}
-        }
-      }'>
-        <div class="swiper-wrapper">
-          {%- for block in section.blocks -%}
-            <div class="swiper-slide" {{ block.shopify_attributes }}>
-              <div class="tf-icon-box style-2">
-                <div class="box-icon">
-                  <i class="icon {{ block.settings.icon }}"></i>
-                </div>
-                <div class="content">
-                  <div class="title">{{ block.settings.title }}</div>
-                  <p class="desc">{{ block.settings.description }}</p>
-                </div>
-              </div>
-            </div>
-          {%- endfor -%}
-        </div>
-        <div class="d-flex d-xl-none sw-dot-default sw-pagination-iconbox justify-content-center"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer></script>
-<script src="{{ 'wow.min.js' | asset_url }}" defer></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Swiper
-    const swipers = document.querySelectorAll('.tf-swiper');
-    swipers.forEach(element => {
-      const options = JSON.parse(element.dataset.swiper);
-      new Swiper(element, options);
-    });
-
-    // Initialize WOW.js
-    new WOW().init();
-  });
-</script>
-
 {% schema %}
 {
   "name": "Icon Box",
-  "tag": "section",
-  "class": "section",
-  "settings": [],
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout Style",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "home-electronic",
+          "label": "Home Electronic"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "range",
+      "id": "slides_per_view_mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "Slides per view (Mobile)",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "slides_per_view_tablet",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Slides per view (Tablet)",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "slides_per_view_desktop",
+      "min": 3,
+      "max": 6,
+      "step": 1,
+      "label": "Slides per view (Desktop)",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "space_between",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "label": "Space between slides",
+      "default": 10
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pagination",
+      "label": "Show pagination",
+      "default": true
+    }
+  ],
   "blocks": [
     {
       "type": "icon_box",
       "name": "Icon Box",
       "settings": [
         {
-          "type": "text",
+          "type": "select",
           "id": "icon",
-          "label": "Icon class",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "icon-shipping",
+              "label": "Shipping"
+            },
+            {
+              "value": "icon-gift",
+              "label": "Gift"
+            },
+            {
+              "value": "icon-return",
+              "label": "Return"
+            },
+            {
+              "value": "icon-support",
+              "label": "Support"
+            }
+          ],
           "default": "icon-shipping"
         },
         {
@@ -200,8 +103,9 @@
         {
           "type": "text",
           "id": "description",
-          "label": "Description",
-          "default": "Enjoy free shipping on all orders"
+          "label": "Description (Default layout only)",
+          "default": "Enjoy free shipping on all orders",
+          "info": "This field is only shown in the default layout"
         }
       ]
     }
@@ -209,6 +113,7 @@
   "presets": [
     {
       "name": "Icon Box",
+      "category": "Features",
       "blocks": [
         {
           "type": "icon_box",
@@ -246,4 +151,56 @@
     }
   ]
 }
-{% endschema %} 
+{% endschema %}
+
+<div class="{% if section.settings.layout == 'home-electronic' %}line-top flat-spacing-7{% else %}flat-spacing-4{% endif %}">
+    <div class="container">
+        <div dir="ltr" class="swiper tf-swiper {% if section.settings.layout == 'home-electronic' %}tf-sw-iconbox-row{% endif %}" data-swiper='{
+            "slidesPerView": {{ section.settings.slides_per_view_mobile }},
+            "spaceBetween": {{ section.settings.space_between }},
+            "speed": 800,
+            "observer": true,
+            "observeParents": true,
+            "slidesPerGroup": {{ section.settings.slides_per_view_mobile }},
+            "pagination": { "el": ".sw-pagination-iconbox", "clickable": true },
+            "breakpoints": {
+                "575": { 
+                    "slidesPerView": {% if section.settings.layout == 'home-electronic' %}2{% else %}{{ section.settings.slides_per_view_mobile }}{% endif %},
+                    "spaceBetween": {% if section.settings.layout == 'home-electronic' %}12{% else %}{{ section.settings.space_between }}{% endif %},
+                    "slidesPerGroup": 2
+                },
+                "768": { 
+                    "slidesPerView": {% if section.settings.layout == 'home-electronic' %}3{% else %}{{ section.settings.slides_per_view_tablet }}{% endif %},
+                    "spaceBetween": {% if section.settings.layout == 'home-electronic' %}24{% else %}{{ section.settings.space_between }}{% endif %},
+                    "slidesPerGroup": 2
+                },
+                "1200": { 
+                    "slidesPerView": {% if section.settings.layout == 'home-electronic' %}4{% else %}{{ section.settings.slides_per_view_desktop }}{% endif %},
+                    "spaceBetween": {% if section.settings.layout == 'home-electronic' %}59{% else %}{{ section.settings.space_between }}{% endif %},
+                    "slidesPerGroup": 2
+                }
+            }
+        }'>
+            <div class="swiper-wrapper">
+                {% for block in section.blocks %}
+                    <div class="swiper-slide" {{ block.shopify_attributes }}>
+                        <div class="tf-icon-box {% if section.settings.layout == 'home-electronic' %}style-3 wow fadeInLeft{% else %}style-2{% endif %}" {% if section.settings.layout == 'home-electronic' and forloop.index > 1 %}data-wow-delay="{{ forloop.index | minus: 1 | times: 0.1 }}s"{% endif %}>
+                            <div class="box-icon">
+                                <i class="icon {{ block.settings.icon }}"></i>
+                            </div>
+                            <div class="content">
+                                <div class="title {% if section.settings.layout == 'home-electronic' %}text-uppercase{% endif %}">{{ block.settings.title }}</div>
+                                {% unless section.settings.layout == 'home-electronic' %}
+                                    <p class="desc">{{ block.settings.description }}</p>
+                                {% endunless %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if section.settings.show_pagination %}
+                <div class="d-flex d-xl-none sw-dot-default sw-pagination-iconbox justify-content-center"></div>
+            {% endif %}
+        </div>
+    </div>
+</div> 
