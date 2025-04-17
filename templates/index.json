@@ -166,9 +166,8 @@
         "category_FKEjKA"
       ],
       "settings": {
-        "layout": "electronic",
+        "layout": "layout1",
         "title": "Categories",
-        "button_text": "Categories",
         "image_style": "circle",
         "products_to_show": 6,
         "products_per_collection": 6
