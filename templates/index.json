@@ -119,24 +119,6 @@
     },
     "categories": {
       "type": "categories",
-      "blocks": {
-        "category_iXRKXR": {
-          "type": "category",
-          "settings": {
-            "collection": "bike"
-          }
-        },
-        "category_k4LGyD": {
-          "type": "category",
-          "settings": {
-            "collection": "baby"
-          }
-        }
-      },
-      "block_order": [
-        "category_iXRKXR",
-        "category_k4LGyD"
-      ],
       "settings": {
         "layout": "bicycle",
         "title": "Categories",
