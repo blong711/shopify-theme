@@ -1,276 +1,209 @@
-{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
-{{ 'component-slider.css' | asset_url | stylesheet_tag }}
-{{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
-
-{%- style -%}
-.tf-slideshow {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-
-.slider-wrap {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  min-height: 600px;
-}
-
-.slider-wrap .image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.slider-wrap .image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.box-content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.content-slider {
-  max-width: 600px;
-  padding: 0 20px;
-}
-
-.box-title-slider .heading {
-  font-size: 64px;
-  font-weight: 500;
-  line-height: 1.2;
-  color: var(--dark-5);
-  margin-bottom: 20px;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 0.8s forwards;
-}
-
-.box-title-slider .sub {
-  font-size: 18px;
-  line-height: 1.6;
-  color: var(--dark-5);
-  margin-bottom: 30px;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 0.8s 0.2s forwards;
-}
-
-.box-btn-slider {
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 0.8s 0.4s forwards;
-}
-
-.tf-btn {
-  display: inline-flex;
-  align-items: center;
-  padding: 15px 40px;
-  background: var(--dark);
-  color: var(--white);
-  font-size: 16px;
-  font-weight: 500;
-  border-radius: 30px;
-  transition: all 0.3s ease;
-}
-
-.tf-btn:hover {
-  background: var(--primary);
-}
-
-.tf-btn i {
-  margin-left: 10px;
-  font-size: 20px;
-}
-
-.sw-pagination-slider {
-  position: absolute;
-  bottom: 30px;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  z-index: 10;
-}
-
-.sw-pagination-slider .swiper-pagination-bullet {
-  width: 12px;
-  height: 12px;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.sw-pagination-slider .swiper-pagination-bullet-active {
-  background: var(--dark);
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media screen and (max-width: 991px) {
-  .slider-wrap {
-    height: 80vh;
-    min-height: 500px;
-  }
-
-  .box-title-slider .heading {
-    font-size: 48px;
-  }
-
-  .box-title-slider .sub {
-    font-size: 16px;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .slider-wrap {
-    height: 60vh;
-    min-height: 400px;
-  }
-
-  .box-title-slider .heading {
-    font-size: 36px;
-  }
-
-  .box-title-slider .sub {
-    font-size: 14px;
-  }
-}
-{%- endstyle -%}
-
-<section class="tf-slideshow slider-fashion-1 slider-default">
-  <div class="swiper tf-sw-slideshow slider-effect-fade" data-effect="fade" data-preview="1" data-tablet="1"
-    data-mobile="1" data-centered="false" data-space="0" data-space-mb="0" data-loop="true"
-    data-auto-play="true" data-speed="800">
-    <div class="swiper-wrapper">
-      {%- for block in section.blocks -%}
-        <div class="swiper-slide" {{ block.shopify_attributes }}>
-          <div class="slider-wrap bg-type-{{ forloop.index }}">
-            <div class="image">
-              {%- if block.settings.image != blank -%}
-                {{ block.settings.image | image_url: width: 1920 | image_tag:
-                  loading: 'lazy',
-                  class: 'lazyload',
-                  widths: '1000, 1500, 1920',
-                  sizes: '100vw'
-                }}
-              {%- else -%}
-                {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder' }}
-              {%- endif -%}
-            </div>
-            <div class="box-content">
-              <div class="container">
-                <div class="row">
-                  <div class="col-lg-12 col-12 col-sm-6">
-                    <div class="content-slider">
-                      <div class="box-title-slider">
-                        {%- if block.settings.title != blank -%}
-                          <h2 class="heading fw-medium fade-item fade-item-1 text-dark-5">
-                            {{ block.settings.title }}
-                          </h2>
-                        {%- endif -%}
-                        {%- if block.settings.subheading != blank -%}
-                          <p class="sub text-md fade-item fade-item-2 text-dark-5">
-                            {{ block.settings.subheading }}
-                          </p>
-                        {%- endif -%}
-                      </div>
-                      {%- if block.settings.button_label != blank -%}
-                        <div class="box-btn-slider fade-item fade-item-3">
-                          <a href="{{ block.settings.button_link }}" class="tf-btn btn-dark2 animate-btn">
-                            {{ block.settings.button_label }}
-                            <i class="icon icon-arr-right"></i>
-                          </a>
+<!-- Slider -->
+<section class="tf-slideshow {% if section.settings.layout == 'home-electronic' %}slider-electronic{% else %}slider-fashion-1{% endif %} slider-default">
+    <div class="swiper tf-sw-slideshow slider-effect-fade" data-effect="fade" data-preview="1" data-tablet="1"
+        data-mobile="1" data-centered="false" data-space="0" data-space-mb="0" data-loop="{{ section.settings.loop }}"
+        data-auto-play="{{ section.settings.autoplay }}" data-speed="{{ section.settings.speed }}">
+        <div class="swiper-wrapper">
+            {% for block in section.blocks %}
+                {% assign slide_class = '' %}
+                {% if section.settings.layout == 'home-electronic' and block.settings.image_position == 'right' %}
+                    {% assign slide_class = 'type-image-right' %}
+                {% elsif section.settings.layout == 'home-electronic' and forloop.index == 2 %}
+                    {% assign slide_class = 'reverse-slide' %}
+                {% endif %}
+                <div class="swiper-slide" {{ block.shopify_attributes }}>
+                    <div class="slider-wrap bg-type-{{ forloop.index }} {{ slide_class }}">
+                        <div class="image">
+                            {% if block.settings.image != blank %}
+                                <img src="{{ block.settings.image | img_url: 'master' }}"
+                                    data-src="{{ block.settings.image | img_url: 'master' }}" 
+                                    alt="{{ block.settings.image.alt | escape }}" 
+                                    class="lazyload"
+                                    width="{{ block.settings.image.width }}"
+                                    height="{{ block.settings.image.height }}">
+                            {% endif %}
                         </div>
-                      {%- endif -%}
+                        <div class="box-content">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="{% if section.settings.layout == 'home-electronic' and block.settings.content_position == 'right' %}offset-lg-8 col-lg-4 col-sm-6 offset-6{% else %}col-lg-12 col-sm-6{% endif %} col-12">
+                                        <div class="content-slider">
+                                            <div class="box-title-slider">
+                                                {% if section.settings.layout == 'home-electronic' %}
+                                                    <p class="sub text-md fw-medium fade-item fade-item-1 text-dark-3">
+                                                        {{ block.settings.subtitle }}
+                                                    </p>
+                                                    <h2 class="heading fw-medium fade-item fade-item-2 text-dark-3">
+                                                        {{ block.settings.heading }}
+                                                    </h2>
+                                                {% else %}
+                                                    <h2 class="heading fw-medium fade-item fade-item-1 text-dark-5">
+                                                        {{ block.settings.heading }}
+                                                    </h2>
+                                                    <p class="sub text-md fade-item fade-item-2 text-dark-5">
+                                                        {{ block.settings.subheading }}
+                                                    </p>
+                                                {% endif %}
+                                            </div>
+                                            <div class="box-btn-slider fade-item fade-item-3">
+                                                <a href="{{ block.settings.button_link }}" class="tf-btn btn-dark2 animate-btn">
+                                                    {{ block.settings.button_text }}
+                                                    <i class="icon icon-arr-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
+            {% endfor %}
         </div>
-      {%- endfor -%}
+        <div class="wrap-pagination">
+            <div class="container">
+                <div class="sw-dots sw-pagination-slider justify-content-center"></div>
+            </div>
+        </div>
     </div>
-    <div class="wrap-pagination">
-      <div class="container">
-        <div class="sw-dots sw-pagination-slider justify-content-center"></div>
-      </div>
-    </div>
-  </div>
 </section>
+<!-- /Slider -->
 
 {% schema %}
 {
-  "name": "Slideshow",
-  "tag": "section",
-  "class": "section",
-  "max_blocks": 5,
-  "blocks": [
-    {
-      "type": "slide",
-      "name": "Slide",
-      "settings": [
+    "name": "Hero Slider",
+    "settings": [
         {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
+            "type": "select",
+            "id": "layout",
+            "label": "Section Layout",
+            "options": [
+                { "value": "default", "label": "Default Fashion" },
+                { "value": "home-electronic", "label": "Home Electronic" }
+            ],
+            "default": "default"
         },
         {
-          "type": "text",
-          "id": "title",
-          "default": "Style\nRedefined",
-          "label": "Title"
+            "type": "checkbox",
+            "id": "autoplay",
+            "label": "Enable autoplay",
+            "default": true
         },
         {
-          "type": "text",
-          "id": "subheading",
-          "default": "Discover the latest trends in fashion that speak your style.",
-          "label": "Subheading"
+            "type": "checkbox",
+            "id": "loop",
+            "label": "Enable loop",
+            "default": true
         },
         {
-          "type": "text",
-          "id": "button_label",
-          "default": "Shop Collection",
-          "label": "Button label"
-        },
-        {
-          "type": "url",
-          "id": "button_link",
-          "label": "Button link"
+            "type": "range",
+            "id": "speed",
+            "min": 100,
+            "max": 2000,
+            "step": 100,
+            "unit": "ms",
+            "label": "Transition speed",
+            "default": 800
         }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Slideshow",
-      "blocks": [
+    ],
+    "blocks": [
         {
-          "type": "slide"
-        },
-        {
-          "type": "slide"
+            "type": "slide",
+            "name": "Slide",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Slide image"
+                },
+                {
+                    "type": "select",
+                    "id": "image_position",
+                    "label": "Image Position",
+                    "options": [
+                        { "value": "left", "label": "Left" },
+                        { "value": "right", "label": "Right" }
+                    ],
+                    "default": "left"
+                },
+                {
+                    "type": "select",
+                    "id": "content_position",
+                    "label": "Content Position",
+                    "options": [
+                        { "value": "left", "label": "Left" },
+                        { "value": "right", "label": "Right" }
+                    ],
+                    "default": "left"
+                },
+                {
+                    "type": "text",
+                    "id": "subtitle",
+                    "label": "Subtitle (Electronic layout)",
+                    "default": "APPLE WATCHES COLLECTION"
+                },
+                {
+                    "type": "text",
+                    "id": "heading",
+                    "label": "Heading",
+                    "default": "Style Redefined"
+                },
+                {
+                    "type": "text",
+                    "id": "subheading",
+                    "label": "Subheading (Default layout)",
+                    "default": "Discover the latest trends in fashion that speak your style."
+                },
+                {
+                    "type": "text",
+                    "id": "button_text",
+                    "label": "Button text",
+                    "default": "Shop Now"
+                },
+                {
+                    "type": "url",
+                    "id": "button_link",
+                    "label": "Button link"
+                }
+            ]
         }
-      ]
-    }
-  ]
+    ],
+    "presets": [
+        {
+            "name": "Hero Slider",
+            "settings": {
+                "layout": "home-electronic"
+            },
+            "blocks": [
+                {
+                    "type": "slide",
+                    "settings": {
+                        "subtitle": "APPLE WATCHES COLLECTION",
+                        "heading": "Sale up to\n15% Off",
+                        "button_text": "Shop Now",
+                        "image_position": "right"
+                    }
+                },
+                {
+                    "type": "slide",
+                    "settings": {
+                        "subtitle": "APPLE MAGSAFE CHARGER",
+                        "heading": "Next-Level\nTech",
+                        "button_text": "Shop Now",
+                        "content_position": "right"
+                    }
+                },
+                {
+                    "type": "slide",
+                    "settings": {
+                        "subtitle": "ON-EAR HEADPHONES",
+                        "heading": "Power Up\nYour Life",
+                        "button_text": "Shop Now",
+                        "image_position": "right"
+                    }
+                }
+            ]
+        }
+    ]
 }
-{% endschema %}
+{% endschema %} 
