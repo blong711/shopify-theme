@@ -15,13 +15,11 @@
         "slide-1": {
           "type": "slide",
           "settings": {
-            "collection": "",
             "image": "shopify://shop_images/slider-fashion-1.png",
             "image_position": "left",
             "content_position": "left",
             "subtitle": "APPLE WATCHES COLLECTION",
             "heading": "Style Redefined",
-            "description": "Find the perfect outfit for any occasion.",
             "subheading": "Discover the latest trends in fashion that speak your style.",
             "button_text": "Shop Now",
             "button_link": "/collections/all"
@@ -30,13 +28,11 @@
         "slide-2": {
           "type": "slide",
           "settings": {
-            "collection": "",
             "image": "shopify://shop_images/slider-fashion-2.png",
             "image_position": "left",
             "content_position": "left",
             "subtitle": "APPLE WATCHES COLLECTION",
             "heading": "Style Redefined",
-            "description": "Find the perfect outfit for any occasion.",
             "subheading": "Discover timeless styles for every occasion.",
             "button_text": "Shop Now",
             "button_link": "/collections/all"
@@ -45,13 +41,11 @@
         "slide-3": {
           "type": "slide",
           "settings": {
-            "collection": "",
             "image": "shopify://shop_images/slider-fashion-3.png",
             "image_position": "left",
             "content_position": "left",
             "subtitle": "APPLE WATCHES COLLECTION",
             "heading": "Style Redefined",
-            "description": "Find the perfect outfit for any occasion.",
             "subheading": "Timeless pieces to refresh your look for every season.",
             "button_text": "Shop Now",
             "button_link": "/collections/all"
@@ -64,7 +58,7 @@
         "slide-3"
       ],
       "settings": {
-        "layout": "fashion-women",
+        "layout": "home-electronic",
         "autoplay": true,
         "loop": true,
         "speed": 800
