@@ -16,9 +16,12 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/slider-fashion-1.png",
-            "title": "Style\nRedefined",
+            "image_position": "left",
+            "content_position": "left",
+            "subtitle": "APPLE WATCHES COLLECTION",
+            "heading": "Style Redefined",
             "subheading": "Discover the latest trends in fashion that speak your style.",
-            "button_label": "Shop Collection",
+            "button_text": "Shop Now",
             "button_link": "/collections/all"
           }
         },
@@ -26,9 +29,12 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/slider-fashion-2.png",
-            "title": "Elegance\nRedefined",
+            "image_position": "left",
+            "content_position": "left",
+            "subtitle": "APPLE WATCHES COLLECTION",
+            "heading": "Style Redefined",
             "subheading": "Discover timeless styles for every occasion.",
-            "button_label": "Shop Collection",
+            "button_text": "Shop Now",
             "button_link": "/collections/all"
           }
         },
@@ -36,9 +42,12 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/slider-fashion-3.png",
-            "title": "Elevate Your\nWardrobe",
+            "image_position": "left",
+            "content_position": "left",
+            "subtitle": "APPLE WATCHES COLLECTION",
+            "heading": "Style Redefined",
             "subheading": "Timeless pieces to refresh your look for every season.",
-            "button_label": "Shop Collection",
+            "button_text": "Shop Now",
             "button_link": "/collections/all"
           }
         }
@@ -48,7 +57,12 @@
         "slide-2",
         "slide-3"
       ],
-      "settings": {}
+      "settings": {
+        "layout": "home-electronic",
+        "autoplay": true,
+        "loop": true,
+        "speed": 800
+      }
     },
     "collection_categories": {
       "type": "collection-categories",
