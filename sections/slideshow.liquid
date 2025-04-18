@@ -1,8 +1,6 @@
 <!-- Slider -->
-<section class="tf-slideshow {% if section.settings.layout == 'home-electronic' %}slider-electronic{% elsif section.settings.layout == 'fashion-women' %}slider-fashion-3{% elsif section.settings.layout == 'bicycle' %}slider-bicycle{% else %}slider-fashion-1{% endif %} slider-default {% if section.settings.layout == 'fashion-women' %}space-abs-header{% endif %}">
-    <div class="swiper tf-sw-slideshow slider-effect-fade" data-effect="fade" data-preview="1" data-tablet="1"
-        data-mobile="1" data-centered="false" data-space="0" data-space-mb="0" data-loop="{{ section.settings.loop }}"
-        data-auto-play="{{ section.settings.autoplay }}" data-speed="{{ section.settings.speed }}">
+<section class="tf-slideshow {% if section.settings.layout == 'home-electronic' %}slider-electronic{% elsif section.settings.layout == 'fashion-women' %}slider-fashion-3{% elsif section.settings.layout == 'bicycle' %}slider-bicycle{% elsif section.settings.layout == 'fashion-02' %}slider-fashion-2{% else %}slider-fashion-1{% endif %} slider-default {% if section.settings.layout == 'fashion-women' %}space-abs-header{% endif %}">
+    <div class="swiper tf-sw-slideshow {% if section.settings.layout == 'fashion-02' %}{% else %}slider-effect-fade{% endif %}" data-effect="fade" data-preview="{% if section.settings.layout == 'fashion-02' %}3{% else %}1{% endif %}" data-tablet="{% if section.settings.layout == 'fashion-02' %}2{% else %}1{% endif %}" data-mobile="{% if section.settings.layout == 'fashion-02' %}1.5{% else %}1{% endif %}" data-centered="false" data-space="{% if section.settings.layout == 'fashion-02' %}15{% else %}0{% endif %}" data-space-mb="{% if section.settings.layout == 'fashion-02' %}5{% else %}0{% endif %}" data-loop="{{ section.settings.loop }}" data-auto-play="{{ section.settings.autoplay }}" data-speed="{{ section.settings.speed }}">
         <div class="swiper-wrapper">
             {% for block in section.blocks %}
                 {% assign slide_class = '' %}
@@ -12,76 +10,99 @@
                     {% assign slide_class = 'reverse-slide' %}
                 {% endif %}
                 <div class="swiper-slide" {{ block.shopify_attributes }}>
-                    <div class="slider-wrap bg-type-{{ forloop.index }} {{ slide_class }}">
-                        <div class="image">
-                            {% if block.settings.image != blank %}
-                                <img src="{{ block.settings.image | img_url: 'master' }}"
-                                    data-src="{{ block.settings.image | img_url: 'master' }}" 
-                                    alt="{{ block.settings.image.alt | escape }}" 
-                                    class="lazyload"
-                                    width="{{ block.settings.image.width }}"
-                                    height="{{ block.settings.image.height }}">
-                            {% endif %}
+                    {% if section.settings.layout == 'fashion-02' %}
+                        <div class="fs-cls hover-img">
+                            <div class="img-style image">
+                                {% if block.settings.image != blank %}
+                                    <img src="{{ block.settings.image | img_url: 'master' }}"
+                                        data-src="{{ block.settings.image | img_url: 'master' }}" 
+                                        alt="{{ block.settings.image.alt | escape }}" 
+                                        class="lazyload"
+                                        width="{{ block.settings.image.width }}"
+                                        height="{{ block.settings.image.height }}">
+                                {% endif %}
+                            </div>
+                            <div class="content">
+                                <a href="{{ block.settings.button_link }}" class="tf-btn btn-white hover-icon-2 hover-dark">
+                                    {{ block.settings.button_text }}
+                                    <i class="icon-arrow-right icon"></i>
+                                </a>
+                            </div>
                         </div>
-                        <div class="box-content">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="{% if section.settings.layout == 'home-electronic' and block.settings.content_position == 'right' %}offset-lg-8 col-lg-4 col-sm-6 offset-6{% elsif section.settings.layout == 'fashion-women' %}col-lg-5 col-md-6 col-sm-7 col-10{% elsif section.settings.layout == 'bicycle' %}col-lg-5 col-md-6 col-sm-10{% else %}col-lg-12 col-sm-6{% endif %} col-12">
-                                        <div class="content-slider {% if section.settings.layout == 'fashion-women' or section.settings.layout == 'bicycle' %}style-2{% endif %}">
-                                            <div class="box-title-slider">
-                                                {% if section.settings.layout == 'home-electronic' %}
-                                                    <p class="sub text-md fw-medium fade-item fade-item-1 text-dark-3">
-                                                        {{ block.settings.subtitle }}
-                                                    </p>
-                                                    <h2 class="heading fw-medium fade-item fade-item-2 text-dark-3">
-                                                        {{ block.settings.heading }}
-                                                    </h2>
-                                                {% elsif section.settings.layout == 'fashion-women' %}
-                                                    <p class="body-text-2 fw-semibold fade-item fade-item-1 font-2">
-                                                        {{ block.settings.subtitle }}
-                                                    </p>
-                                                    <div class="heading display-lg-3 fade-item fade-item-2 font-2">
-                                                        {{ block.settings.heading }}
-                                                    </div>
-                                                    <p class="sub text-md fade-item fade-item-3 text-main">
-                                                        {{ block.settings.subheading }}
-                                                    </p>
-                                                {% elsif section.settings.layout == 'bicycle' %}
-                                                    <h2 class="heading display-xl-2 fw-medium fade-item fade-item-2">
-                                                        {{ block.settings.heading }}
-                                                    </h2>
-                                                    <p class="sub text-xl-2 text-main fade-item fade-item-3">
-                                                        {{ block.settings.subheading }}
-                                                    </p>
-                                                {% else %}
-                                                    <h2 class="heading fw-medium fade-item fade-item-1 text-dark-5">
-                                                        {{ block.settings.heading }}
-                                                    </h2>
-                                                    <p class="sub text-md fade-item fade-item-2 text-dark-5">
-                                                        {{ block.settings.subheading }}
-                                                    </p>
-                                                {% endif %}
-                                            </div>
-                                            <div class="box-btn-slider {% if section.settings.layout == 'fashion-women' %}fade-item fade-item-4{% else %}fade-item fade-item-3{% endif %}">
-                                                <a href="{{ block.settings.button_link }}" class="tf-btn {% if section.settings.layout == 'fashion-women' %}animate-btn font-2{% elsif section.settings.layout == 'bicycle' %}btn-space1 animate-btn btn-green-2{% else %}btn-dark2 animate-btn{% endif %}">
-                                                    {{ block.settings.button_text }}
-                                                    <i class="icon {% if section.settings.layout == 'bicycle' %}icon-arr-right3{% else %}icon-arr-right{% endif %}"></i>
-                                                </a>
+                    {% else %}
+                        <div class="slider-wrap bg-type-{{ forloop.index }} {{ slide_class }}">
+                            <div class="image">
+                                {% if block.settings.image != blank %}
+                                    <img src="{{ block.settings.image | img_url: 'master' }}"
+                                        data-src="{{ block.settings.image | img_url: 'master' }}" 
+                                        alt="{{ block.settings.image.alt | escape }}" 
+                                        class="lazyload"
+                                        width="{{ block.settings.image.width }}"
+                                        height="{{ block.settings.image.height }}">
+                                {% endif %}
+                            </div>
+                            <div class="box-content">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="{% if section.settings.layout == 'home-electronic' and block.settings.content_position == 'right' %}offset-lg-8 col-lg-4 col-sm-6 offset-6{% elsif section.settings.layout == 'fashion-women' %}col-lg-5 col-md-6 col-sm-7 col-10{% elsif section.settings.layout == 'bicycle' %}col-lg-5 col-md-6 col-sm-10{% else %}col-lg-12 col-sm-6{% endif %} col-12">
+                                            <div class="content-slider {% if section.settings.layout == 'fashion-women' or section.settings.layout == 'bicycle' %}style-2{% endif %}">
+                                                <div class="box-title-slider">
+                                                    {% if section.settings.layout == 'home-electronic' %}
+                                                        <p class="sub text-md fw-medium fade-item fade-item-1 text-dark-3">
+                                                            {{ block.settings.subtitle }}
+                                                        </p>
+                                                        <h2 class="heading fw-medium fade-item fade-item-2 text-dark-3">
+                                                            {{ block.settings.heading }}
+                                                        </h2>
+                                                    {% elsif section.settings.layout == 'fashion-women' %}
+                                                        <p class="body-text-2 fw-semibold fade-item fade-item-1 font-2">
+                                                            {{ block.settings.subtitle }}
+                                                        </p>
+                                                        <div class="heading display-lg-3 fade-item fade-item-2 font-2">
+                                                            {{ block.settings.heading }}
+                                                        </div>
+                                                        <p class="sub text-md fade-item fade-item-3 text-main">
+                                                            {{ block.settings.subheading }}
+                                                        </p>
+                                                    {% elsif section.settings.layout == 'bicycle' %}
+                                                        <h2 class="heading display-xl-2 fw-medium fade-item fade-item-2">
+                                                            {{ block.settings.heading }}
+                                                        </h2>
+                                                        <p class="sub text-xl-2 text-main fade-item fade-item-3">
+                                                            {{ block.settings.subheading }}
+                                                        </p>
+                                                    {% else %}
+                                                        <h2 class="heading fw-medium fade-item fade-item-1 text-dark-5">
+                                                            {{ block.settings.heading }}
+                                                        </h2>
+                                                        <p class="sub text-md fade-item fade-item-2 text-dark-5">
+                                                            {{ block.settings.subheading }}
+                                                        </p>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="box-btn-slider {% if section.settings.layout == 'fashion-women' %}fade-item fade-item-4{% else %}fade-item fade-item-3{% endif %}">
+                                                    <a href="{{ block.settings.button_link }}" class="tf-btn {% if section.settings.layout == 'fashion-women' %}animate-btn font-2{% elsif section.settings.layout == 'bicycle' %}btn-space1 animate-btn btn-green-2{% else %}btn-dark2 animate-btn{% endif %}">
+                                                        {{ block.settings.button_text }}
+                                                        <i class="icon {% if section.settings.layout == 'bicycle' %}icon-arr-right3{% else %}icon-arr-right{% endif %}"></i>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
+        {% unless section.settings.layout == 'fashion-02' %}
         <div class="wrap-pagination">
             <div class="container">
                 <div class="sw-dots sw-pagination-slider justify-content-center"></div>
             </div>
         </div>
+        {% endunless %}
     </div>
 </section>
 <!-- /Slider -->
@@ -98,7 +119,8 @@
                 { "value": "default", "label": "Default Fashion" },
                 { "value": "home-electronic", "label": "Home Electronic" },
                 { "value": "fashion-women", "label": "Fashion Women" },
-                { "value": "bicycle", "label": "Bicycle" }
+                { "value": "bicycle", "label": "Bicycle" },
+                { "value": "fashion-02", "label": "Fashion 02" }
             ],
             "default": "default"
         },
