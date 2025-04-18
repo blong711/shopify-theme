@@ -731,14 +731,11 @@
     "banner_collection_HeDRCy": {
       "type": "banner-collection",
       "settings": {
-        "layout": "default",
         "title": "Unmatched Performance",
         "subtitle": "Upgrade your devices with cutting-edge technology.",
-        "spacing": "flat-spacing-3",
-        "banner_class": "banner-cls-electric",
-        "show_button": true,
-        "button_url": "",
-        "button_text": "Shop Now"
+        "button_text": "Shop Now",
+        "button_link": "",
+        "padding_top": 100
       }
     }
   },
