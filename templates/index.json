@@ -25,6 +25,32 @@
             "button_link": "/collections/all"
           }
         },
+        "slide_JxjNed": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/GooglePay.png",
+            "image_position": "left",
+            "content_position": "left",
+            "subtitle": "SUMMER COLLECTION",
+            "heading": "Style Redefined",
+            "subheading": "Discover the latest trends in fashion that speak your style.",
+            "button_text": "Shop Now",
+            "button_link": ""
+          }
+        },
+        "slide_mnMWxD": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Mastercard.png",
+            "image_position": "left",
+            "content_position": "left",
+            "subtitle": "SUMMER COLLECTION",
+            "heading": "Style Redefined",
+            "subheading": "Discover the latest trends in fashion that speak your style.",
+            "button_text": "Shop Now",
+            "button_link": ""
+          }
+        },
         "slide-2": {
           "type": "slide",
           "settings": {
@@ -54,6 +80,8 @@
       },
       "block_order": [
         "slide-1",
+        "slide_JxjNed",
+        "slide_mnMWxD",
         "slide-2",
         "slide-3"
       ],
