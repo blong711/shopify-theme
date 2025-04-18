@@ -689,6 +689,44 @@
         "view_all_link": "",
         "view_all_text": "View all"
       }
+    },
+    "collection_jkERjK": {
+      "type": "collection",
+      "blocks": {
+        "collection_XeU3k3": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify://shop_images/Mastercard.png",
+            "title": "Tops",
+            "link": ""
+          }
+        },
+        "collection_nfnpEn": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify://shop_images/GooglePay.png",
+            "title": "Bottoms",
+            "link": ""
+          }
+        },
+        "collection_y7jjfj": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify://shop_images/DinersClub.png",
+            "title": "Accessories",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_XeU3k3",
+        "collection_nfnpEn",
+        "collection_y7jjfj"
+      ],
+      "settings": {
+        "layout": "default",
+        "speed": 800
+      }
     }
   },
   "order": [
@@ -703,6 +741,7 @@
     "testimonials",
     "icon_box",
     "collection_slider_EbkU8C",
-    "top_pick_rRFMkh"
+    "top_pick_rRFMkh",
+    "collection_jkERjK"
   ]
 }
