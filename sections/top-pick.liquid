@@ -35,28 +35,29 @@
                 <div class="swiper-wrapper wow fadeInUp">
                     {% for block in section.blocks %}
                         {% if block.type == 'product' %}
+                            {% assign product = all_products[block.settings.product] %}
                             <div class="swiper-slide" {{ block.shopify_attributes }}>
                                 <div class="card-product {% if layout == 'home-fashion-02' %}style-2{% else %}style-center{% endif %} {% if block.settings.show_size_swatches %}card-product-size{% endif %}">
                                     <div class="card-product-wrapper">
-                                        <a href="{{ block.settings.product_url }}" class="product-img">
+                                        <a href="{{ product.url }}" class="product-img">
                                             <img class="img-product lazyload" 
-                                                data-src="{{ block.settings.product_image | image_url }}"
-                                                src="{{ block.settings.product_image | image_url }}"
-                                                alt="{{ block.settings.product_title }}"
+                                                data-src="{{ product.featured_image | image_url }}"
+                                                src="{{ product.featured_image | image_url }}"
+                                                alt="{{ product.title }}"
                                                 width="400"
                                                 height="400">
-                                            {% if block.settings.product_hover_image != blank %}
+                                            {% if product.images[1] != blank %}
                                                 <img class="img-hover lazyload"
-                                                    data-src="{{ block.settings.product_hover_image | image_url }}"
-                                                    src="{{ block.settings.product_hover_image | image_url }}"
-                                                    alt="{{ block.settings.product_title }}"
+                                                    data-src="{{ product.images[1] | image_url }}"
+                                                    src="{{ product.images[1] | image_url }}"
+                                                    alt="{{ product.title }}"
                                                     width="400"
                                                     height="400">
                                             {% endif %}
                                         </a>
                                         {% if block.settings.show_sale_badge or block.settings.show_trending_badge %}
                                             <div class="on-sale-wrap {% if layout == 'home-fashion-02' %}flex-column type-2{% endif %}">
-                                                {% if block.settings.show_sale_badge %}
+                                                {% if block.settings.show_sale_badge and product.compare_at_price > product.price %}
                                                     <span class="on-sale-item">{{ block.settings.sale_badge_text }}</span>
                                                 {% endif %}
                                                 {% if block.settings.show_trending_badge %}
@@ -104,30 +105,32 @@
                                         {% endif %}
                                     </div>
                                     <div class="card-product-info {% if layout == 'default' %}text-center{% endif %}">
-                                        <a href="{{ block.settings.product_url }}" class="name-product link fw-medium text-md">
-                                            {{ block.settings.product_title }}
+                                        <a href="{{ product.url }}" class="name-product link fw-medium text-md">
+                                            {{ product.title }}
                                         </a>
                                         <p class="price-wrap fw-medium">
-                                            <span class="price-new {% if block.settings.show_sale_price %}text-primary{% endif %}">
-                                                {{ block.settings.product_price | money }}
+                                            <span class="price-new {% if product.compare_at_price > product.price %}text-primary{% endif %}">
+                                                {{ product.price | money }}
                                             </span>
-                                            {% if block.settings.show_compare_price and block.settings.product_compare_price != blank %}
-                                                <span class="price-old {% if layout == 'home-fashion-02' %}old-line{% endif %}">{{ block.settings.product_compare_price | money }}</span>
+                                            {% if product.compare_at_price > product.price %}
+                                                <span class="price-old {% if layout == 'home-fashion-02' %}old-line{% endif %}">{{ product.compare_at_price | money }}</span>
                                             {% endif %}
                                         </p>
-                                        {% if block.settings.show_color_swatches %}
+                                        {% if block.settings.show_color_swatches and product.options contains 'Color' %}
                                             <ul class="list-color-product {% if layout == 'default' %}justify-content-center{% endif %}">
-                                                {% for color in block.settings.color_swatches %}
-                                                    <li class="list-color-item color-swatch hover-tooltip tooltip-bot {% if forloop.first %}active{% endif %} {% if color.line %}line{% endif %}">
-                                                        <span class="tooltip">{{ color.name }}</span>
-                                                        <span class="swatch-value {{ color.class }}"></span>
-                                                        <img class="lazyload"
-                                                            data-src="{{ color.image | image_url }}"
-                                                            src="{{ color.image | image_url }}"
-                                                            alt="{{ color.name }}"
-                                                            width="400"
-                                                            height="400">
-                                                    </li>
+                                                {% for variant in product.variants %}
+                                                    {% if variant.option1 contains 'Color' %}
+                                                        <li class="list-color-item color-swatch hover-tooltip tooltip-bot {% if forloop.first %}active{% endif %} {% if variant.option1 contains 'White' %}line{% endif %}">
+                                                            <span class="tooltip">{{ variant.option1 }}</span>
+                                                            <span class="swatch-value bg-{{ variant.option1 | handleize }}"></span>
+                                                            <img class="lazyload"
+                                                                data-src="{{ variant.image | image_url }}"
+                                                                src="{{ variant.image | image_url }}"
+                                                                alt="{{ variant.option1 }}"
+                                                                width="400"
+                                                                height="400">
+                                                        </li>
+                                                    {% endif %}
                                                 {% endfor %}
                                             </ul>
                                         {% endif %}
@@ -237,34 +240,9 @@
             "name": "Product",
             "settings": [
                 {
-                    "type": "text",
-                    "id": "product_title",
-                    "label": "Product Title"
-                },
-                {
-                    "type": "url",
-                    "id": "product_url",
-                    "label": "Product URL"
-                },
-                {
-                    "type": "image_picker",
-                    "id": "product_image",
-                    "label": "Product Image"
-                },
-                {
-                    "type": "image_picker",
-                    "id": "product_hover_image",
-                    "label": "Product Hover Image"
-                },
-                {
-                    "type": "text",
-                    "id": "product_price",
-                    "label": "Product Price"
-                },
-                {
-                    "type": "text",
-                    "id": "product_compare_price",
-                    "label": "Compare at Price"
+                    "type": "product",
+                    "id": "product",
+                    "label": "Product"
                 },
                 {
                     "type": "checkbox",
@@ -289,18 +267,6 @@
                     "id": "trending_badge_text",
                     "label": "Trending Badge Text",
                     "default": "Trending"
-                },
-                {
-                    "type": "checkbox",
-                    "id": "show_sale_price",
-                    "label": "Show Sale Price",
-                    "default": false
-                },
-                {
-                    "type": "checkbox",
-                    "id": "show_compare_price",
-                    "label": "Show Compare at Price",
-                    "default": false
                 },
                 {
                     "type": "checkbox",
