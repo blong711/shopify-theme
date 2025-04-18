@@ -1,41 +1,32 @@
 {% assign section_spacing = section.settings.spacing | default: 'flat-spacing-3' %}
 {% assign banner_class = section.settings.banner_class | default: 'banner-cls-electric' %}
-{% assign layout = section.settings.layout | default: 'default' %}
 
-<div class="s-banner-colection {{ banner_class }} {{ section_spacing }} {% if layout == 'home-bicycle' %}style-abs{% endif %}">
+<div class="s-banner-colection {{ banner_class }} {{ section_spacing }}">
     <div class="container">
-        <div class="banner-content {% if layout == 'default' %}tf-grid-layout tf-col-2 hover-overlay-2{% endif %}">
-            {% if layout == 'home-bicycle' %}
-                {% if section.settings.video != blank %}
-                    <video autoplay loop muted playsinline preload="auto">
-                        <source src="{{ section.settings.video | file_url }}" type="video/mp4">
-                    </video>
+        <div class="banner-content tf-grid-layout tf-col-2 hover-overlay-2">
+            <div class="image">
+                {% if section.settings.banner_image != blank %}
+                    <img src="{{ section.settings.banner_image | image_url }}"
+                         alt="{{ section.settings.banner_image.alt | default: section.settings.title }}"
+                         class="lazyload"
+                         width="{{ section.settings.banner_image.width }}"
+                         height="{{ section.settings.banner_image.height }}">
                 {% endif %}
-            {% else %}
-                <div class="image">
-                    {% if section.settings.banner_image != blank %}
-                        <img src="{{ section.settings.banner_image | image_url }}"
-                             alt="{{ section.settings.banner_image.alt | default: section.settings.title }}"
-                             class="lazyload"
-                             width="{{ section.settings.banner_image.width }}"
-                             height="{{ section.settings.banner_image.height }}">
-                    {% endif %}
-                </div>
-            {% endif %}
-            <div class="box-content wow fadeInUp">
-                <div class="box-title-banner">
-                    <p class="title display-md fw-medium {% if layout == 'home-bicycle' %}text-white{% endif %}">
+            </div>
+            <div class="box-content">
+                <div class="box-title-banner wow fadeInUp">
+                    <p class="title display-md fw-medium">
                         {{ section.settings.title }}
                     </p>
-                    <p class="sub text-md {% if layout == 'home-bicycle' %}text-white{% else %}text-main{% endif %}">
+                    <p class="sub text-md text-main">
                         {{ section.settings.subtitle }}
                     </p>
                 </div>
                 {% if section.settings.show_button %}
-                    <div class="box-btn-banner">
-                        <a href="{{ section.settings.button_url }}" class="tf-btn {% if layout == 'home-bicycle' %}btn-green-2{% else %}btn-dark2{% endif %} animate-btn btn-space1">
+                    <div class="box-btn-banner wow fadeInUp">
+                        <a href="{{ section.settings.button_url }}" class="tf-btn btn-dark2 animate-btn">
                             {{ section.settings.button_text }}
-                            <i class="icon {% if layout == 'home-bicycle' %}icon-arr-right3{% else %}icon-arr-right{% endif %}"></i>
+                            <i class="icon icon-arr-right"></i>
                         </a>
                     </div>
                 {% endif %}
@@ -49,32 +40,9 @@
     "name": "Banner Collection",
     "settings": [
         {
-            "type": "select",
-            "id": "layout",
-            "label": "Layout",
-            "options": [
-                {
-                    "value": "default",
-                    "label": "Default"
-                },
-                {
-                    "value": "home-bicycle",
-                    "label": "Home Bicycle"
-                }
-            ],
-            "default": "default"
-        },
-        {
             "type": "image_picker",
             "id": "banner_image",
-            "label": "Banner Image",
-            "info": "Used in default layout only"
-        },
-        {
-            "type": "video",
-            "id": "video",
-            "label": "Background Video",
-            "info": "Used in bicycle layout only"
+            "label": "Banner Image"
         },
         {
             "type": "text",
@@ -120,10 +88,6 @@
                 {
                     "value": "banner-cls-default",
                     "label": "Default"
-                },
-                {
-                    "value": "banner-cls-bicycle",
-                    "label": "Bicycle"
                 }
             ],
             "default": "banner-cls-electric"
@@ -154,17 +118,6 @@
                 "subtitle": "Upgrade your devices with cutting-edge technology.",
                 "show_button": true,
                 "button_text": "Shop Now"
-            }
-        },
-        {
-            "name": "Banner Collection - Bicycle",
-            "settings": {
-                "layout": "home-bicycle",
-                "banner_class": "banner-cls-bicycle",
-                "title": "Unleash Your Ride",
-                "subtitle": "Experience the thrill of top performance",
-                "show_button": true,
-                "button_text": "Explore now"
             }
         }
     ]
