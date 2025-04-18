@@ -727,6 +727,19 @@
         "layout": "home-fashion-women",
         "speed": 800
       }
+    },
+    "banner_collection_HeDRCy": {
+      "type": "banner-collection",
+      "settings": {
+        "layout": "default",
+        "title": "Unmatched Performance",
+        "subtitle": "Upgrade your devices with cutting-edge technology.",
+        "spacing": "flat-spacing-3",
+        "banner_class": "banner-cls-electric",
+        "show_button": true,
+        "button_url": "",
+        "button_text": "Shop Now"
+      }
     }
   },
   "order": [
@@ -742,6 +755,7 @@
     "icon_box",
     "collection_slider_EbkU8C",
     "top_pick_rRFMkh",
-    "collection_jkERjK"
+    "collection_jkERjK",
+    "banner_collection_HeDRCy"
   ]
 }
