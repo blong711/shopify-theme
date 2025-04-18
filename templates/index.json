@@ -553,6 +553,48 @@
         "space_between": 10,
         "show_pagination": true
       }
+    },
+    "collection_slider_EbkU8C": {
+      "type": "collection-slider",
+      "blocks": {
+        "slide_XGaqVR": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Mastercard.png",
+            "button_text": "Shop Now",
+            "button_link": ""
+          }
+        },
+        "slide_WUXWCU": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/GooglePay.png",
+            "button_text": "Shop Now",
+            "button_link": ""
+          }
+        },
+        "slide_qii9G4": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Visa.png",
+            "button_text": "Shop Now",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_XGaqVR",
+        "slide_WUXWCU",
+        "slide_qii9G4"
+      ],
+      "settings": {
+        "margin_bottom": 36,
+        "slides_per_view_desktop": 3,
+        "slides_per_view_tablet": 2,
+        "slides_per_view_mobile": 1.5,
+        "space_between": 15,
+        "space_between_mobile": 5
+      }
     }
   },
   "order": [
@@ -565,6 +607,7 @@
     "shop_gram",
     "brands",
     "testimonials",
-    "icon_box"
+    "icon_box",
+    "collection_slider_EbkU8C"
   ]
 }
