@@ -1,182 +1,172 @@
-{%- style -%}
-/* Root variables for consistent styling */
-:root {
-  --primary: #2d54a3;
-  --secondary: #666666;
-  --text: #666666;
-  --dark: #0d0d0d;
-  --white: #ffffff;
-  --line: rgba(0, 0, 0, 0.1);
-}
+{% assign section_spacing = section.settings.spacing | default: 'flat-spacing-3' %}
+{% assign banner_class = section.settings.banner_class | default: 'banner-cls-electric' %}
+{% assign layout = section.settings.layout | default: 'default' %}
 
-/* Banner Collection styles */
-.banner-collection {
-  position: relative;
-  padding: 80px 0;
-  background: #f8f8f8;
-}
-
-.banner-collection__wrapper {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
-  align-items: center;
-}
-
-.banner-collection__image-wrapper {
-  position: relative;
-  padding-bottom: 100%;
-  overflow: hidden;
-}
-
-.banner-collection__image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.banner-collection__image:hover {
-  transform: scale(1.05);
-}
-
-.banner-collection__content {
-  padding: 30px;
-}
-
-.banner-collection__title {
-  font-size: 36px;
-  font-weight: 600;
-  color: var(--dark);
-  margin-bottom: 20px;
-  line-height: 1.2;
-}
-
-.banner-collection__description {
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--text);
-  margin-bottom: 30px;
-}
-
-.banner-collection__button {
-  display: inline-block;
-  padding: 15px 40px;
-  background: var(--primary);
-  color: var(--white);
-  font-size: 16px;
-  font-weight: 500;
-  text-transform: uppercase;
-  border-radius: 30px;
-  transition: background 0.3s ease;
-}
-
-.banner-collection__button:hover {
-  background: var(--dark);
-}
-
-@media screen and (max-width: 991px) {
-  .banner-collection {
-    padding: 60px 0;
-  }
-
-  .banner-collection__wrapper {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .banner-collection__content {
-    padding: 20px 0;
-    text-align: center;
-  }
-
-  .banner-collection__title {
-    font-size: 28px;
-  }
-
-  .banner-collection__description {
-    font-size: 14px;
-  }
-
-  .banner-collection__button {
-    padding: 12px 30px;
-    font-size: 14px;
-  }
-}
-{%- endstyle -%}
-
-<div class="banner-collection page-width">
-  <div class="banner-collection__wrapper">
-    <div class="banner-collection__image-wrapper">
-      {%- if section.settings.image != blank -%}
-        {{ section.settings.image | image_url: width: 800 | image_tag:
-          loading: 'lazy',
-          class: 'banner-collection__image',
-          widths: '400, 600, 800',
-          sizes: '(min-width: 992px) 50vw, 100vw'
-        }}
-      {%- else -%}
-        {{ 'collection-1' | placeholder_svg_tag: 'banner-collection__image placeholder' }}
-      {%- endif -%}
+<div class="s-banner-colection {{ banner_class }} {{ section_spacing }} {% if layout == 'home-bicycle' %}style-abs{% endif %}">
+    <div class="container">
+        <div class="banner-content {% if layout == 'default' %}tf-grid-layout tf-col-2 hover-overlay-2{% endif %}">
+            {% if layout == 'home-bicycle' %}
+                {% if section.settings.video != blank %}
+                    <video autoplay loop muted playsinline preload="auto">
+                        <source src="{{ section.settings.video | file_url }}" type="video/mp4">
+                    </video>
+                {% endif %}
+            {% else %}
+                <div class="image">
+                    {% if section.settings.banner_image != blank %}
+                        <img src="{{ section.settings.banner_image | image_url }}"
+                             alt="{{ section.settings.banner_image.alt | default: section.settings.title }}"
+                             class="lazyload"
+                             width="{{ section.settings.banner_image.width }}"
+                             height="{{ section.settings.banner_image.height }}">
+                    {% endif %}
+                </div>
+            {% endif %}
+            <div class="box-content wow fadeInUp">
+                <div class="box-title-banner">
+                    <p class="title display-md fw-medium {% if layout == 'home-bicycle' %}text-white{% endif %}">
+                        {{ section.settings.title }}
+                    </p>
+                    <p class="sub text-md {% if layout == 'home-bicycle' %}text-white{% else %}text-main{% endif %}">
+                        {{ section.settings.subtitle }}
+                    </p>
+                </div>
+                {% if section.settings.show_button %}
+                    <div class="box-btn-banner">
+                        <a href="{{ section.settings.button_url }}" class="tf-btn {% if layout == 'home-bicycle' %}btn-green-2{% else %}btn-dark2{% endif %} animate-btn btn-space1">
+                            {{ section.settings.button_text }}
+                            <i class="icon {% if layout == 'home-bicycle' %}icon-arr-right3{% else %}icon-arr-right{% endif %}"></i>
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
     </div>
-    <div class="banner-collection__content">
-      {%- if section.settings.title != blank -%}
-        <h2 class="banner-collection__title">{{ section.settings.title }}</h2>
-      {%- endif -%}
-      {%- if section.settings.description != blank -%}
-        <div class="banner-collection__description">{{ section.settings.description }}</div>
-      {%- endif -%}
-      {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
-        <a href="{{ section.settings.button_link }}" class="banner-collection__button">
-          {{ section.settings.button_label }}
-        </a>
-      {%- endif -%}
-    </div>
-  </div>
 </div>
 
 {% schema %}
 {
-  "name": "Banner Collection",
-  "tag": "section",
-  "class": "section",
-  "settings": [
-    {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Image"
-    },
-    {
-      "type": "text",
-      "id": "title",
-      "default": "Featured Collection",
-      "label": "Title"
-    },
-    {
-      "type": "richtext",
-      "id": "description",
-      "default": "<p>Share information about your collection and what makes it special</p>",
-      "label": "Description"
-    },
-    {
-      "type": "text",
-      "id": "button_label",
-      "default": "Shop Collection",
-      "label": "Button label"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button link"
-    }
-  ],
-  "presets": [
-    {
-      "name": "Banner Collection"
-    }
-  ]
+    "name": "Banner Collection",
+    "settings": [
+        {
+            "type": "select",
+            "id": "layout",
+            "label": "Layout",
+            "options": [
+                {
+                    "value": "default",
+                    "label": "Default"
+                },
+                {
+                    "value": "home-bicycle",
+                    "label": "Home Bicycle"
+                }
+            ],
+            "default": "default"
+        },
+        {
+            "type": "image_picker",
+            "id": "banner_image",
+            "label": "Banner Image",
+            "info": "Used in default layout only"
+        },
+        {
+            "type": "video",
+            "id": "video",
+            "label": "Background Video",
+            "info": "Used in bicycle layout only"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Unmatched Performance"
+        },
+        {
+            "type": "text",
+            "id": "subtitle",
+            "label": "Subtitle",
+            "default": "Upgrade your devices with cutting-edge technology."
+        },
+        {
+            "type": "select",
+            "id": "spacing",
+            "label": "Section Spacing",
+            "options": [
+                {
+                    "value": "flat-spacing-3",
+                    "label": "Default"
+                },
+                {
+                    "value": "flat-spacing-4",
+                    "label": "Medium"
+                },
+                {
+                    "value": "flat-spacing-5",
+                    "label": "Large"
+                }
+            ],
+            "default": "flat-spacing-3"
+        },
+        {
+            "type": "select",
+            "id": "banner_class",
+            "label": "Banner Style",
+            "options": [
+                {
+                    "value": "banner-cls-electric",
+                    "label": "Electric"
+                },
+                {
+                    "value": "banner-cls-default",
+                    "label": "Default"
+                },
+                {
+                    "value": "banner-cls-bicycle",
+                    "label": "Bicycle"
+                }
+            ],
+            "default": "banner-cls-electric"
+        },
+        {
+            "type": "checkbox",
+            "id": "show_button",
+            "label": "Show Button",
+            "default": true
+        },
+        {
+            "type": "url",
+            "id": "button_url",
+            "label": "Button URL"
+        },
+        {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text",
+            "default": "Shop Now"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Banner Collection",
+            "settings": {
+                "title": "Unmatched Performance",
+                "subtitle": "Upgrade your devices with cutting-edge technology.",
+                "show_button": true,
+                "button_text": "Shop Now"
+            }
+        },
+        {
+            "name": "Banner Collection - Bicycle",
+            "settings": {
+                "layout": "home-bicycle",
+                "banner_class": "banner-cls-bicycle",
+                "title": "Unleash Your Ride",
+                "subtitle": "Experience the thrill of top performance",
+                "show_button": true,
+                "button_text": "Explore now"
+            }
+        }
+    ]
 }
 {% endschema %} 
