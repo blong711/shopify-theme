@@ -608,6 +608,87 @@
         "space_between": 15,
         "space_between_mobile": 5
       }
+    },
+    "top_pick_rRFMkh": {
+      "type": "top-pick",
+      "blocks": {
+        "product_jAxz4T": {
+          "type": "product",
+          "settings": {
+            "product": "aclla-cress",
+            "show_sale_badge": false,
+            "sale_badge_text": "20% Off",
+            "show_trending_badge": false,
+            "trending_badge_text": "Trending",
+            "show_color_swatches": false,
+            "show_size_swatches": false,
+            "size_swatches": "",
+            "show_countdown": false,
+            "countdown_timer": "86400"
+          }
+        },
+        "product_JyAjLT": {
+          "type": "product",
+          "settings": {
+            "product": "aloe-arborescens",
+            "show_sale_badge": false,
+            "sale_badge_text": "20% Off",
+            "show_trending_badge": false,
+            "trending_badge_text": "Trending",
+            "show_color_swatches": false,
+            "show_size_swatches": false,
+            "size_swatches": "",
+            "show_countdown": false,
+            "countdown_timer": "86400"
+          }
+        },
+        "product_kUE7GE": {
+          "type": "product",
+          "settings": {
+            "product": "annurca-apples",
+            "show_sale_badge": false,
+            "sale_badge_text": "20% Off",
+            "show_trending_badge": false,
+            "trending_badge_text": "Trending",
+            "show_color_swatches": false,
+            "show_size_swatches": false,
+            "size_swatches": "",
+            "show_countdown": false,
+            "countdown_timer": "86400"
+          }
+        },
+        "product_fpBCaQ": {
+          "type": "product",
+          "settings": {
+            "product": "apples-granny",
+            "show_sale_badge": false,
+            "sale_badge_text": "20% Off",
+            "show_trending_badge": false,
+            "trending_badge_text": "Trending",
+            "show_color_swatches": false,
+            "show_size_swatches": false,
+            "size_swatches": "",
+            "show_countdown": false,
+            "countdown_timer": "86400"
+          }
+        }
+      },
+      "block_order": [
+        "product_jAxz4T",
+        "product_JyAjLT",
+        "product_kUE7GE",
+        "product_fpBCaQ"
+      ],
+      "settings": {
+        "layout": "default",
+        "title": "Top Picks You'll Love",
+        "description": "Explore our most popular pieces that customers can't get enough of",
+        "spacing": "flat-spacing-8",
+        "background_color": "bg-surface",
+        "show_view_all": true,
+        "view_all_link": "",
+        "view_all_text": "View all"
+      }
     }
   },
   "order": [
@@ -621,6 +702,7 @@
     "brands",
     "testimonials",
     "icon_box",
-    "collection_slider_EbkU8C"
+    "collection_slider_EbkU8C",
+    "top_pick_rRFMkh"
   ]
 }
