@@ -737,6 +737,22 @@
         "button_link": "",
         "padding_top": 100
       }
+    },
+    "banner_text_CPyLBW": {
+      "type": "banner-text",
+      "settings": {
+        "layout": "default",
+        "banner_link": "",
+        "featured_product": "aclla-cress",
+        "heading": "Elevating Your Style Journey",
+        "subtext": "Discover timeless pieces that define elegance and sophistication.",
+        "button_label": "Shop Now",
+        "button_link": "",
+        "fashion_heading": "Sustainable Fashion",
+        "fashion_subtext": "Look good, feel good with eco-friendly and stylish designs.",
+        "fashion_button_label": "Shop Now",
+        "fashion_button_link": ""
+      }
     }
   },
   "order": [
@@ -753,6 +769,7 @@
     "collection_slider_EbkU8C",
     "top_pick_rRFMkh",
     "collection_jkERjK",
-    "banner_collection_HeDRCy"
+    "banner_collection_HeDRCy",
+    "banner_text_CPyLBW"
   ]
 }
